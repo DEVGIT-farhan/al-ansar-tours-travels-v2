@@ -1,14 +1,30 @@
+import Hero from "../../components/home/Hero";
+import About from "../../components/home/About";
+import Services from "../../components/home/Services";
+import Destinations from "../../components/home/Destinations";
+import Statistics from "../../components/home/Statistics";
+import Umrah from "../../components/home/Umrah";
+import Testimonials from "../../components/home/Testimonials";
+import Contact from "../../components/home/Contact";
+import Gallery from "../../components/home/Gallery";
+import FAQ from "../../components/home/FAQ";
+
+
 export default function Home() {
   return (
-    <main className="mx-auto max-w-7xl p-10">
-      <h1 className="text-5xl font-bold text-[#0B3D91]">
-        Welcome to AL ANSAR TOURS & TRAVELS
-      </h1>
+    <>
+      <Hero />
+      <About />
+      <Services />
+      <Destinations />
+      <Statistics />
+      <Umrah />
+      <Testimonials />
+      <Contact />
+      <Gallery />
+      <FAQ />
+      
 
-      <p className="mt-6 text-lg text-gray-600">
-        Your trusted partner for flights, visa assistance, Umrah,
-        holidays and unforgettable travel experiences.
-      </p>
-    </main>
+    </>
   );
 }
