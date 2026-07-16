@@ -1,4 +1,5 @@
 import Hero from "../../components/home/Hero";
+import SearchSection from "../../components/home/SearchSection";
 import About from "../../components/home/About";
 import Services from "../../components/home/Services";
 import Destinations from "../../components/home/Destinations";
@@ -10,10 +11,12 @@ import Gallery from "../../components/home/Gallery";
 import FAQ from "../../components/home/FAQ";
 
 
+
 export default function Home() {
   return (
     <>
       <Hero />
+      <SearchSection />
       <About />
       <Services />
       <Destinations />
