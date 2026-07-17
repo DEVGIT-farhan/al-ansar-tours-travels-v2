@@ -1,9 +1,5 @@
-export default function About() {
-  return (
-    <div className="flex min-h-screen items-center justify-center">
-      <h1 className="text-5xl font-bold text-blue-900">
-        About Page
-      </h1>
-    </div>
-  );
+import About from "../../components/home/about/About";
+
+export default function AboutPage() {
+  return <About />;
 }

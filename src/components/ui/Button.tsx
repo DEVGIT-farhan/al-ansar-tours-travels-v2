@@ -6,6 +6,7 @@ interface ButtonProps {
   to?: string;
   href?: string;
   variant?: "primary" | "secondary" | "outline";
+  className?: string;
 }
 
 export default function Button({
@@ -13,6 +14,7 @@ export default function Button({
   to,
   href,
   variant = "primary",
+  className = "",
 }: ButtonProps) {
   const classes = {
     primary:
@@ -23,7 +25,7 @@ export default function Button({
       "border-2 border-[#0B3D91] text-[#0B3D91] hover:bg-[#0B3D91] hover:text-white",
   };
 
-  const className = `inline-flex items-center justify-center rounded-xl px-6 py-3 font-semibold transition ${classes[variant]}`;
+  const ButtonClasses = `inline-flex items-center justify-center rounded-xl px-6 py-3 font-semibold transition ${classes[variant]} ${className}`;
 
   if (href) {
     return (
@@ -31,7 +33,7 @@ export default function Button({
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className={className}
+        className={ButtonClasses}
       >
         {children}
       </a>
@@ -39,7 +41,7 @@ export default function Button({
   }
 
   return (
-    <Link to={to ?? "/"} className={className}>
+    <Link to={to ?? "/"} className={ButtonClasses}>
       {children}
     </Link>
   );
