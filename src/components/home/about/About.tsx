@@ -1,8 +1,7 @@
- import Section from "../../ui/Section";
+ import { Button, Section } from "../../ui";
  import { aboutStats } from "../../../data/aboutStats";
 import { aboutFeatures } from "../../../data/aboutFeatures";
 import SectionHeading from "../../common/SectionHeading";
-import Button from "../../ui/Button";
 import { aboutImages } from "../../../data/aboutImages";
 import ImageSlider from "../../common/ImageSlider";
 

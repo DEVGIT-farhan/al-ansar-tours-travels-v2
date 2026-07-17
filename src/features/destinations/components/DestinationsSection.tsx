@@ -1,4 +1,4 @@
-import Section from "../../../components/ui/Section";
+import { Section } from "@/components/ui";
 import SectionHeading from "../../../components/common/SectionHeading";
 import DestinationCard from "./DestinationCard";
 import { destinations } from "../data/destinations";

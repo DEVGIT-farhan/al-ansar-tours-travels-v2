@@ -1,6 +1,6 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
-import Section from "../../../components/ui/Section";
+import { Section } from "@/components/ui";
 import "swiper/css";
 import "swiper/css/pagination";
 

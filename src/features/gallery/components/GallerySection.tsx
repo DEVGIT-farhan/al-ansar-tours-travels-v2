@@ -1,4 +1,4 @@
-import Section from "../../../components/ui/Section";
+import { Section } from "@/components/ui";
 import SectionHeading from "../../../components/common/SectionHeading";
 import GalleryCard from "./GalleryCard";
 import { galleryItems } from "../data/gallery";

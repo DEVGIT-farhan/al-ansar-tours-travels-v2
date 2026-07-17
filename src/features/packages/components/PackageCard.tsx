@@ -1,7 +1,7 @@
 import type { Package } from "../types/package";
-import Button from "../../../components/ui/Button";
+import Button from "@/components/ui/Button";
 import { Star, Clock, Check } from "lucide-react";
-import Card from "../../../components/ui/Card";
+import Card from "@/components/ui/Card";
 
 interface PackageCardProps {
   packageData: Package;

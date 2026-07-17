@@ -1,6 +1,6 @@
 import type { Testimonial } from "../types/testimonial";
 import { Star, Quote } from "lucide-react";
-import Card from "../../../components/ui/Card";
+import Card from "@/components/ui/Card";
 
 interface TestimonialCardProps {
   testimonial: Testimonial;

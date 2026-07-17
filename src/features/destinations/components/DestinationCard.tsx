@@ -1,7 +1,7 @@
 import type { Destination } from "../types/destination";
-import Button from "../../../components/ui/Button";
+import Button from "@/components/ui/Button";
 import { Star, Clock } from "lucide-react";
-import Card from "../../../components/ui/Card";
+import Card from "@/components/ui/Card";
 
 interface DestinationCardProps {
   destination: Destination;

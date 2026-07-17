@@ -1,6 +1,5 @@
 import type { Service } from "../types/service";
-import Button from "../../../components/ui/Button";
-import Card from "../../../components/ui/Card";
+import { Button, Card } from "@/components/ui";
 
 interface ServicesCardProps {
   service: Service;
