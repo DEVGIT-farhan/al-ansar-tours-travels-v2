@@ -1,5 +1,5 @@
-import clsx from "clsx";
 import type { ReactNode } from "react";
+import { cn } from "../../lib/cn";
 
 interface CardProps {
   children: ReactNode;
@@ -12,7 +12,7 @@ export default function Card({
 }: CardProps) {
   return (
     <div
-      className={clsx(
+      className={cn(
         "rounded-3xl bg-white shadow-sm transition-all duration-300",
         className
       )}

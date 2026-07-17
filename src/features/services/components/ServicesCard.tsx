@@ -1,5 +1,6 @@
 import type { Service } from "../types/service";
 import Button from "../../../components/ui/Button";
+import Card from "../../../components/ui/Card";
 
 interface ServicesCardProps {
   service: Service;
@@ -11,9 +12,7 @@ export default function ServicesCard({
   const Icon = service.icon;
 
   return (
-   <div 
-   
-   className="group flex h-full flex-col rounded-3xl border border-gray-200 bg-white p-8 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:border-[#0B3D91] hover:shadow-xl">
+   <Card className="group flex h-full flex-col border border-gray-200 p-8 hover:-translate-y-2 hover:border-[#0B3D91] hover:shadow-xl">
       <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-[#0B3D91]/10 transition-transform duration-300 group-hover:scale-110">
         <Icon className="h-8 w-8 text-[#0B3D91]" />
       </div>
@@ -31,6 +30,6 @@ export default function ServicesCard({
   className="w-full group-hover:bg-[#0B3D91] group-hover:text-white">
   Learn More
 </Button>
-    </div>
+    </Card>
   );
 }

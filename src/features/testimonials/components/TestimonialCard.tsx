@@ -1,5 +1,6 @@
 import type { Testimonial } from "../types/testimonial";
 import { Star, Quote } from "lucide-react";
+import Card from "../../../components/ui/Card";
 
 interface TestimonialCardProps {
   testimonial: Testimonial;
@@ -9,8 +10,7 @@ export default function TestimonialCard({
   testimonial,
 }: TestimonialCardProps) {
   return (
-    <div className="rounded-3xl bg-white p-8 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
-      {/* Quote Icon */}
+    <Card className="p-8 shadow-lg hover:-translate-y-2 hover:shadow-2xl">
       <Quote className="mb-6 h-10 w-10 text-[#0B3D91]/20" />
 
       {/* Review */}
@@ -46,6 +46,6 @@ export default function TestimonialCard({
           </p>
         </div>
       </div>
-    </div>
+    </Card>
   );
 }

@@ -1,6 +1,7 @@
 import type { Destination } from "../types/destination";
 import Button from "../../../components/ui/Button";
 import { Star, Clock } from "lucide-react";
+import Card from "../../../components/ui/Card";
 
 interface DestinationCardProps {
   destination: Destination;
@@ -10,7 +11,7 @@ export default function DestinationCard({
   destination,
 }: DestinationCardProps) {
   return (
-    <div className="group overflow-hidden rounded-3xl bg-white shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
+    <Card className="group overflow-hidden hover:-translate-y-2 hover:shadow-2xl">
       {/* Image */}
       <div className="overflow-hidden">
         <img
@@ -55,6 +56,6 @@ export default function DestinationCard({
           Explore
         </Button>
       </div>
-    </div>
+    </Card>
   );
 }

@@ -1,6 +1,7 @@
 import type { Package } from "../types/package";
 import Button from "../../../components/ui/Button";
 import { Star, Clock, Check } from "lucide-react";
+import Card from "../../../components/ui/Card";
 
 interface PackageCardProps {
   packageData: Package;
@@ -10,7 +11,7 @@ export default function PackageCard({
   packageData,
 }: PackageCardProps) {
   return (
-    <div className="group overflow-hidden rounded-3xl bg-white shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
+    <Card className="group overflow-hidden shadow-lg hover:-translate-y-2 hover:shadow-2xl">
       
       {/* Image */}
       <div className="relative overflow-hidden">
@@ -79,6 +80,6 @@ export default function PackageCard({
 
       </div>
 
-    </div>
+    </Card>
   );
 }
