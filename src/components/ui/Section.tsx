@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import Container from "./Container";
-import clsx from "clsx";
+import { cn } from "../../lib/cn";
 
 interface SectionProps {
   children: ReactNode;
@@ -18,7 +18,7 @@ export default function Section({
   return (
     <section
       id={id}
-      className={clsx("py-24", className)}
+      className={cn("py-24", className)}
       data-aos="fade-up"
     >
       <Container className={containerClassName}>
