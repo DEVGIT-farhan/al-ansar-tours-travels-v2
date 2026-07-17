@@ -1,5 +1,11 @@
+export type ContactIcon =
+  | "phone"
+  | "mail"
+  | "map"
+  | "clock";
+
 export interface ContactInfo {
-  icon: string;
+  icon: ContactIcon;
   title: string;
   value: string;
 }

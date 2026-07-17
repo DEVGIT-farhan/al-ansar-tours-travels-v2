@@ -1,7 +1,8 @@
 import { FaWhatsapp } from "react-icons/fa";
+import { COMPANY } from "@/constants/COMPANY";
 
 export default function WhatsAppButton() {
-  const phoneNumber = "919876543210";
+  const phoneNumber = COMPANY.whatsapp;
 
   const message =
     "Hello AL ANSAR TOURS & TRAVELS, I would like to know more about your travel packages.";

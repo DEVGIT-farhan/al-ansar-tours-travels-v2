@@ -1,27 +1,30 @@
-export interface NavigationItem {
-  label: string;
-  path: string;
-}
-
-export const navigation: NavigationItem[] = [
+export const NAVIGATION = [
   {
     label: "Home",
-    path: "/",
+    href: "/",
   },
   {
     label: "About",
-    path: "/about",
+    href: "/about",
+  },
+  {
+    label: "Services",
+    href: "/services",
   },
   {
     label: "Packages",
-    path: "/packages",
+    href: "/packages",
+  },
+  {
+    label: "Destinations",
+    href: "/destinations",
   },
   {
     label: "Gallery",
-    path: "/gallery",
+    href: "/gallery",
   },
   {
     label: "Contact",
-    path: "/contact",
+    href: "/contact",
   },
-];
+] as const;

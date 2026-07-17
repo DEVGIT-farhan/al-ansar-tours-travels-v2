@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Mail, MapPin, Phone } from "lucide-react";
-
+import { COMPANY } from "@/constants/COMPANY";
 import { Container } from "@/components/ui";
 import { companyLinks, quickLinks } from "../data/footerLinks";
 
@@ -70,17 +70,17 @@ export default function Footer() {
             <div className="space-y-4 text-blue-100">
               <div className="flex items-start gap-3">
                 <Phone size={18} />
-                <span>+91 93800 80009</span>
+                <span>{COMPANY.phone}</span>
               </div>
 
               <div className="flex items-start gap-3">
                 <Mail size={18} />
-                <span>alansartourstravels@gmail.com</span>
+                <span>{COMPANY.email}</span>
               </div>
 
               <div className="flex items-start gap-3">
                 <MapPin size={18} />
-                <span>Chennai, Tamil Nadu, India</span>
+                <span>{COMPANY.address.line1}, {COMPANY.address.city}</span>
               </div>
             </div>
           </div>

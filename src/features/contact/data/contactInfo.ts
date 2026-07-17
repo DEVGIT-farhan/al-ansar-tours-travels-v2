@@ -1,24 +1,25 @@
+import { COMPANY } from "@/constants/COMPANY";
 import type { ContactInfo } from "../types/contact";
 
 export const contactInfo: ContactInfo[] = [
   {
     icon: "phone",
     title: "Phone",
-    value: "+91 98765 43210",
+    value: COMPANY.phone,
   },
   {
     icon: "mail",
     title: "Email",
-    value: "info@alansartravels.com",
+    value: COMPANY.email,
   },
   {
     icon: "map",
     title: "Address",
-    value: "Chennai, Tamil Nadu, India",
+    value: `${COMPANY.address.line1}, ${COMPANY.address.city}, ${COMPANY.address.state} ${COMPANY.address.pincode}`,
   },
   {
     icon: "clock",
     title: "Office Hours",
-    value: "Mon - Sat : 9:00 AM - 7:00 PM",
+    value: COMPANY.officeHours,
   },
 ];

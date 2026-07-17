@@ -16,6 +16,6 @@ export const COMPANY = {
     facebook: "",
     instagram: "",
     youtube: "",
-    whatsapp: "",
+    X: "",
   },
 };
