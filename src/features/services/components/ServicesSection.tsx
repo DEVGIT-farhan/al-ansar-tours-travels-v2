@@ -1,12 +1,11 @@
-import Container from "../../../components/ui/Container";
+import Section from "../../../components/ui/Section";
 import SectionHeading from "../../../components/common/SectionHeading";
 import ServicesCard from "./ServicesCard";
 import { services } from "../data/services";
 
 export default function ServicesSection() {
   return (
-    <section className="bg-linear-to-b from-white via-gray-50 to-white py-20">
-      <Container>
+    <Section className="bg-linear-to-b from-white via-gray-50 to-white">
         <SectionHeading
           badge="Our Services"
           title="Everything You Need for Your Journey"
@@ -24,7 +23,7 @@ export default function ServicesSection() {
             </div>
           ))}
         </div>
-      </Container>
-    </section>
+      
+    </Section>
   );
 }

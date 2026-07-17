@@ -1,16 +1,11 @@
-import Container from "../../../components/ui/Container";
+import Section from "../../../components/ui/Section";
 import SectionHeading from "../../../components/common/SectionHeading";
 import GalleryCard from "./GalleryCard";
 import { galleryItems } from "../data/gallery";
 
 export default function GallerySection() {
   return (
-    <section
-      className="bg-white py-24"
-      data-aos="fade-up"
-    >
-      <Container>
-
+<Section className="bg-white">
         <SectionHeading
           badge="Gallery"
           title="Moments That Inspire Travel"
@@ -29,7 +24,6 @@ export default function GallerySection() {
           ))}
         </div>
 
-      </Container>
-    </section>
+    </Section>
   );
 }

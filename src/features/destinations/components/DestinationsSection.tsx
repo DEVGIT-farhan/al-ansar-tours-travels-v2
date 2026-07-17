@@ -1,12 +1,11 @@
-import Container from "../../../components/ui/Container";
+import Section from "../../../components/ui/Section";
 import SectionHeading from "../../../components/common/SectionHeading";
 import DestinationCard from "./DestinationCard";
 import { destinations } from "../data/destinations";
 
 export default function DestinationsSection() {
   return (
-    <section className="bg-white py-20">
-      <Container>
+    <Section className="bg-white">
         <SectionHeading
           badge="Popular Destinations"
           title="Explore Our Most Loved Places"
@@ -25,7 +24,7 @@ export default function DestinationsSection() {
 ))}
 
         </div>
-      </Container>
-    </section>
+     
+    </Section>
   );
 }
