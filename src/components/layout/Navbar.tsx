@@ -1,22 +1,22 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import { navigation } from "../../constants/navigation";
 import Logo from "../common/Logo";
 import Button from "../ui/Button";
+import { company } from "../../data/company";
 
 export default function Navbar() {
   return (
-    <header className="sticky top-0 z-50 border-b bg-white shadow-sm">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+    <header className="sticky top-0 z-50 border-b border-gray-200 bg-white/95 backdrop-blur shadow-sm">
+      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
         <Logo />
 
-        <nav className="hidden gap-8 font-medium md:flex">
-          <Link to="/">Home</Link>
-          <Link to="/about">About</Link>
-          <Link to="/packages">Packages</Link>
-          <Link to="/gallery">Gallery</Link>
-          <Link to="/contact">Contact</Link>
+       <nav className="hidden gap-8 font-medium md:flex">{navigation.map((item) => (
+         <NavLink key={item.path} to={item.path}className={({ isActive }) => `transition-colors duration-300 ${ isActive ? "font-bold text-[#0B3D91]"  : "text-gray-600 transition hover:text-[#0B3D91]"}`}>
+          {item.label}
+          </NavLink>))}
         </nav>
 
-        <Button>WhatsApp</Button>
+        <Button href={`https://wa.me/${company.whatsapp}`}>WhatsApp</Button>
       </div>
     </header>
   );

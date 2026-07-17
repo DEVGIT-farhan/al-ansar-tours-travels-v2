@@ -1,17 +1,20 @@
 import { Outlet } from "react-router-dom";
+import TopBar from "../components/layout/TopBar";
+import Navbar from "../components/layout/Navbar";
+import Footer from "../components/layout/Footer";
 
 export default function MainLayout() {
   return (
     <>
-      <div style={{ background: "red", color: "white", padding: "20px" }}>
-        NAVBAR
-      </div>
+      <TopBar />
 
-      <Outlet />
+      <Navbar />
 
-      <div style={{ background: "blue", color: "white", padding: "20px" }}>
-        FOOTER
-      </div>
+      <main>
+        <Outlet />
+      </main>
+
+      <Footer />
     </>
   );
 }

@@ -1,0 +1,11 @@
+export { default as Hero } from "./Hero";
+export { default as SearchSection } from "./SearchSection";
+export { default as About } from "./About";
+export { default as Services } from "./Services";
+export { default as Destinations } from "./Destinations";
+export { default as Umrah } from "./Umrah";
+export { default as Statistics } from "./Statistics";
+export { default as Testimonials } from "./Testimonials";
+export { default as Gallery } from "./Gallery";
+export { default as FAQ } from "./FAQ";
+export { default as Contact } from "./Contact";
