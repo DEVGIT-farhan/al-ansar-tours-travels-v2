@@ -3,15 +3,15 @@ import {
   SearchSection,
   Umrah,
   Statistics,
-  FAQ,
-  Contact
 } from "../../components/home";
+import { FAQSection } from "@/features/faq";
 import About from "../../components/home/about/About";
 import ServicesSection from "../../features/services/components/ServicesSection";
 import DestinationsSection from "../../features/destinations/components/DestinationsSection";
 import PackagesSection from "../../features/packages/components/PackagesSection";
 import { TestimonialsSection } from "../../features/testimonials";
 import { GallerySection } from "../../features/gallery";
+import { ContactSection } from "@/features/contact";
 
 
 
@@ -29,10 +29,8 @@ export default function Home() {
       <GallerySection />
       <Umrah />
       <Statistics />
-      <Contact />
-      <FAQ />
-      
-
+      <FAQSection />
+      <ContactSection />
     </>
   );
 }
