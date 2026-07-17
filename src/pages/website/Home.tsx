@@ -3,7 +3,6 @@ import {
   SearchSection,
   Umrah,
   Statistics,
-  Gallery,
   FAQ,
   Contact
 } from "../../components/home";
@@ -12,6 +11,7 @@ import ServicesSection from "../../features/services/components/ServicesSection"
 import DestinationsSection from "../../features/destinations/components/DestinationsSection";
 import PackagesSection from "../../features/packages/components/PackagesSection";
 import { TestimonialsSection } from "../../features/testimonials";
+import { GallerySection } from "../../features/gallery";
 
 
 
@@ -25,11 +25,11 @@ export default function Home() {
       <ServicesSection />
       <DestinationsSection />
       <PackagesSection />
+      <TestimonialsSection />
+      <GallerySection />
       <Umrah />
       <Statistics />
-      <TestimonialsSection />
       <Contact />
-      <Gallery />
       <FAQ />
       
 
