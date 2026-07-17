@@ -7,7 +7,7 @@ import ImageSlider from "../../common/ImageSlider";
 
 export default function About() {
   return (
-   <section className="py-20">
+   <section className="py-20" data-aos="fade-up">
   <div className="mx-auto grid max-w-7xl items-center gap-12 px-6 lg:grid-cols-2">
 
     {/* Left */}

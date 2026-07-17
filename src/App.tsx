@@ -7,9 +7,19 @@ import Contact from "./pages/website/Contact";
 import Gallery from "./pages/website/Gallery";
 import PackageDetails from "./pages/website/PackageDetails";
 import NotFound from "./pages/website/NotFound";
+import { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 
 export default function App() {
+  useEffect(() => {
+  AOS.init({
+    duration: 800,
+    once: true,
+    easing: "ease-in-out",
+  });
+}, []);
   return (
     <Routes>
       <Route element={<MainLayout />}>

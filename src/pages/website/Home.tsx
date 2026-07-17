@@ -1,7 +1,6 @@
 import {
   Hero,
   SearchSection,
-  Destinations,
   Umrah,
   Statistics,
   Testimonials,
@@ -11,6 +10,7 @@ import {
 } from "../../components/home";
 import About from "../../components/home/about/About";
 import ServicesSection from "../../features/services/components/ServicesSection";
+import DestinationsSection from "../../features/destinations/components/DestinationsSection";
 
 
 
@@ -22,7 +22,7 @@ export default function Home() {
       <SearchSection />
       <About />
       <ServicesSection />
-      <Destinations />
+      <DestinationsSection />
       <Umrah />
       <Statistics />
       <Testimonials />
