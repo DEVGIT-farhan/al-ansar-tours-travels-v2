@@ -1,6 +1,6 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
-
+import Container from "../../../components/ui/Container";
 import "swiper/css";
 import "swiper/css/pagination";
 
@@ -14,7 +14,7 @@ export default function TestimonialsSection() {
       className="bg-gray-50 py-24"
       data-aos="fade-up"
     >
-      <div className="mx-auto max-w-7xl px-6">
+      <Container>
 
         <SectionHeading
           badge="Testimonials"
@@ -50,7 +50,7 @@ export default function TestimonialsSection() {
           </Swiper>
         </div>
 
-      </div>
+      </Container>
     </section>
   );
 }

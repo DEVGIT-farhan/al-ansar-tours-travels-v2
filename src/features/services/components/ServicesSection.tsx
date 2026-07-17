@@ -1,3 +1,4 @@
+import Container from "../../../components/ui/Container";
 import SectionHeading from "../../../components/common/SectionHeading";
 import ServicesCard from "./ServicesCard";
 import { services } from "../data/services";
@@ -5,7 +6,7 @@ import { services } from "../data/services";
 export default function ServicesSection() {
   return (
     <section className="bg-linear-to-b from-white via-gray-50 to-white py-20">
-      <div className="mx-auto max-w-7xl px-6">
+      <Container>
         <SectionHeading
           badge="Our Services"
           title="Everything You Need for Your Journey"
@@ -23,7 +24,7 @@ export default function ServicesSection() {
             </div>
           ))}
         </div>
-      </div>
+      </Container>
     </section>
   );
 }

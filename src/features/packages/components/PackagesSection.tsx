@@ -1,3 +1,4 @@
+import Container from "../../../components/ui/Container";
 import SectionHeading from "../../../components/common/SectionHeading";
 import PackageCard from "./PackageCard";
 import { packages } from "../data/packages";
@@ -8,7 +9,7 @@ export default function PackagesSection() {
       className="bg-gradient-to-b from-white via-gray-50 to-white py-24"
       data-aos="fade-up"
     >
-      <div className="mx-auto max-w-7xl px-6">
+      <Container>
 
         <SectionHeading
           badge="Featured Packages"
@@ -28,7 +29,7 @@ export default function PackagesSection() {
           ))}
         </div>
 
-      </div>
+      </Container>
     </section>
   );
 }

@@ -1,3 +1,4 @@
+import Container from "../../../components/ui/Container";
 import SectionHeading from "../../../components/common/SectionHeading";
 import GalleryCard from "./GalleryCard";
 import { galleryItems } from "../data/gallery";
@@ -8,7 +9,7 @@ export default function GallerySection() {
       className="bg-white py-24"
       data-aos="fade-up"
     >
-      <div className="mx-auto max-w-7xl px-6">
+      <Container>
 
         <SectionHeading
           badge="Gallery"
@@ -28,7 +29,7 @@ export default function GallerySection() {
           ))}
         </div>
 
-      </div>
+      </Container>
     </section>
   );
 }

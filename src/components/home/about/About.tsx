@@ -1,3 +1,4 @@
+ import Section from "../../ui/Section";
  import { aboutStats } from "../../../data/aboutStats";
 import { aboutFeatures } from "../../../data/aboutFeatures";
 import SectionHeading from "../../common/SectionHeading";
@@ -7,8 +8,8 @@ import ImageSlider from "../../common/ImageSlider";
 
 export default function About() {
   return (
-   <section className="py-20" data-aos="fade-up">
-  <div className="mx-auto grid max-w-7xl items-center gap-12 px-6 lg:grid-cols-2">
+<Section className="py-20"
+      containerClassName="grid items-center gap-12 lg:grid-cols-2">
 
     {/* Left */}
 
@@ -55,7 +56,6 @@ export default function About() {
       className="rounded-3xl shadow-2xl"
     />
 
-  </div>
-</section>
+</Section>
   );
 }

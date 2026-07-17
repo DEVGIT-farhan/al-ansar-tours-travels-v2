@@ -1,3 +1,4 @@
+import Container from "../../../components/ui/Container";
 import SectionHeading from "../../../components/common/SectionHeading";
 import DestinationCard from "./DestinationCard";
 import { destinations } from "../data/destinations";
@@ -5,7 +6,7 @@ import { destinations } from "../data/destinations";
 export default function DestinationsSection() {
   return (
     <section className="bg-white py-20">
-      <div className="mx-auto max-w-7xl px-6">
+      <Container>
         <SectionHeading
           badge="Popular Destinations"
           title="Explore Our Most Loved Places"
@@ -24,7 +25,7 @@ export default function DestinationsSection() {
 ))}
 
         </div>
-      </div>
+      </Container>
     </section>
   );
 }
