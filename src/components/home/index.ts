@@ -1,6 +1,6 @@
 export { default as Hero } from "./Hero";
 export { default as SearchSection } from "./SearchSection";
-export { default as About } from "./About";
+export { default as About } from "./about/About";
 export { default as Services } from "./Services";
 export { default as Destinations } from "./Destinations";
 export { default as Umrah } from "./Umrah";
