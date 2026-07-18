@@ -11,8 +11,7 @@ import DestinationsSection from "../../features/destinations/components/Destinat
 import PackagesSection from "../../features/packages/components/PackagesSection";
 import { TestimonialsSection } from "../../features/testimonials";
 import { GallerySection } from "../../features/gallery";
-import { ContactSection } from "@/features/contact";
-
+import {ContactSection,GoogleMap,} from "@/features/contact";
 
 
 
@@ -31,6 +30,7 @@ export default function Home() {
       <Statistics />
       <FAQSection />
       <ContactSection />
+      <GoogleMap />
     </>
   );
 }
