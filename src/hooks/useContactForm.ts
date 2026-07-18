@@ -10,15 +10,18 @@ import {
 
 export function useContactForm() {
   const form = useForm<ContactFormData>({
-    resolver: zodResolver(contactSchema),
-    defaultValues: {
-      name: "",
-      email: "",
-      phone: "",
-      destination: "",
-      message: "",
-    },
-  });
+  resolver: zodResolver(contactSchema),
+  mode: "onSubmit",
+  reValidateMode: "onChange",
+  shouldFocusError: false,
+  defaultValues: {
+    name: "",
+    email: "",
+    phone: "",
+    destination: "",
+    message: "",
+  },
+});
 
   const onSubmit = async (data: ContactFormData) => {
     try {

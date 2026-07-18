@@ -3,7 +3,7 @@ import { useContactForm } from "@/hooks/useContactForm";
 
 import { Button, Card, Section } from "@/components/ui";
 import SectionHeading from "@/components/common/SectionHeading";
-
+import { destinations } from "../data/destinations";
 import { contactInfo } from "../data/contactInfo";
 
 const icons = {
@@ -65,9 +65,13 @@ export default function ContactSection() {
             Send an Enquiry
           </h3>
 
-          <form onSubmit={handleSubmit(onSubmit)}className="space-y-5">
+          <form
+  noValidate
+  onSubmit={handleSubmit(onSubmit)}
+  className="space-y-5"
+>
             <input
-  {...register("name")}disabled={isSubmitting}
+  {...register("name")} required disabled={isSubmitting}
   type="text"
   placeholder="Your Name"
   className="w-full rounded-xl border border-gray-300 px-4 py-3 transition focus:border-[#0B3D91] focus:outline-none"
@@ -79,7 +83,10 @@ export default function ContactSection() {
 )}
 
             <input
-  {...register("email")}disabled={isSubmitting}
+  {...register("email")} 
+  autoComplete="name"
+  required 
+  disabled={isSubmitting}
   type="email"
   placeholder="Email Address"
   className="w-full rounded-xl border border-gray-300 px-4 py-3 transition focus:border-[#0B3D91] focus:outline-none"
@@ -91,7 +98,9 @@ export default function ContactSection() {
 )}
 
             <input
-  {...register("phone")}disabled={isSubmitting}
+  {...register("phone")}
+  autoComplete="tel"
+  required disabled={isSubmitting}
   type="tel"
   placeholder="Phone Number"
   className="w-full rounded-xl border border-gray-300 px-4 py-3 transition focus:border-[#0B3D91] focus:outline-none"
@@ -102,13 +111,18 @@ export default function ContactSection() {
   </p>
 )}
 
-            <select {...register("destination")}disabled={isSubmitting}>
+            <select
+  {...register("destination")}
+  disabled={isSubmitting}
+  className="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 transition focus:border-[#0B3D91] focus:outline-none"
+>
   <option value="">Select Your Destination</option>
-  <option value="Umrah">Umrah</option>
-  <option value="Hajj">Hajj</option>
-  <option value="Dubai">Dubai</option>
-  <option value="Malaysia">Malaysia</option>
-  <option value="Singapore">Singapore</option>
+
+  {destinations.map((destination) => (
+    <option key={destination} value={destination}>
+      {destination}
+    </option>
+  ))}
 </select>
 {errors.destination && (
   <p className="mt-1 text-sm text-red-500">
@@ -117,10 +131,13 @@ export default function ContactSection() {
 )}
 
            <textarea
-  {...register("message")}disabled={isSubmitting}
+  className="w-full resize-y rounded-xl border border-gray-300 px-4 py-3 transition focus:border-[#0B3D91] focus:outline-none"
+  {...register("message")}
+  autoComplete="message"
+  required disabled={isSubmitting}
   rows={5}
   placeholder="Your Message"
-  className="w-full rounded-xl border border-gray-300 px-4 py-3 transition focus:border-[#0B3D91] focus:outline-none"
+
 />
 {errors.message && (
   <p className="mt-1 text-sm text-red-500">
@@ -128,11 +145,19 @@ export default function ContactSection() {
   </p>
 )}
 
-           <Button
+<Button
   type="submit"
-  disabled={isSubmitting} className="w-full"
+  disabled={isSubmitting}
+  className="w-full"
 >
-  {isSubmitting ? "Sending..." : "Send Enquiry"}
+  {isSubmitting ? (
+    <>
+      <span className="mr-2 inline-block h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
+      Sending...
+    </>
+  ) : (
+    "Send Enquiry"
+  )}
 </Button>
           </form>
         </Card>

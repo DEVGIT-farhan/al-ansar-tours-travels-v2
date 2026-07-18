@@ -10,9 +10,12 @@ export const contactSchema = z.object({
     .email("Please enter a valid email address."),
 
   phone: z
-    .string()
-    .trim()
-    .min(10, "Please enter a valid phone number."),
+  .string()
+  .trim()
+  .regex(
+    /^(?:\+91|91)?[6-9]\d{9}$/,
+    "Please enter a valid Indian mobile number."
+  ),
 
   destination: z
     .string()
