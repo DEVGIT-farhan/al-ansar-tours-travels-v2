@@ -49,9 +49,34 @@ export default function ContactSection() {
                       {item.title}
                     </h3>
 
-                    <p className="mt-1 text-gray-600">
-                      {item.value}
-                    </p>
+                    {item.icon === "phone" ? (
+  <a
+    href={`tel:${item.value.replace(/\s+/g, "")}`}
+    className="mt-1 block text-gray-600 transition hover:text-[#0B3D91]"
+  >
+    {item.value}
+  </a>
+) : item.icon === "mail" ? (
+  <a
+    href={`mailto:${item.value}`}
+    className="mt-1 block text-gray-600 transition hover:text-[#0B3D91]"
+  >
+    {item.value}
+  </a>
+) : item.icon === "map" ? (
+  <a
+    href="https://maps.google.com/?q=125+Dr+Besant+Road+Royapettah+Chennai+600014"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="mt-1 block text-gray-600 transition hover:text-[#0B3D91]"
+  >
+    {item.value}
+  </a>
+) : (
+  <p className="mt-1 text-gray-600">
+    {item.value}
+  </p>
+)}
                   </div>
                 </div>
               </Card>

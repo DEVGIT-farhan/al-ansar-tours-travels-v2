@@ -13,9 +13,9 @@ export const COMPANY = {
   officeHours: "Mon - Sat, 9:00 AM - 7:00 PM",
 
   social: {
-    facebook: "",
-    instagram: "",
-    youtube: "",
-    X: "",
-  },
+  facebook: "https://facebook.com/yourpage",
+  instagram: "https://instagram.com/yourpage",
+  youtube: "https://youtube.com/@yourchannel",
+  whatsapp: "https://wa.me/919380080009",
+},
 };
