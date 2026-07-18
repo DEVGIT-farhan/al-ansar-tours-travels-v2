@@ -1,4 +1,5 @@
 import { Clock, Mail, MapPin, Phone } from "lucide-react";
+import { useContactForm } from "@/hooks/useContactForm";
 
 import { Button, Card, Section } from "@/components/ui";
 import SectionHeading from "@/components/common/SectionHeading";
@@ -13,6 +14,12 @@ const icons = {
 };
 
 export default function ContactSection() {
+  const {
+  register,
+  handleSubmit,
+  formState: { errors, isSubmitting },
+  onSubmit,
+} = useContactForm();
   return (
     <Section className="bg-gray-50">
       <SectionHeading
@@ -58,47 +65,75 @@ export default function ContactSection() {
             Send an Enquiry
           </h3>
 
-          <form className="space-y-5">
+          <form onSubmit={handleSubmit(onSubmit)}className="space-y-5">
             <input
-              type="text"
-              placeholder="Enter your full name"
-              className="w-full rounded-xl border border-gray-300 p-4 focus:border-[#0B3D91] focus:outline-none"
-            />
+  {...register("name")}disabled={isSubmitting}
+  type="text"
+  placeholder="Your Name"
+  className="w-full rounded-xl border border-gray-300 px-4 py-3 transition focus:border-[#0B3D91] focus:outline-none"
+/>
+{errors.name && (
+  <p className="mt-1 text-sm text-red-500">
+    {errors.name.message}
+  </p>
+)}
 
             <input
-              type="email"
-              placeholder="Enter your email address"
-              className="w-full rounded-xl border border-gray-300 p-4 focus:border-[#0B3D91] focus:outline-none"
-            />
+  {...register("email")}disabled={isSubmitting}
+  type="email"
+  placeholder="Email Address"
+  className="w-full rounded-xl border border-gray-300 px-4 py-3 transition focus:border-[#0B3D91] focus:outline-none"
+/>
+{errors.email && (
+  <p className="mt-1 text-sm text-red-500">
+    {errors.email.message}
+  </p>
+)}
 
             <input
-              type="tel"
-              placeholder="Enter your phone number"
-              className="w-full rounded-xl border border-gray-300 p-4 focus:border-[#0B3D91] focus:outline-none"
-            />
-            <select
-  className="w-full rounded-xl border border-gray-300 p-4 focus:border-[#0B3D91] focus:outline-none"
-  defaultValue=""
->
-  <option value="" disabled>
-    Select your destination
-  </option>
-  <option>Umrah</option>
-  <option>Dubai</option>
-  <option>Malaysia</option>
-  <option>Thailand</option>
-  <option>Turkey</option>
+  {...register("phone")}disabled={isSubmitting}
+  type="tel"
+  placeholder="Phone Number"
+  className="w-full rounded-xl border border-gray-300 px-4 py-3 transition focus:border-[#0B3D91] focus:outline-none"
+/>
+{errors.phone && (
+  <p className="mt-1 text-sm text-red-500">
+    {errors.phone.message}
+  </p>
+)}
+
+            <select {...register("destination")}disabled={isSubmitting}>
+  <option value="">Select Your Destination</option>
+  <option value="Umrah">Umrah</option>
+  <option value="Hajj">Hajj</option>
+  <option value="Dubai">Dubai</option>
+  <option value="Malaysia">Malaysia</option>
+  <option value="Singapore">Singapore</option>
 </select>
+{errors.destination && (
+  <p className="mt-1 text-sm text-red-500">
+    {errors.destination.message}
+  </p>
+)}
 
-            <textarea
-              rows={5}
-              placeholder="Tell us about your preferred destination, travel dates, and number of travellers."
-              className="w-full rounded-xl border border-gray-300 p-4 focus:border-[#0B3D91] focus:outline-none"
-            />
+           <textarea
+  {...register("message")}disabled={isSubmitting}
+  rows={5}
+  placeholder="Your Message"
+  className="w-full rounded-xl border border-gray-300 px-4 py-3 transition focus:border-[#0B3D91] focus:outline-none"
+/>
+{errors.message && (
+  <p className="mt-1 text-sm text-red-500">
+    {errors.message.message}
+  </p>
+)}
 
-            <Button className="w-full">
-              Send Enquiry
-            </Button>
+           <Button
+  type="submit"
+  disabled={isSubmitting} className="w-full"
+>
+  {isSubmitting ? "Sending..." : "Send Enquiry"}
+</Button>
           </form>
         </Card>
       </div>

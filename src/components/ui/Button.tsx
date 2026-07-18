@@ -1,7 +1,7 @@
-import type { ReactNode } from "react";
+import type { ButtonHTMLAttributes, ReactNode } from "react";
 import { Link } from "react-router-dom";
 
-interface ButtonProps {
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
   to?: string;
   href?: string;
@@ -15,6 +15,7 @@ export default function Button({
   href,
   variant = "primary",
   className = "",
+  ...buttonProps
 }: ButtonProps) {
   const classes = {
     primary:
@@ -25,24 +26,35 @@ export default function Button({
       "border-2 border-[#0B3D91] text-[#0B3D91] hover:bg-[#0B3D91] hover:text-white",
   };
 
-  const ButtonClasses = `inline-flex items-center justify-center rounded-xl px-6 py-3 font-semibold transition ${classes[variant]} ${className}`;
+  const buttonClasses = `inline-flex items-center justify-center rounded-xl px-6 py-3 font-semibold transition ${classes[variant]} ${className}`;
 
+  // External link
   if (href) {
     return (
       <a
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className={ButtonClasses}
+        className={buttonClasses}
       >
         {children}
       </a>
     );
   }
 
+  // Internal navigation
+  if (to) {
+    return (
+      <Link to={to} className={buttonClasses}>
+        {children}
+      </Link>
+    );
+  }
+
+  // HTML button (forms)
   return (
-    <Link to={to ?? "/"} className={ButtonClasses}>
+    <button className={buttonClasses} {...buttonProps}>
       {children}
-    </Link>
+    </button>
   );
 }
