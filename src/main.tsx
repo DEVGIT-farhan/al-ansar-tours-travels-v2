@@ -10,8 +10,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <BrowserRouter>
       <App />
-      <Toaster position="top-right" toastOptions={{ duration: 3000 }} />
-      
+      <Toaster position="top-right" toastOptions={{ duration: 3000 }}/>
     </BrowserRouter>
   </React.StrictMode>
 );

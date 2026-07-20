@@ -5,7 +5,7 @@ import { packages } from "../data/packages";
 
 export default function PackagesSection() {
   return (
-    <Section className="bg-gradient-to-b from-white via-gray-50 to-white">
+    <Section className="bg-linear-to-b from-white via-gray-50 to-white">
 
         <SectionHeading
           badge="Featured Packages"

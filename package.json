@@ -4,10 +4,13 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "typecheck": "tsc --noEmit",
+    "check": "npm run lint && npm run typecheck",
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "lint": "eslint .",
-    "preview": "vite preview"
+    "lint": "eslint . --max-warnings=0",
+    "preview": "vite preview",
+    "format": "prettier --write ."
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
@@ -28,6 +31,7 @@
     "swiper": "^14.0.5",
     "tailwind-merge": "^3.6.0",
     "tailwindcss": "^4.3.3",
+    "vite-plugin-checker": "^0.14.4",
     "yet-another-react-lightbox": "^3.32.1",
     "zod": "^4.4.3"
   },

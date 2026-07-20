@@ -13,7 +13,8 @@ export default function Navbar() {
 
   useEffect(() => {
   const handleScroll = () => {
-    setIsScrolled(window.scrollY > 20);
+    const next = window.scrollY > 20;
+     setIsScrolled(prev => (prev === next ? prev : next));
   };
 
   window.addEventListener("scroll", handleScroll);
@@ -80,6 +81,9 @@ export default function Navbar() {
   onClick={() => setIsMenuOpen(!isMenuOpen)}
   className="rounded-lg p-2 text-[#0B3D91] transition hover:bg-[#0B3D91]/10 md:hidden"
   aria-label="Toggle navigation menu"
+  aria-expanded={isMenuOpen}
+aria-controls="mobile-navigation"
+  id="mobile-navigation"
 >
   {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
 </button>

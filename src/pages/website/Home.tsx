@@ -1,8 +1,6 @@
 import {
   Hero,
   SearchSection,
-  Umrah,
-  Statistics,
 } from "../../components/home";
 
 import About from "../../components/home/about/About";

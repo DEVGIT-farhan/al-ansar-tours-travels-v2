@@ -6,7 +6,7 @@ import StatCard from "../common/StatCard";
 export default function Hero() {
   return (
     <section className="bg-slate-50">
-      <div className="mx-auto flex max-w-7xl flex-col items-start gap-12 px-6 py-10 md:py-14 lg:min-h-[620px] lg:flex-row lg:items-center lg:py-16">
+      <div className="mx-auto flex max-w-7xl flex-col items-start gap-12 px-6 py-10 md:py-14 lg:min-h-155 lg:flex-row lg:items-center lg:py-16">
         {/* Left Content */}
         <div className="max-w-xl flex-1">
           <p className="font-semibold uppercase tracking-[4px] text-[#F4B400]">
