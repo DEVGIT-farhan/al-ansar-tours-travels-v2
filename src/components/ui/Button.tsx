@@ -1,6 +1,7 @@
-import { cn } from "@/lib/cn";
 import type { ButtonHTMLAttributes, ReactNode } from "react";
 import { Link } from "react-router-dom";
+
+import { cn } from "@/lib/cn";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
@@ -10,6 +11,13 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string;
 }
 
+const variants = {
+  primary: "bg-[#0B3D91] text-white hover:bg-[#082d6d]",
+  secondary: "bg-[#F4B400] text-black hover:bg-yellow-500",
+  outline:
+    "border-2 border-[#0B3D91] text-[#0B3D91] hover:bg-[#0B3D91] hover:text-white",
+};
+
 export default function Button({
   children,
   to,
@@ -18,47 +26,39 @@ export default function Button({
   className = "",
   ...buttonProps
 }: ButtonProps) {
-  const classes = {
-    primary:
-      "bg-[#0B3D91] hover:bg-[#082d6d] text-white",
-    secondary:
-      "bg-[#F4B400] hover:bg-yellow-500 text-black",
-    outline:
-      "border-2 border-[#0B3D91] text-[#0B3D91] hover:bg-[#0B3D91] hover:text-white",
-  };
+  const classes = cn(
+    "inline-flex items-center justify-center rounded-xl px-6 py-3 font-semibold transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-[#0B3D91] focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+    variants[variant],
+    className
+  );
 
-  const buttonClasses = cn(
-  "inline-flex items-center justify-center rounded-xl px-6 py-3 font-semibold transition",
-  classes[variant],
-  className
-);
-
-  // External link
   if (href) {
     return (
       <a
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className={buttonClasses}
+        className={classes}
       >
         {children}
       </a>
     );
   }
 
-  // Internal navigation
   if (to) {
     return (
-      <Link to={to} className={buttonClasses}>
+      <Link to={to} className={classes}>
         {children}
       </Link>
     );
   }
 
-  // HTML button (forms)
   return (
-    <button className={buttonClasses} {...buttonProps}>
+    <button
+      type={buttonProps.type ?? "button"}
+      className={classes}
+      {...buttonProps}
+    >
       {children}
     </button>
   );

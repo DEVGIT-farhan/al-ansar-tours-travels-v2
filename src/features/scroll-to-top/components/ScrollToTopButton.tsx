@@ -6,13 +6,20 @@ export default function ScrollToTopButton() {
 
   useEffect(() => {
     const toggleVisibility = () => {
-      setIsVisible(window.scrollY > 300);
+      const next = window.scrollY > 300;
+
+      setIsVisible((prev) => (prev === next ? prev : next));
     };
 
-    window.addEventListener("scroll", toggleVisibility);
+    toggleVisibility();
 
-    return () =>
+    window.addEventListener("scroll", toggleVisibility, {
+      passive: true,
+    });
+
+    return () => {
       window.removeEventListener("scroll", toggleVisibility);
+    };
   }, []);
 
   const scrollToTop = () => {
@@ -24,6 +31,7 @@ export default function ScrollToTopButton() {
 
   return (
     <button
+      type="button"
       onClick={scrollToTop}
       aria-label="Scroll to top"
       className={`fixed bottom-24 right-4 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-[#0B3D91] text-white shadow-xl transition-all duration-300 hover:scale-110 hover:bg-[#072f70] active:scale-95 md:bottom-28 md:right-6 md:h-14 md:w-14 ${
@@ -32,7 +40,10 @@ export default function ScrollToTopButton() {
           : "pointer-events-none translate-y-6 opacity-0"
       }`}
     >
-      <ArrowUp size={22} />
+      <ArrowUp
+        size={22}
+        aria-hidden="true"
+      />
     </button>
   );
 }

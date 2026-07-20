@@ -1,23 +1,29 @@
 import { Link } from "react-router-dom";
-import logo from "../../assets/logos/logo.png";
-import { company } from "../../data/company";
+
+import logo from "@/assets/logos/logo.png";
+import { COMPANY } from "@/constants/COMPANY";
 
 export default function Logo() {
   return (
-    <Link to="/" className="flex items-center gap-3">
+    <Link
+      to="/"
+      className="flex items-center gap-3"
+      aria-label={`${COMPANY.name} Home`}
+    >
       <img
         src={logo}
-        alt={company.name}
-        className="h-14 w-auto object-contain shrink-0"
+        alt={`${COMPANY.name} Logo`}
+        draggable={false}
+        className="h-14 w-auto shrink-0 object-contain"
       />
 
       <div>
-        <h1 className="text-lg font-bold text-[#0B3D91]">
-          {company.name}
+        <h1 className="text-base font-bold text-[#0B3D91] lg:text-lg">
+          {COMPANY.name}
         </h1>
 
         <p className="text-xs text-gray-500">
-          {company.tagline}
+          {COMPANY.tagline}
         </p>
       </div>
     </Link>
