@@ -33,6 +33,8 @@ export default function TestimonialCard({
         <img
           src={testimonial.image}
           alt={testimonial.name}
+          loading="lazy"
+          decoding="async"  
           className="h-16 w-16 rounded-full object-cover border-2 border-[#0B3D91]"
         />
 

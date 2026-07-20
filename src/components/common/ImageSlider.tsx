@@ -32,10 +32,12 @@ export default function ImageSlider({
         <SwiperSlide key={index}>
           <div className="h-[450px] w-full">
             <img
-              src={image}
-              alt={`About ${index + 1}`}
-              className="h-72 w-full rounded-3xl object-cover md:h-96 lg:h-[450px]"
-            />
+  src={image}
+  alt={`About ${index + 1}`}
+  loading="lazy"
+  decoding="async"
+  className="h-72 w-full rounded-3xl object-cover md:h-96 lg:h-[450px]"
+/>
           </div>
         </SwiperSlide>
       ))}

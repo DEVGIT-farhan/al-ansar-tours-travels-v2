@@ -17,6 +17,8 @@ export default function DestinationCard({
         <img
           src={destination.image}
           alt={destination.name}
+          loading="lazy"
+          decoding="async"
           className="h-64 w-full object-cover transition-transform duration-500 group-hover:scale-110"
         />
       </div>

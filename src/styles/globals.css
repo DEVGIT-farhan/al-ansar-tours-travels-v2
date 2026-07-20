@@ -43,3 +43,25 @@ h6 {
 .whatsapp-pulse {
   animation: whatsappPulse 2s infinite;
 }
+@keyframes loading {
+  from {
+    transform: scaleX(0);
+  }
+
+  to {
+    transform: scaleX(1);
+  }
+}
+@keyframes logoFloat {
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}

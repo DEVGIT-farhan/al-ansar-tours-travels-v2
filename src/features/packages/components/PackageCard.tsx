@@ -18,6 +18,8 @@ export default function PackageCard({
         <img
           src={packageData.image}
           alt={packageData.title}
+          loading="lazy"
+         decoding="async"
           className="h-64 w-full object-cover transition-transform duration-500 group-hover:scale-110"
         />
 

@@ -1,3 +1,4 @@
+import { cn } from "@/lib/cn";
 import type { ButtonHTMLAttributes, ReactNode } from "react";
 import { Link } from "react-router-dom";
 
@@ -26,7 +27,11 @@ export default function Button({
       "border-2 border-[#0B3D91] text-[#0B3D91] hover:bg-[#0B3D91] hover:text-white",
   };
 
-  const buttonClasses = `inline-flex items-center justify-center rounded-xl px-6 py-3 font-semibold transition ${classes[variant]} ${className}`;
+  const buttonClasses = cn(
+  "inline-flex items-center justify-center rounded-xl px-6 py-3 font-semibold transition",
+  classes[variant],
+  className
+);
 
   // External link
   if (href) {

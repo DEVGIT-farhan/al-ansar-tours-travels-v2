@@ -1,7 +1,7 @@
-import type { ReactNode } from "react";
+import type { HTMLAttributes, ReactNode } from "react";
 import { cn } from "../../lib/cn";
 
-interface CardProps {
+interface CardProps extends HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
   className?: string;
 }
@@ -9,6 +9,7 @@ interface CardProps {
 export default function Card({
   children,
   className,
+  ...props
 }: CardProps) {
   return (
     <div
@@ -16,6 +17,7 @@ export default function Card({
         "rounded-3xl bg-white shadow-sm transition-all duration-300",
         className
       )}
+      {...props}
     >
       {children}
     </div>

@@ -4,18 +4,25 @@ import Card from "@/components/ui/Card";
 
 interface GalleryCardProps {
   item: GalleryItem;
+  onClick?: () => void;
 }
 
 export default function GalleryCard({
   item,
+  onClick,
 }: GalleryCardProps) {
   return (
-    <Card className="group relative overflow-hidden shadow-lg">
+    <Card
+  onClick={onClick}
+  className="group relative cursor-pointer overflow-hidden shadow-lg"
+>
       <img
-        src={item.image}
-        alt={item.title}
-        className="h-80 w-full object-cover transition-transform duration-500 group-hover:scale-110"
-      />
+  src={item.image}
+  alt={item.title}
+  loading="lazy"
+  decoding="async"
+  className="h-80 w-full object-cover transition-transform duration-500 group-hover:scale-110"
+/>
 
       <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
