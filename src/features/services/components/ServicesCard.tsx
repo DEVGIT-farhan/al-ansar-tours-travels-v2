@@ -1,5 +1,9 @@
-import type { Service } from "../types/service";
+import { useMemo } from "react";
+
 import { Button, Card } from "@/components/ui";
+import { COMPANY } from "@/constants/COMPANY";
+
+import type { Service } from "../types/service";
 
 interface ServicesCardProps {
   service: Service;
@@ -10,10 +14,25 @@ export default function ServicesCard({
 }: ServicesCardProps) {
   const Icon = service.icon;
 
+  const whatsappUrl = useMemo(() => {
+    const message = `Hello ${COMPANY.name},
+
+${service.whatsappMessage}
+
+Thank you.`;
+
+    return `https://wa.me/${COMPANY.whatsapp}?text=${encodeURIComponent(
+      message
+    )}`;
+  }, [service]);
+
   return (
-   <Card className="group flex h-full flex-col border border-gray-200 p-8 hover:-translate-y-2 hover:border-[#0B3D91] hover:shadow-xl">
-      <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-[#0B3D91]/10 transition-transform duration-300 group-hover:scale-110">
-        <Icon className="h-8 w-8 text-[#0B3D91]" />
+    <Card className="group flex h-full flex-col border border-gray-200 p-8 transition-all duration-300 hover:-translate-y-2 hover:border-[#0B3D91] hover:shadow-2xl">
+      <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-[#0B3D91]/10 transition-all duration-300 group-hover:bg-[#0B3D91]">
+        <Icon
+          aria-hidden="true"
+          className="h-8 w-8 text-[#0B3D91] transition-colors duration-300 group-hover:text-white"
+        />
       </div>
 
       <h3 className="mb-3 text-2xl font-bold text-[#0B3D91]">
@@ -24,11 +43,13 @@ export default function ServicesCard({
         {service.description}
       </p>
 
-     <Button
-  variant="outline"
-  className="w-full group-hover:bg-[#0B3D91] group-hover:text-white">
-  Learn More
-</Button>
+      <Button
+        href={whatsappUrl}
+        className="w-full"
+        variant="outline"
+      >
+        Enquire Now
+      </Button>
     </Card>
   );
 }
