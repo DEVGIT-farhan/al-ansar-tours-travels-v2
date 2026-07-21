@@ -13,8 +13,20 @@ export default function GalleryCard({
 }: GalleryCardProps) {
   return (
     <Card
-  onClick={onClick}
-  className="group relative cursor-pointer overflow-hidden shadow-lg"
+  {...(onClick && {
+    role: "button",
+    tabIndex: 0,
+    onClick,
+    onKeyDown: (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        onClick();
+      }
+    },
+  })}
+  className={`group relative overflow-hidden shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl ${
+    onClick ? "cursor-pointer focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#F4B400]" : ""
+  }`}
 >
       <img
   src={item.image}

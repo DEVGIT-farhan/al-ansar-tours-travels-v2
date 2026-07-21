@@ -1,16 +1,18 @@
 import { useState } from "react";
 
-import { Section } from "@/components/ui";
 import SectionHeading from "@/components/common/SectionHeading";
+import { Section } from "@/components/ui";
 
-import FAQItem from "./FAQItem";
 import { faqs } from "../data/faqs";
+import FAQItem from "./FAQItem";
 
 export default function FAQSection() {
   const [openId, setOpenId] = useState<number | null>(1);
 
-  const handleToggle = (id: number) => {
-    setOpenId((current) => (current === id ? null : id));
+  const toggleFaq = (id: number) => {
+    setOpenId((current) =>
+      current === id ? null : id
+    );
   };
 
   return (
@@ -18,19 +20,20 @@ export default function FAQSection() {
       <SectionHeading
         badge="Frequently Asked Questions"
         title="Everything You Need to Know"
-        description="Find answers to the most common questions about our Umrah, visa, and travel services."
+        description="Find answers to the most common questions about our Umrah, visa and travel services."
       />
 
-      <div className="mx-auto mt-16 max-w-5xl space-y-6">
+      <ul className="mx-auto mt-16 max-w-5xl space-y-6">
         {faqs.map((faq) => (
-          <FAQItem
-            key={faq.id}
-            faq={faq}
-            isOpen={openId === faq.id}
-            onClick={() => handleToggle(faq.id)}
-          />
+          <li key={faq.id}>
+            <FAQItem
+              faq={faq}
+              isOpen={openId === faq.id}
+              onClick={() => toggleFaq(faq.id)}
+            />
+          </li>
         ))}
-      </div>
+      </ul>
     </Section>
   );
 }

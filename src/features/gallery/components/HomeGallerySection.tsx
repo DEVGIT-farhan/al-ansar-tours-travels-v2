@@ -1,8 +1,11 @@
-import { Section } from "@/components/ui";
-import Button from "@/components/ui/Button";
 import SectionHeading from "@/components/common/SectionHeading";
-import GalleryCard from "./GalleryCard";
+import Button from "@/components/ui/Button";
+import { Section } from "@/components/ui";
+
 import { galleryItems } from "../data/gallery";
+import GalleryCard from "./GalleryCard";
+
+const PREVIEW_COUNT = 6;
 
 export default function HomeGallerySection() {
   return (
@@ -13,20 +16,25 @@ export default function HomeGallerySection() {
         description="Take a glimpse at unforgettable journeys with AL ANSAR TOURS & TRAVELS."
       />
 
-      <div className="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {galleryItems.slice(0, 6).map((item, index) => (
-          <div
-            key={item.id}
-            data-aos="zoom-in"
-            data-aos-delay={index * 100}
-          >
-            <GalleryCard item={item} />
-          </div>
-        ))}
-      </div>
+      <ul className="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {galleryItems
+          .slice(0, PREVIEW_COUNT)
+          .map((item, index) => (
+            <li
+              key={item.id}
+              data-aos="zoom-in"
+              data-aos-delay={Math.min(index * 100, 500)}
+            >
+              <GalleryCard item={item} />
+            </li>
+          ))}
+      </ul>
 
       <div className="mt-12 flex justify-center">
-        <Button to="/gallery" variant="secondary">
+        <Button
+          to="/gallery"
+          variant="secondary"
+        >
           View Full Gallery
         </Button>
       </div>
