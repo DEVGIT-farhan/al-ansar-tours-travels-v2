@@ -1,6 +1,6 @@
 import { Hero, SearchSection } from "@/components/home";
 import About from "@/components/home/about/About";
-
+import SEO from "@/components/common/SEO";
 import { ContactSection, GoogleMap } from "@/features/contact";
 import DestinationsSection from "@/features/destinations/components/DestinationsSection";
 import { FAQSection } from "@/features/faq";
@@ -12,6 +12,10 @@ import { TestimonialsSection } from "@/features/testimonials";
 export default function Home() {
   return (
     <>
+    <SEO
+    description="Trusted travel agency in Chennai offering Umrah packages, tourist visas, flight bookings and international holiday packages."
+    url="/"
+  />
       <Hero />
 
       <SearchSection />
