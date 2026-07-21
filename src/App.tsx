@@ -32,7 +32,7 @@ export default function App() {
         <Route path="/packages" element={<Packages />} />
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/package-details" element={<PackageDetails />} />
+       <Route path="/package-details/:slug"element={<PackageDetails />}/>
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
