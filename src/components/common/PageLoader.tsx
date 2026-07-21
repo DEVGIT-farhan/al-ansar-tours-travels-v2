@@ -52,7 +52,7 @@ export default function PageLoader() {
       role="status"
       aria-live="polite"
       aria-busy="true"
-      className={`fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-white/95 backdrop-blur-md transition-opacity duration-700 ${
+      className={`fixed inset-0 z-9999 flex flex-col items-center justify-center bg-white/95 backdrop-blur-md transition-opacity duration-700 ${
         fadeOut ? "opacity-0" : "opacity-100"
       }`}
     >

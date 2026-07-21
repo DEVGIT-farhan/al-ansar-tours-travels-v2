@@ -12,13 +12,9 @@ interface PackageCardProps {
 export default function PackageCard({
   packageData,
 }: PackageCardProps) {
-  const whatsappUrl = `https://wa.me/${
-    COMPANY.whatsapp
-  }?text=${encodeURIComponent(`Hello ${COMPANY.name},
-
-${packageData.whatsappMessage}
-
-Thank you.`)}`;
+ const whatsappUrl = `https://wa.me/${
+  COMPANY.whatsapp
+}?text=${encodeURIComponent(packageData.whatsappMessage)}`;
 
   return (
     <Card className="group flex h-full flex-col overflow-hidden border border-gray-200 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:border-[#0B3D91] hover:shadow-2xl">
@@ -96,18 +92,19 @@ Thank you.`)}`;
         {/* Actions */}
         <div className="mt-8 flex gap-3">
           <Button
-            href={whatsappUrl}
-            className="flex-1"
-          >
-            Book Now
-          </Button>
+  href={whatsappUrl}
+  variant="primary"
+  className="flex-1"
+>
+  Book Now
+</Button>
 
           <Button
             to={`/package-details/${packageData.slug}`}
             variant="outline"
             className="flex-1"
           >
-            Details
+            View Details
           </Button>
         </div>
       </div>

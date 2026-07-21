@@ -1,15 +1,23 @@
-import type { ButtonHTMLAttributes, ReactNode } from "react";
+import type {
+  AnchorHTMLAttributes,
+  ButtonHTMLAttributes,
+  ReactNode,
+} from "react";
 import { Link } from "react-router-dom";
 
 import { cn } from "@/lib/cn";
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface BaseProps {
   children: ReactNode;
   to?: string;
   href?: string;
   variant?: "primary" | "secondary" | "outline";
   className?: string;
 }
+
+type ButtonProps = BaseProps &
+  ButtonHTMLAttributes<HTMLButtonElement> &
+  AnchorHTMLAttributes<HTMLAnchorElement>;
 
 const variants = {
   primary: "bg-[#0B3D91] text-white hover:bg-[#082d6d]",
@@ -24,7 +32,7 @@ export default function Button({
   href,
   variant = "primary",
   className = "",
-  ...buttonProps
+  ...props
 }: ButtonProps) {
   const classes = cn(
     "inline-flex items-center justify-center rounded-xl px-6 py-3 font-semibold transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-[#0B3D91] focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
@@ -36,9 +44,8 @@ export default function Button({
     return (
       <a
         href={href}
-        target="_blank"
-        rel="noopener noreferrer"
         className={classes}
+        {...props}
       >
         {children}
       </a>
@@ -47,7 +54,10 @@ export default function Button({
 
   if (to) {
     return (
-      <Link to={to} className={classes}>
+      <Link
+        to={to}
+        className={classes}
+      >
         {children}
       </Link>
     );
@@ -55,9 +65,9 @@ export default function Button({
 
   return (
     <button
-      type={buttonProps.type ?? "button"}
+      type={props.type ?? "button"}
       className={classes}
-      {...buttonProps}
+      {...props}
     >
       {children}
     </button>
