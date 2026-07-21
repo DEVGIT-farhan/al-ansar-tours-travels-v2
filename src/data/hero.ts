@@ -1,6 +1,4 @@
 export const heroContent = {
-  company: "AL ANSAR TOURS & TRAVELS",
-
   tagline: "Your Trusted Travel Partner",
 
   heading: "Discover Your Next Journey With Confidence",

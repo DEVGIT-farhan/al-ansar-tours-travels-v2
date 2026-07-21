@@ -1,13 +1,18 @@
-import heroImage from "../../assets/images/hero.jpg";
-import { heroContent } from "../../data/hero";
-import Button from "../ui/Button";
-import StatCard from "../common/StatCard";
+import heroImage from "@/assets/images/hero.jpg";
+
+import StatCard from "@/components/common/StatCard";
+import { Container, Button } from "@/components/ui";
+import { COMPANY } from "@/constants/COMPANY";
+import { heroContent } from "@/data/hero";
 
 export default function Hero() {
+  const whatsappUrl = `https://wa.me/${COMPANY.whatsapp}?text=${encodeURIComponent(
+    `Hello ${COMPANY.name}, I would like to know more about your travel packages.`
+  )}`;
+
   return (
     <section className="bg-slate-50">
-      <div className="mx-auto flex max-w-7xl flex-col items-start gap-12 px-6 py-10 md:py-14 lg:min-h-155 lg:flex-row lg:items-center lg:py-16">
-        {/* Left Content */}
+      <Container className="flex flex-col items-start gap-12 py-10 md:py-14 lg:min-h-155 lg:flex-row lg:items-center lg:py-16">
         <div className="max-w-xl flex-1">
           <p className="font-semibold uppercase tracking-[4px] text-[#F4B400]">
             {heroContent.tagline}
@@ -22,10 +27,7 @@ export default function Hero() {
           </p>
 
           <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:flex-wrap">
-            <Button
-              href="https://wa.me/919380080009"
-              className="w-full sm:w-auto"
-            >
+            <Button href={whatsappUrl} className="w-full sm:w-auto">
               Enquire on WhatsApp
             </Button>
 
@@ -47,26 +49,29 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Right Image */}
         <div className="mt-4 flex flex-1 justify-center lg:mt-0 lg:justify-end">
           <img
             src={heroImage}
             alt="Muslims performing Tawaf around the Holy Kaaba in Makkah"
+            loading="eager"
+            decoding="async"
+            fetchPriority="high"
             className="w-full max-w-2xl rounded-3xl object-cover shadow-2xl transition-transform duration-500 hover:scale-[1.02]"
           />
         </div>
-      </div>
+      </Container>
 
-      {/* Statistics */}
-      <div className="-mt-6 mx-auto grid max-w-6xl gap-6 px-6 pb-12 md:grid-cols-3">
-        {heroContent.stats.map((stat) => (
-          <StatCard
-            key={stat.label}
-            value={stat.value}
-            label={stat.label}
-          />
-        ))}
-      </div>
+      <Container>
+        <div className="-mt-6 grid gap-6 pb-12 md:grid-cols-3">
+          {heroContent.stats.map((stat) => (
+            <StatCard
+              key={stat.label}
+              value={stat.value}
+              label={stat.label}
+            />
+          ))}
+        </div>
+      </Container>
     </section>
   );
 }
