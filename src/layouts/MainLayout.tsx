@@ -7,6 +7,7 @@ import { ScrollToTopButton } from "@/features/scroll-to-top";
 import ScrollProgress from "@/components/common/ScrollProgress";
 import PageLoader from "@/components/common/PageLoader";
 
+
 export default function MainLayout() {
   return (
     <>
@@ -23,6 +24,7 @@ export default function MainLayout() {
       <Footer />
       <WhatsAppButton />
       <ScrollToTopButton />
+  
     </>
   );
 }

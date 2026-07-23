@@ -1,10 +1,10 @@
 import { useParams } from "react-router-dom";
-
+import PackageGallery from "@/features/packages/package-details/components/PackageGallery";
 import SEO from "@/components/common/SEO";
 import NotFound from "@/pages/website/NotFound";
-
+import PackageEnquiryForm from "@/features/packages/package-details/components/PackageEnquiryForm";
 import { packageDetails } from "@/features/packages/package-details/data/packageDetails";
-
+import PageHeader from "@/components/common/PageHeader";
 import PackageHero from "@/features/packages/package-details/components/PackageHero";
 import PackageOverview from "@/features/packages/package-details/components/PackageOverview";
 import PackageIncludes from "@/features/packages/package-details/components/PackageIncludes";
@@ -33,10 +33,32 @@ export default function PackageDetails() {
         keywords={packageData.seo.keywords}
         url={`/package-details/${packageData.slug}`}
       />
+<PageHeader
+  title={packageData.title}
+  description={packageData.subtitle}
+  breadcrumb={[
+    {
+      label: "Packages",
+      to: "/packages",
+    },
+    {
+      label: packageData.title,
+    },
+  ]}
+/>
 
+<PackageHero packageData={packageData} />
       <main className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
+        
         {/* Hero */}
         <PackageHero packageData={packageData} />
+
+<div className="mt-8">
+  <PackageGallery
+    images={packageData.gallery}
+    title={packageData.title}
+  />
+</div>
 
         {/* Highlights */}
         <section className="mt-8">
@@ -67,6 +89,9 @@ export default function PackageDetails() {
 
             <PackageFAQ packageData={packageData} />
           </div>
+          <PackageEnquiryForm
+  packageName={packageData.title}
+/>
 
           <StickyBookingCard packageData={packageData} />
         </section>

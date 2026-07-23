@@ -9,3 +9,12 @@ export interface ContactInfo {
   title: string;
   value: string;
 }
+export interface ContactFormData {
+  name: string;
+  email: string;
+  phone: string;
+  destination: string;
+  message: string;
+
+  packageName?: string;
+}

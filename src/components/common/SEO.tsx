@@ -40,9 +40,34 @@ export default function SEO({
     DEFAULT_SEO.siteUrl
   ).toString();
 
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "TravelAgency",
+    name: DEFAULT_SEO.siteName,
+    url: DEFAULT_SEO.siteUrl,
+    logo: pageImage,
+    image: pageImage,
+  };
+
+  const websiteSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: DEFAULT_SEO.siteName,
+    url: DEFAULT_SEO.siteUrl,
+  };
+
+  const webpageSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: pageTitle,
+    url: pageUrl,
+    description: pageDescription,
+  };
+
   return (
     <Helmet prioritizeSeoTags>
-      {/* Primary SEO */}
+      {/* Primary */}
+
       <title>{pageTitle}</title>
 
       <meta
@@ -57,12 +82,17 @@ export default function SEO({
 
       <meta
         name="robots"
-        content="index, follow"
+        content="index,follow"
       />
 
       <meta
         name="author"
         content={DEFAULT_SEO.siteName}
+      />
+
+      <meta
+        name="theme-color"
+        content="#0B3D91"
       />
 
       <link
@@ -71,6 +101,7 @@ export default function SEO({
       />
 
       {/* Open Graph */}
+
       <meta
         property="og:type"
         content={type}
@@ -106,7 +137,23 @@ export default function SEO({
         content={pageImage}
       />
 
+      <meta
+        property="og:image:alt"
+        content={pageTitle}
+      />
+
+      <meta
+        property="og:image:width"
+        content="1200"
+      />
+
+      <meta
+        property="og:image:height"
+        content="630"
+      />
+
       {/* Twitter */}
+
       <meta
         name="twitter:card"
         content={DEFAULT_SEO.twitterCard}
@@ -127,11 +174,34 @@ export default function SEO({
         content={pageImage}
       />
 
-      {/* Theme */}
       <meta
-        name="theme-color"
-        content="#0B3D91"
+        name="twitter:image:alt"
+        content={pageTitle}
       />
+
+      <meta
+        name="twitter:site"
+        content="@alansartravels"
+      />
+
+      <meta
+        name="twitter:creator"
+        content="@alansartravels"
+      />
+
+      {/* Structured Data */}
+
+      <script type="application/ld+json">
+        {JSON.stringify(organizationSchema)}
+      </script>
+
+      <script type="application/ld+json">
+        {JSON.stringify(websiteSchema)}
+      </script>
+
+      <script type="application/ld+json">
+        {JSON.stringify(webpageSchema)}
+      </script>
     </Helmet>
   );
 }

@@ -1,7 +1,7 @@
 export const SEO = {
   siteName: "AL ANSAR TOURS & TRAVELS",
 
-  siteUrl: "https://www.alansartours.com", // Replace with your real domain
+  siteUrl: "https://www.alansartours.com",
 
   defaultTitle: "AL ANSAR TOURS & TRAVELS",
 
@@ -19,7 +19,10 @@ export const SEO = {
     "Saudi Visa",
     "Dubai Tour",
     "Malaysia Tour",
+    "Thailand Tour",
     "Turkey Tour",
+    "International Travel",
+    "Chennai Travel Agency",
   ],
 
   defaultImage: "/og-image.jpg",
@@ -27,4 +30,32 @@ export const SEO = {
   locale: "en_IN",
 
   twitterCard: "summary_large_image",
-};
+
+  twitterSite: "@alansartravels",
+
+  twitterCreator: "@alansartravels",
+
+  themeColor: "#0B3D91",
+
+  company: {
+    name: "AL ANSAR TOURS & TRAVELS",
+
+    email: "info@alansartours.com",
+
+    phone: "+919840000000",
+
+    address: {
+      street: "125 Dr Besant Road",
+
+      locality: "Royapettah",
+
+      city: "Chennai",
+
+      state: "Tamil Nadu",
+
+      postalCode: "600014",
+
+      country: "IN",
+    },
+  },
+} as const;

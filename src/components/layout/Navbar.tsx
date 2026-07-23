@@ -52,7 +52,7 @@ export default function Navbar() {
         </div>
 
         <nav
-          className="hidden items-center gap-8 md:flex"
+          className="hidden items-center gap-6 lg:flex"
           aria-label="Primary navigation"
         >
           {NAVIGATION.map((item) => (
@@ -84,14 +84,14 @@ export default function Navbar() {
           ))}
         </nav>
 
-        <div className="hidden transition-transform duration-300 hover:scale-105 md:block">
+        <div className="hidden transition-transform duration-300 hover:scale-105 lg:block">
           <Button href={whatsappHref}>WhatsApp</Button>
         </div>
 
         <button
           type="button"
           onClick={() => setIsMenuOpen((prev) => !prev)}
-          className="rounded-lg p-2 text-[#0B3D91] transition hover:bg-[#0B3D91]/10 md:hidden"
+          className="rounded-lg p-2 text-[#0B3D91] transition hover:bg-[#0B3D91]/10 lg:hidden"
           aria-label="Toggle navigation menu"
           aria-expanded={isMenuOpen}
           aria-controls="mobile-navigation"
@@ -102,7 +102,7 @@ export default function Navbar() {
 
       <div
         id="mobile-navigation"
-        className={`overflow-hidden transition-all duration-300 ease-in-out md:hidden ${
+        className={`overflow-hidden transition-all duration-300 ease-in-out lg:hidden ${
           isMenuOpen
             ? "max-h-screen border-t border-gray-200 bg-white shadow-lg"
             : "max-h-0"

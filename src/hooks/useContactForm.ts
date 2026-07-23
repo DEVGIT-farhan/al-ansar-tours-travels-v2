@@ -3,6 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "react-hot-toast";
 
 import { sendContactEmail } from "@/lib/email";
+
 import {
   contactSchema,
   type ContactFormData,
@@ -10,30 +11,46 @@ import {
 
 export function useContactForm() {
   const form = useForm<ContactFormData>({
-  resolver: zodResolver(contactSchema),
-  mode: "onSubmit",
-  reValidateMode: "onChange",
-  shouldFocusError: false,
-  defaultValues: {
-    name: "",
-    email: "",
-    phone: "",
-    destination: "",
-    message: "",
-  },
-});
+    resolver: zodResolver(contactSchema),
+    mode: "onSubmit",
+    reValidateMode: "onChange",
+    shouldFocusError: true,
+    defaultValues: {
+      name: "",
+      email: "",
+      phone: "",
+      destination: "",
+      packageName: "",
+      message: "",
+    },
+  });
 
-  const onSubmit = async (data: ContactFormData) => {
+  const onSubmit = async (
+    data: ContactFormData
+  ) => {
     try {
       await sendContactEmail(data);
 
-      toast.success("Enquiry sent successfully!");
+      toast.success(
+        data.packageName
+          ? `Enquiry for "${data.packageName}" sent successfully!`
+          : "Enquiry sent successfully!"
+      );
 
-      form.reset();
+      form.reset({
+        name: "",
+        email: "",
+        phone: "",
+        destination: "",
+        packageName: "",
+        message: "",
+      });
     } catch (error) {
       console.error(error);
 
-      toast.error("Failed to send enquiry. Please try again.");
+      toast.error(
+        "Failed to send enquiry. Please try again."
+      );
     }
   };
 

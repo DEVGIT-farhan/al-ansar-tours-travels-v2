@@ -14,11 +14,12 @@ export default function Logo() {
         src={logo}
         alt={`${COMPANY.name} Logo`}
         draggable={false}
-        className="h-14 w-auto shrink-0 object-contain"
+        className="h-12 w-auto shrink-0 object-contain lg:h-14"
       />
 
-      <div>
-        <h1 className="text-base font-bold text-[#0B3D91] lg:text-lg">
+      {/* Hide text on small screens */}
+      <div className="hidden sm:block">
+        <h1 className="text-base font-bold leading-tight text-[#0B3D91] lg:text-lg">
           {COMPANY.name}
         </h1>
 
