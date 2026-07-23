@@ -1,5 +1,10 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import {
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from "@tanstack/react-query";
 import toast from "react-hot-toast";
+
 import {
   getSettings,
   updateSettings,
@@ -19,14 +24,14 @@ export function useUpdateSettings() {
     mutationFn: updateSettings,
 
     onSuccess: () => {
+      toast.success("Settings updated");
+
       queryClient.invalidateQueries({
         queryKey: ["settings"],
       });
-
-      toast.success("Settings updated successfully.");
     },
 
-    onError: (error: Error) => {
+    onError(error: Error) {
       toast.error(error.message);
     },
   });

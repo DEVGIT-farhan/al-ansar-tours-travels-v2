@@ -1,14 +1,26 @@
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-
+import { useUpdateSettings } from "../hooks/useSettings";
+import type { Settings } from "../types/settings.types";
 import {
   settingsSchema,
   type SettingsFormValues,
 } from "../validation/settings.schema";
-export default function SettingsForm() {
+import SectionCard from "@/admin/components/forms/SectionCard";
+import TextInput from "@/admin/components/forms/TextInput";
+
+interface SettingsFormProps {
+  settings: Settings | null;
+}
+
+export default function SettingsForm({
+  settings,
+}: SettingsFormProps) {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<SettingsFormValues>({
     resolver: zodResolver(settingsSchema),
@@ -29,58 +41,71 @@ export default function SettingsForm() {
       seo_keywords: "",
     },
   });
+  const updateSettings = useUpdateSettings();
 
-  function onSubmit(values: SettingsFormValues) {
-    console.log(values);
-  }
+  useEffect(() => {
+    if (settings) {
+      reset({
+        company_name: settings.company_name ?? "",
+        tagline: settings.tagline ?? "",
+        email: settings.email ?? "",
+        phone: settings.phone ?? "",
+        whatsapp: settings.whatsapp ?? "",
+        address: settings.address ?? "",
+        google_maps_url: settings.google_maps_url ?? "",
+        facebook_url: settings.facebook_url ?? "",
+        instagram_url: settings.instagram_url ?? "",
+        youtube_url: settings.youtube_url ?? "",
+        twitter_url: settings.twitter_url ?? "",
+        seo_title: settings.seo_title ?? "",
+        seo_description: settings.seo_description ?? "",
+        seo_keywords: settings.seo_keywords ?? "",
+      });
+    }
+  }, [settings, reset]);
+
+  async function onSubmit(values: SettingsFormValues) {
+  if (!settings) return;
+
+  updateSettings.mutate({
+    ...settings,
+    ...values,
+  });
+}
 
   return (
     <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="space-y-8"
+  onSubmit={handleSubmit(onSubmit)}
+  className="space-y-6"
+>
+  <SectionCard
+    title="General Information"
+    description="Basic company information displayed across the website."
+  >
+    <TextInput
+      label="Company Name"
+      placeholder="AL ANSAR TOURS & TRAVELS"
+      {...register("company_name")}
+      error={errors.company_name?.message}
+    />
+
+    <TextInput
+      label="Tagline"
+      placeholder="Your Trusted Travel Partner"
+      {...register("tagline")}
+      error={errors.tagline?.message}
+    />
+  </SectionCard>
+
+  <div className="flex justify-end">
+    <button
+      type="submit"
+      disabled={updateSettings.isPending}
+      className="rounded-lg bg-[#0B3D91] px-6 py-3 text-white transition hover:bg-[#082f70] disabled:cursor-not-allowed disabled:opacity-50"
     >
-      <div>
-        <h2 className="mb-4 text-xl font-semibold">
-          General Information
-        </h2>
-
-        <div className="grid gap-4 md:grid-cols-2">
-          <div>
-            <label className="mb-2 block text-sm font-medium">
-              Company Name
-            </label>
-
-            <input
-              {...register("company_name")}
-              className="w-full rounded-lg border p-3"
-            />
-
-            {errors.company_name && (
-              <p className="mt-1 text-sm text-red-500">
-                {errors.company_name.message}
-              </p>
-            )}
-          </div>
-
-          <div>
-            <label className="mb-2 block text-sm font-medium">
-              Tagline
-            </label>
-
-            <input
-              {...register("tagline")}
-              className="w-full rounded-lg border p-3"
-            />
-          </div>
-        </div>
-      </div>
-
-      <button
-        type="submit"
-        className="rounded-lg bg-[#0B3D91] px-6 py-3 text-white"
-      >
-        Save Changes
-      </button>
-    </form>
+      {updateSettings.isPending ? "Saving..." : "Save Changes"}
+    </button>
+  </div>
+</form>
   );
 }
