@@ -2,10 +2,11 @@ import { lazy, Suspense, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import Services from "./pages/website/Services";
 import MainLayout from "./layouts/MainLayout";
-import Login from "@/admin/pages/Login";
-import Dashboard from "@/admin/pages/Dashboard";
+import Services from "./pages/website/Services";
+import Login from "@/admin/features/auth/pages/Login";
+import DashboardPage from "@/admin/features/dashboard/pages/DashboardPage";
+import SettingsPage from "@/admin/features/settings/pages/SettingsPage";
 import ProtectedRoute from "@/admin/routes/ProtectedRoute";
 
 const Home = lazy(() => import("./pages/website/Home"));
@@ -43,47 +44,51 @@ export default function App() {
   return (
     <Suspense fallback={<PageFallback />}>
       <Routes>
-  {/* ---------- Public Website ---------- */}
+        {/* ================= Public Website ================= */}
 
-  <Route element={<MainLayout />}>
-    <Route path="/" element={<Home />} />
-    <Route path="/about" element={<About />} />
-    <Route path="/services" element={<Services />} />
-    <Route path="/packages" element={<Packages />} />
+        <Route element={<MainLayout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/packages" element={<Packages />} />
 
-    <Route
-      path="/package-details/:slug"
-      element={<PackageDetails />}
-    />
+          <Route
+            path="/package-details/:slug"
+            element={<PackageDetails />}
+          />
 
-    <Route
-      path="/destinations"
-      element={<Destinations />}
-    />
+          <Route
+            path="/destinations"
+            element={<Destinations />}
+          />
 
-    <Route path="/gallery" element={<Gallery />} />
+          <Route path="/gallery" element={<Gallery />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="*" element={<NotFound />} />
+        </Route>
 
-    <Route path="/contact" element={<Contact />} />
+        {/* ================= Admin ================= */}
 
-    <Route path="*" element={<NotFound />} />
-  </Route>
+        <Route path="/admin/login" element={<Login />} />
 
-  {/* ---------- Admin ---------- */}
+        <Route
+          path="/admin"
+          element={
+            <ProtectedRoute>
+              <DashboardPage />
+            </ProtectedRoute>
+          }
+        />
 
-  <Route
-    path="/admin/login"
-    element={<Login />}
-  />
-
-  <Route
-    path="/admin"
-    element={
-      <ProtectedRoute>
-        <Dashboard />
-      </ProtectedRoute>
-    }
-  />
-</Routes>
+        <Route
+          path="/admin/settings"
+          element={
+            <ProtectedRoute>
+              <SettingsPage />
+            </ProtectedRoute>
+          }
+        />
+      </Routes>
     </Suspense>
   );
 }

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Navigate } from "react-router-dom";
 
 import { supabase } from "@/lib/supabase";
-import { useAuth } from "../hooks/useAuth";
+import { useAuth } from "@/admin/hooks/useAuth";
 
 export default function Login() {
   const { isAuthenticated } = useAuth();
@@ -15,7 +15,7 @@ export default function Login() {
     return <Navigate to="/admin" replace />;
   }
 
-  async function handleLogin(e: React.FormEvent) {
+  async function handleLogin(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
     setLoading(true);
@@ -48,6 +48,7 @@ export default function Login() {
           className="mb-4 w-full rounded-lg border p-3"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          required
         />
 
         <input
@@ -56,12 +57,13 @@ export default function Login() {
           className="mb-6 w-full rounded-lg border p-3"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          required
         />
 
         <button
           type="submit"
           disabled={loading}
-          className="w-full rounded-lg bg-[#0B3D91] py-3 text-white"
+          className="w-full rounded-lg bg-[#0B3D91] py-3 text-white transition hover:bg-[#082f70] disabled:cursor-not-allowed disabled:opacity-70"
         >
           {loading ? "Signing in..." : "Login"}
         </button>

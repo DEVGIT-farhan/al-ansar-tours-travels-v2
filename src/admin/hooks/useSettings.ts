@@ -1,3 +1,0 @@
-useSettings()
-
-useUpdateSettings()

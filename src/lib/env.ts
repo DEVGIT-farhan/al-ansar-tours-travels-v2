@@ -1,15 +1,14 @@
-const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
-const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
+function getEnv(name: string): string {
+  const value = import.meta.env[name];
 
-if (!SUPABASE_URL) {
-  throw new Error("Missing VITE_SUPABASE_URL");
-}
+  if (!value) {
+    throw new Error(`Missing environment variable: ${name}`);
+  }
 
-if (!SUPABASE_ANON_KEY) {
-  throw new Error("Missing VITE_SUPABASE_ANON_KEY");
+  return value;
 }
 
 export const env = {
-  SUPABASE_URL,
-  SUPABASE_ANON_KEY,
+  SUPABASE_URL: getEnv("VITE_SUPABASE_URL"),
+  SUPABASE_ANON_KEY: getEnv("VITE_SUPABASE_ANON_KEY"),
 };

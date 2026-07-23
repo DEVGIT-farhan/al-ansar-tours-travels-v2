@@ -2,14 +2,14 @@ export interface Settings {
   id: string;
 
   company_name: string;
-  tagline: string;
+  tagline: string | null;
 
-  email: string;
-  phone: string;
-  whatsapp: string;
+  email: string | null;
+  phone: string | null;
+  whatsapp: string | null;
 
-  address: string;
-  google_maps_url: string;
+  address: string | null;
+  google_maps_url: string | null;
 
   logo_url: string | null;
   favicon_url: string | null;
