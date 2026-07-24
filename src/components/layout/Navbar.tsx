@@ -4,35 +4,43 @@ import { Menu, X } from "lucide-react";
 
 import Logo from "@/components/common/Logo";
 import { Button, Container } from "@/components/ui";
-import { COMPANY } from "@/constants/COMPANY";
 import { NAVIGATION } from "@/constants/NAVIGATION";
+import { useWebsite } from "@/context/WebsiteSettingsContext";
 
 export default function Navbar() {
+  const { settings } = useWebsite();
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      const next = window.scrollY > 20;
-      setIsScrolled((prev) => (prev === next ? prev : next));
+      setIsScrolled(window.scrollY > 20);
     };
 
     handleScroll();
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("scroll", handleScroll, {
+      passive: true,
+    });
 
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener(
+        "scroll",
+        handleScroll
+      );
     };
   }, []);
 
-  const whatsappHref = useMemo(
-    () =>
-      `https://wa.me/${COMPANY.whatsapp}?text=${encodeURIComponent(
-        "Hello AL ANSAR TOURS & TRAVELS, I'd like to know more about your travel packages."
-      )}`,
-    []
-  );
+  const whatsappHref = useMemo(() => {
+    if (!settings?.whatsapp) {
+      return "#";
+    }
+
+    return `https://wa.me/${settings.whatsapp}?text=${encodeURIComponent(
+      `Hello ${settings.company_name ?? ""}, I'd like to know more about your travel packages.`
+    )}`;
+  }, [settings]);
 
   return (
     <header
@@ -75,7 +83,9 @@ export default function Navbar() {
 
                   <span
                     className={`absolute bottom-0 left-0 h-0.5 rounded-full bg-[#F4B400] transition-all duration-300 ${
-                      isActive ? "w-full" : "w-0 group-hover:w-full"
+                      isActive
+                        ? "w-full"
+                        : "w-0 group-hover:w-full"
                     }`}
                   />
                 </>
@@ -84,36 +94,49 @@ export default function Navbar() {
           ))}
         </nav>
 
-        <div className="hidden transition-transform duration-300 hover:scale-105 lg:block">
-          <Button href={whatsappHref}>WhatsApp</Button>
+        <div className="hidden lg:block">
+          <Button
+            href={whatsappHref}
+            className={!settings?.whatsapp ? "pointer-events-none opacity-60" : ""}
+          >
+            WhatsApp
+          </Button>
         </div>
 
         <button
           type="button"
-          onClick={() => setIsMenuOpen((prev) => !prev)}
+          onClick={() =>
+            setIsMenuOpen((prev) => !prev)
+          }
           className="rounded-lg p-2 text-[#0B3D91] transition hover:bg-[#0B3D91]/10 lg:hidden"
           aria-label="Toggle navigation menu"
           aria-expanded={isMenuOpen}
           aria-controls="mobile-navigation"
         >
-          {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
+          {isMenuOpen ? (
+            <X size={28} />
+          ) : (
+            <Menu size={28} />
+          )}
         </button>
       </Container>
 
       <div
         id="mobile-navigation"
-        className={`overflow-hidden transition-all duration-300 ease-in-out lg:hidden ${
+        className={`overflow-hidden transition-all duration-300 lg:hidden ${
           isMenuOpen
             ? "max-h-screen border-t border-gray-200 bg-white shadow-lg"
             : "max-h-0"
         }`}
       >
-        <nav className="flex flex-col p-4" aria-label="Mobile navigation">
+        <nav className="flex flex-col p-4">
           {NAVIGATION.map((item) => (
             <NavLink
               key={item.href}
               to={item.href}
-              onClick={() => setIsMenuOpen(false)}
+              onClick={() =>
+                setIsMenuOpen(false)
+              }
               className={({ isActive }) =>
                 `rounded-lg px-4 py-3 font-medium transition ${
                   isActive
@@ -127,7 +150,14 @@ export default function Navbar() {
           ))}
 
           <div className="mt-4">
-            <Button href={whatsappHref} className="w-full">
+            <Button
+              href={whatsappHref}
+              className={`w-full ${
+                !settings?.whatsapp
+                  ? "pointer-events-none opacity-60"
+                  : ""
+              }`}
+            >
               WhatsApp
             </Button>
           </div>

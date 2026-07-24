@@ -1,30 +1,44 @@
 import { Link } from "react-router-dom";
 
-import logo from "@/assets/logos/logo.png";
-import { COMPANY } from "@/constants/COMPANY";
+import defaultLogo from "@/assets/logos/logo.png";
+import { useWebsite } from "@/context/WebsiteSettingsContext";
 
 export default function Logo() {
+  const { settings } = useWebsite();
+
+  const companyName =
+    settings?.company_name || "AL ANSAR TOURS & TRAVELS";
+
+  const tagline =
+    settings?.tagline || "Your Trusted Travel Partner";
+
+  const logo =
+    settings?.logo_url || defaultLogo;
+
   return (
     <Link
       to="/"
       className="flex items-center gap-3"
-      aria-label={`${COMPANY.name} Home`}
+      aria-label={`${companyName} Home`}
     >
       <img
         src={logo}
-        alt={`${COMPANY.name} Logo`}
+        alt={`${companyName} Logo`}
         draggable={false}
         className="h-12 w-auto shrink-0 object-contain lg:h-14"
+        loading="eager"
+        onError={(event) => {
+          event.currentTarget.src = defaultLogo;
+        }}
       />
 
-      {/* Hide text on small screens */}
       <div className="hidden sm:block">
         <h1 className="text-base font-bold leading-tight text-[#0B3D91] lg:text-lg">
-          {COMPANY.name}
+          {companyName}
         </h1>
 
         <p className="text-xs text-gray-500">
-          {COMPANY.tagline}
+          {tagline}
         </p>
       </div>
     </Link>

@@ -10,10 +10,19 @@ import {
   updateSettings,
 } from "../api/settings.api";
 
+import type {
+  Settings,
+  UpdateSettingsDto,
+} from "../types/settings.types";
+
+const SETTINGS_QUERY_KEY = ["settings"];
+
 export function useSettings() {
-  return useQuery({
-    queryKey: ["settings"],
+  return useQuery<Settings | null>({
+    queryKey: SETTINGS_QUERY_KEY,
+    placeholderData: null,
     queryFn: getSettings,
+    staleTime: 1000 * 60 * 5, // 5 minutes
   });
 }
 
@@ -21,17 +30,18 @@ export function useUpdateSettings() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: updateSettings,
+    mutationFn: (values: UpdateSettingsDto) =>
+      updateSettings(values),
 
     onSuccess: () => {
-      toast.success("Settings updated");
+      toast.success("Settings updated successfully.");
 
       queryClient.invalidateQueries({
-        queryKey: ["settings"],
+        queryKey: SETTINGS_QUERY_KEY,
       });
     },
 
-    onError(error: Error) {
+    onError: (error: Error) => {
       toast.error(error.message);
     },
   });

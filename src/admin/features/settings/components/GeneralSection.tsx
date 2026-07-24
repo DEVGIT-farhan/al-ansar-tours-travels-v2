@@ -1,6 +1,11 @@
+import type {
+  FieldErrors,
+  UseFormRegister,
+} from "react-hook-form";
+
 import TextInput from "@/admin/components/forms/TextInput";
 import SectionCard from "@/admin/components/forms/SectionCard";
-import type { FieldErrors, UseFormRegister } from "react-hook-form";
+
 import type { SettingsFormValues } from "../validation/settings.schema";
 
 interface Props {
@@ -15,7 +20,7 @@ export default function GeneralSection({
   return (
     <SectionCard
       title="General Information"
-      description="Basic company information displayed across the website."
+      description="Basic company information displayed throughout the website."
     >
       <TextInput
         label="Company Name"
