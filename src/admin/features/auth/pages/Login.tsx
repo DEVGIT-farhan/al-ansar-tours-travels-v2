@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Navigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
-import { supabase } from "@/lib/supabase";
+import { auth } from "@/lib/supabase/auth";
 import { useAuth } from "@/admin/hooks/useAuth";
 
 export default function Login() {
@@ -15,59 +16,104 @@ export default function Login() {
     return <Navigate to="/admin" replace />;
   }
 
-  async function handleLogin(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(
+    e: React.FormEvent<HTMLFormElement>
+  ) {
     e.preventDefault();
+
+    if (!email.trim()) {
+      toast.error("Please enter your email.");
+      return;
+    }
+
+    if (!password.trim()) {
+      toast.error("Please enter your password.");
+      return;
+    }
 
     setLoading(true);
 
-    const { error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
+    try {
+      const { error } = await auth.signIn(
+        email,
+        password
+      );
 
-    if (error) {
-      alert(error.message);
+      if (error) {
+        toast.error(error.message);
+        return;
+      }
+
+      toast.success("Welcome back!");
+    } catch {
+      toast.error("Unable to login.");
+    } finally {
+      setLoading(false);
     }
-
-    setLoading(false);
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-100">
-      <form
-        onSubmit={handleLogin}
-        className="w-full max-w-md rounded-2xl bg-white p-8 shadow-xl"
-      >
-        <h1 className="mb-8 text-center text-3xl font-bold text-[#0B3D91]">
-          Admin Login
-        </h1>
+    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-slate-100 to-blue-100 px-4">
+      <div className="w-full max-w-md rounded-2xl bg-white p-8 shadow-xl">
+        <div className="mb-8 text-center">
+          <h1 className="text-3xl font-bold text-[#0B3D91]">
+            AL ANSAR CMS
+          </h1>
 
-        <input
-          type="email"
-          placeholder="Email"
-          className="mb-4 w-full rounded-lg border p-3"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
+          <p className="mt-2 text-gray-500">
+            Administrator Login
+          </p>
+        </div>
 
-        <input
-          type="password"
-          placeholder="Password"
-          className="mb-6 w-full rounded-lg border p-3"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-
-        <button
-          type="submit"
-          disabled={loading}
-          className="w-full rounded-lg bg-[#0B3D91] py-3 text-white transition hover:bg-[#082f70] disabled:cursor-not-allowed disabled:opacity-70"
+        <form
+          onSubmit={handleSubmit}
+          className="space-y-5"
         >
-          {loading ? "Signing in..." : "Login"}
-        </button>
-      </form>
+          <div>
+            <label className="mb-2 block text-sm font-medium">
+              Email
+            </label>
+
+            <input
+              type="email"
+              autoComplete="email"
+              value={email}
+              onChange={(e) =>
+                setEmail(e.target.value)
+              }
+              className="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none transition focus:border-[#0B3D91] focus:ring-2 focus:ring-[#0B3D91]/20"
+              placeholder="admin@example.com"
+            />
+          </div>
+
+          <div>
+            <label className="mb-2 block text-sm font-medium">
+              Password
+            </label>
+
+            <input
+              type="password"
+              autoComplete="current-password"
+              value={password}
+              onChange={(e) =>
+                setPassword(e.target.value)
+              }
+              className="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none transition focus:border-[#0B3D91] focus:ring-2 focus:ring-[#0B3D91]/20"
+              placeholder="••••••••"
+            />
+          </div>
+
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full rounded-lg bg-[#0B3D91] py-3 font-semibold text-white transition hover:bg-[#082f70] disabled:cursor-not-allowed disabled:opacity-60"
+          >
+            {loading
+              ? "Signing in..."
+              : "Login"}
+          </button>
+        </form>
+      </div>
     </div>
   );
 }

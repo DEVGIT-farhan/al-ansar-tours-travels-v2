@@ -11,8 +11,8 @@ export interface Settings {
   address: string | null;
   google_maps_url: string | null;
 
-  logo_url: string | null;
-  favicon_url: string | null;
+logo_url: string | null;
+favicon_url: string | null;
 
   facebook_url: string | null;
   instagram_url: string | null;
@@ -25,4 +25,5 @@ export interface Settings {
 
   created_at: string;
   updated_at: string;
+  
 }

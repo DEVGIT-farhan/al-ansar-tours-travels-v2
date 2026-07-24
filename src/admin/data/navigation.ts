@@ -15,8 +15,9 @@ import {
 export interface AdminNavigationItem {
   id: string;
   label: string;
-  path: string;
   icon: IconType;
+  path?: string;
+  action?: "logout";
 }
 
 export const adminNavigation: AdminNavigationItem[] = [
@@ -83,7 +84,7 @@ export const adminNavigation: AdminNavigationItem[] = [
   {
     id: "logout",
     label: "Logout",
-    path: "/admin/logout",
     icon: FiLogOut,
+    action: "logout",
   },
 ];

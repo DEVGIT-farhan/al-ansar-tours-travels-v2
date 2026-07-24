@@ -1,4 +1,4 @@
-import { supabase } from "@/lib/supabase";
+import { supabase } from "@/lib/supabase/client";
 import type { Settings } from "../types/settings.types";
 
 export async function getSettings() {

@@ -7,13 +7,13 @@ export const settingsSchema = z.object({
 
   email: z.email("Invalid email").optional().or(z.literal("")),
 
-  phone: z.string().optional(),
+phone: z.string().optional(),
 
-  whatsapp: z.string().optional(),
+whatsapp: z.string().optional(),
 
-  address: z.string().optional(),
+address: z.string().optional(),
 
-  google_maps_url: z.string().optional(),
+google_maps_url: z.url("Invalid URL").optional().or(z.literal("")),
 
   facebook_url: z.string().optional(),
 
@@ -28,6 +28,10 @@ export const settingsSchema = z.object({
   seo_description: z.string().optional(),
 
   seo_keywords: z.string().optional(),
+
+  logo_url: z.string().optional(),
+
+favicon_url: z.string().optional(),
 });
 
 export type SettingsFormValues = z.infer<typeof settingsSchema>;
