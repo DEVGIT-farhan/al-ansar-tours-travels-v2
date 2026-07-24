@@ -5,8 +5,7 @@ import { Menu, X } from "lucide-react";
 import Logo from "@/components/common/Logo";
 import { Button, Container } from "@/components/ui";
 import { NAVIGATION } from "@/constants/NAVIGATION";
-import { useWebsite } from "@/context/WebsiteSettingsContext";
-
+import { useWebsite } from "@/hooks/useWebsite";
 export default function Navbar() {
   const { settings } = useWebsite();
 

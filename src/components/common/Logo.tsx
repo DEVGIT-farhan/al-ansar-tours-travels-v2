@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 import defaultLogo from "@/assets/logos/logo.png";
-import { useWebsite } from "@/context/WebsiteSettingsContext";
+import { useWebsite } from "@/hooks/useWebsite";
 
 export default function Logo() {
   const { settings } = useWebsite();
