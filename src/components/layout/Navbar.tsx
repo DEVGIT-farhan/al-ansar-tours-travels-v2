@@ -6,6 +6,7 @@ import Logo from "@/components/common/Logo";
 import { Button, Container } from "@/components/ui";
 import { NAVIGATION } from "@/constants/NAVIGATION";
 import { useWebsite } from "@/hooks/useWebsite";
+
 export default function Navbar() {
   const { settings } = useWebsite();
 
@@ -24,20 +25,26 @@ export default function Navbar() {
     });
 
     return () => {
-      window.removeEventListener(
-        "scroll",
-        handleScroll
-      );
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
   const whatsappHref = useMemo(() => {
-    if (!settings?.whatsapp) {
+    const whatsapp = settings?.whatsapp?.trim();
+
+    if (!whatsapp) {
       return "#";
     }
 
-    return `https://wa.me/${settings.whatsapp}?text=${encodeURIComponent(
-      `Hello ${settings.company_name ?? ""}, I'd like to know more about your travel packages.`
+    // Remove spaces, +, -, () from phone number
+    const phone = whatsapp.replace(/[^\d]/g, "");
+
+    const company =
+      settings?.company_name?.trim() ||
+      "AL ANSAR TOURS & TRAVELS";
+
+    return `https://wa.me/${phone}?text=${encodeURIComponent(
+      `Hello ${company}, I'd like to know more about your travel packages.`
     )}`;
   }, [settings]);
 
@@ -104,19 +111,13 @@ export default function Navbar() {
 
         <button
           type="button"
-          onClick={() =>
-            setIsMenuOpen((prev) => !prev)
-          }
+          onClick={() => setIsMenuOpen((prev) => !prev)}
           className="rounded-lg p-2 text-[#0B3D91] transition hover:bg-[#0B3D91]/10 lg:hidden"
           aria-label="Toggle navigation menu"
           aria-expanded={isMenuOpen}
           aria-controls="mobile-navigation"
         >
-          {isMenuOpen ? (
-            <X size={28} />
-          ) : (
-            <Menu size={28} />
-          )}
+          {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
       </Container>
 
@@ -128,14 +129,15 @@ export default function Navbar() {
             : "max-h-0"
         }`}
       >
-        <nav className="flex flex-col p-4">
+        <nav
+          className="flex flex-col p-4"
+          aria-label="Mobile navigation"
+        >
           {NAVIGATION.map((item) => (
             <NavLink
               key={item.href}
               to={item.href}
-              onClick={() =>
-                setIsMenuOpen(false)
-              }
+              onClick={() => setIsMenuOpen(false)}
               className={({ isActive }) =>
                 `rounded-lg px-4 py-3 font-medium transition ${
                   isActive

@@ -27,6 +27,7 @@ export default function SettingsPage() {
   }
 
   if (error) {
+    
     return (
       <AdminLayout>
         <div className="rounded-xl border border-red-200 bg-red-50 p-6">
@@ -41,7 +42,7 @@ export default function SettingsPage() {
       </AdminLayout>
     );
   }
-
+console.log("SettingsPage:", settings);
   return (
     <AdminLayout>
       <div className="space-y-8">

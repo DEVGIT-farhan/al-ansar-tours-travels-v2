@@ -8,6 +8,7 @@ import Login from "@/admin/features/auth/pages/Login";
 import DashboardPage from "@/admin/features/dashboard/pages/DashboardPage";
 import SettingsPage from "@/admin/features/settings/pages/SettingsPage";
 import ProtectedRoute from "@/admin/routes/ProtectedRoute";
+import WebsiteSeo from "@/components/common/WebsiteSeo";
 
 const Home = lazy(() => import("./pages/website/Home"));
 const About = lazy(() => import("./pages/website/About"));
@@ -43,6 +44,7 @@ export default function App() {
 
   return (
     <Suspense fallback={<PageFallback />}>
+      <WebsiteSeo />
       <Routes>
         {/* ================= Public Website ================= */}
 

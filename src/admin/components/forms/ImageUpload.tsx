@@ -30,11 +30,11 @@ export default function ImageUpload({
     try {
       setUploading(true);
 
-      const url = await uploadFile(
-        "branding",
-        folder,
-        file
-      );
+      const url = await uploadFile({
+  bucket: "branding",
+  folder,
+  file,
+});
 
       onChange(url);
 

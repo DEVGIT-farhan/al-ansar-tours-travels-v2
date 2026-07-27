@@ -24,6 +24,7 @@ interface SettingsFormProps {
 export default function SettingsForm({
   settings,
 }: SettingsFormProps) {
+  console.log("SettingsForm props:", settings);
   const {
     register,
     control,
@@ -104,16 +105,32 @@ export default function SettingsForm({
   }, [settings, reset]);
 
   function onSubmit(values: SettingsFormValues) {
-    if (!settings) return;
+  console.log("onSubmit fired");
+  console.log("settings:", settings);
 
-    updateSettings.mutate({
-      ...settings,
-      ...values,
-    });
+  if (!settings) {
+    console.error("Settings is null");
+    return;
   }
 
+  updateSettings.mutate(
+    {
+      ...settings,
+      ...values,
+    },
+    {
+      onSuccess: (data) => {
+        console.log("Mutation Success", data);
+      },
+      onError: (error) => {
+        console.error("Mutation Error", error);
+      },
+    }
+  );
+}
   return (
     <form
+    
       onSubmit={handleSubmit(onSubmit)}
       className="space-y-8"
     >
@@ -147,16 +164,16 @@ export default function SettingsForm({
       />
 
       <div className="flex justify-end border-t border-gray-200 pt-6">
-        <button
-          type="submit"
-          disabled={updateSettings.isPending}
-          className="rounded-lg bg-[#0B3D91] px-8 py-3 font-medium text-white transition hover:bg-[#082f70] disabled:cursor-not-allowed disabled:opacity-50"
-        >
-          {updateSettings.isPending
-            ? "Saving Changes..."
-            : "Save Changes"}
-        </button>
-      </div>
+  <button
+    type="submit"
+    disabled={updateSettings.isPending}
+    className="rounded-lg bg-[#0B3D91] px-8 py-3 font-medium text-white transition hover:bg-[#082f70] disabled:cursor-not-allowed disabled:opacity-50"
+  >
+    {updateSettings.isPending
+      ? "Saving Changes..."
+      : "Save Changes"}
+  </button>
+</div>
     </form>
   );
 }

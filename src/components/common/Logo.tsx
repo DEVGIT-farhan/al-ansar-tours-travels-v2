@@ -7,13 +7,15 @@ export default function Logo() {
   const { settings } = useWebsite();
 
   const companyName =
-    settings?.company_name || "AL ANSAR TOURS & TRAVELS";
+    settings?.company_name?.trim() ??
+    "AL ANSAR TOURS & TRAVELS";
 
   const tagline =
-    settings?.tagline || "Your Trusted Travel Partner";
+    settings?.tagline?.trim() ??
+    "Your Trusted Travel Partner";
 
   const logo =
-    settings?.logo_url || defaultLogo;
+    settings?.logo_url?.trim() || defaultLogo;
 
   return (
     <Link
@@ -25,10 +27,10 @@ export default function Logo() {
         src={logo}
         alt={`${companyName} Logo`}
         draggable={false}
-        className="h-12 w-auto shrink-0 object-contain lg:h-14"
         loading="eager"
-        onError={(event) => {
-          event.currentTarget.src = defaultLogo;
+        className="h-12 w-auto shrink-0 object-contain lg:h-14"
+        onError={(e) => {
+          e.currentTarget.src = defaultLogo;
         }}
       />
 
