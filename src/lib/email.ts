@@ -43,11 +43,17 @@ export async function sendCustomerConfirmationEmail({
     import.meta.env.VITE_EMAILJS_SERVICE_ID,
     templateId,
     {
+      // Support both the custom `to_email` recipient field and EmailJS's
+      // standard auto-reply template field, `email`.
       to_email: data.email,
+      email: data.email,
       customer_name: data.name,
+      name: data.name,
+      phone: data.phone,
       package_name: data.packageName ?? "Travel enquiry",
       destination: data.destination ?? "Not specified",
       preferred_callback_time: data.preferredCallbackTime ?? "Any time",
+      message: data.message,
       company_name: companyName,
       company_phone: companyPhone,
       company_whatsapp: companyWhatsapp,
