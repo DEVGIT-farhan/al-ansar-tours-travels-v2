@@ -3,7 +3,7 @@ import { ArrowDown, ArrowUpRight, Check } from "lucide-react";
 import heroImage from "@/assets/images/hero.jpg";
 
 import { Container, Button } from "@/components/ui";
-import { COMPANY } from "@/constants/COMPANY";
+import { COMPANY } from "@/constants/company";
 import { useSiteContent } from "@/features/site-content";
 import { useWebsite } from "@/hooks/useWebsite";
 

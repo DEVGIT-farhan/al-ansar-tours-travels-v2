@@ -1,7 +1,7 @@
 import { Check, Clock } from "lucide-react";
 
 import { Button, Card } from "@/components/ui";
-import { COMPANY } from "@/constants/COMPANY";
+import { COMPANY } from "@/constants/company";
 import { useWebsite } from "@/hooks/useWebsite";
 
 import type { TravelPackageWithCategory } from "@/shared/types/package.types";

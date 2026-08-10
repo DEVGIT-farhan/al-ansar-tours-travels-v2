@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import type { ChangeEvent } from "react";
 
 import { Button, Container } from "@/components/ui";
-import { COMPANY } from "@/constants/COMPANY";
+import { COMPANY } from "@/constants/company";
 import { useSiteContent } from "@/features/site-content";
 import { useWebsite } from "@/hooks/useWebsite";
 

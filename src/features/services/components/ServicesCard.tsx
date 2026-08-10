@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 
 import { Button, Card } from "@/components/ui";
-import { COMPANY } from "@/constants/COMPANY";
+import { COMPANY } from "@/constants/company";
 import { useWebsite } from "@/hooks/useWebsite";
 
 import type { Service } from "../types/service";

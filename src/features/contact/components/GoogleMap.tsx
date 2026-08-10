@@ -2,7 +2,7 @@ import { Navigation } from "lucide-react";
 
 import SectionHeading from "@/components/common/SectionHeading";
 import { Button, Container } from "@/components/ui";
-import { COMPANY } from "@/constants/COMPANY";
+import { COMPANY } from "@/constants/company";
 import { useSiteContent } from "@/features/site-content";
 import { useWebsite } from "@/hooks/useWebsite";
 

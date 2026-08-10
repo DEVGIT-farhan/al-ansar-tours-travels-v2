@@ -1,7 +1,7 @@
 import { CalendarDays, MapPin, Phone, MessageCircle, Tag } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
-import { COMPANY } from "@/constants/COMPANY";
+import { COMPANY } from "@/constants/company";
 import { useWebsite } from "@/hooks/useWebsite";
 import Button from "@/shared/components/Button";
 

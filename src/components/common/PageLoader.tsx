@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 
 import logo from "@/assets/logos/logo.png";
-import { COMPANY } from "@/constants/COMPANY";
+import { COMPANY } from "@/constants/company";
 import { useWebsite } from "@/hooks/useWebsite";
 
 const SHOW_DURATION = 700;

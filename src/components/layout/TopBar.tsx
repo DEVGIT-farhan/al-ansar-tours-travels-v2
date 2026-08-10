@@ -8,7 +8,7 @@ import {
 } from "react-icons/fa";
 
 import { Container } from "@/components/ui";
-import { COMPANY } from "@/constants/COMPANY";
+import { COMPANY } from "@/constants/company";
 import { useWebsite } from "@/hooks/useWebsite";
 
 export default function TopBar() {

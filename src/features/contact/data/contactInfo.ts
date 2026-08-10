@@ -1,4 +1,4 @@
-import { COMPANY } from "@/constants/COMPANY";
+import { COMPANY } from "@/constants/company";
 import type { ContactInfo } from "../types/contact";
 
 export const contactInfo: ContactInfo[] = [
