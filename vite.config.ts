@@ -4,7 +4,11 @@ import tailwindcss from "@tailwindcss/vite";
 import checker from "vite-plugin-checker";
 import { fileURLToPath, URL } from "node:url";
 
+const isGitHubPagesBuild = process.env.GITHUB_ACTIONS === "true";
+
 export default defineConfig({
+  base: isGitHubPagesBuild ? "/al-ansar-tours-travels-v2/" : "/",
+
   plugins: [
     react(),
 
@@ -21,9 +25,7 @@ export default defineConfig({
 
   resolve: {
     alias: {
-      "@": fileURLToPath(
-        new URL("./src", import.meta.url)
-      ),
+      "@": fileURLToPath(new URL("./src", import.meta.url)),
     },
   },
 
