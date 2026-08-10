@@ -16,18 +16,18 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     <HelmetProvider>
       <QueryClientProvider client={queryClient}>
         <WebsiteSettingsProvider>
-        <BrowserRouter>
-          <App />
+          <BrowserRouter>
+            <App />
 
-          <Toaster
-            position="top-right"
-            toastOptions={{
-              duration: 3000,
-            }}
-          />
-        </BrowserRouter>
+            <Toaster
+              position="top-right"
+              toastOptions={{
+                duration: 3000,
+              }}
+            />
+          </BrowserRouter>
         </WebsiteSettingsProvider>
       </QueryClientProvider>
     </HelmetProvider>
-  </React.StrictMode>
+  </React.StrictMode>,
 );

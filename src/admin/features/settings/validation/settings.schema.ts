@@ -63,33 +63,23 @@ export const settingsSchema = z.object({
 
   seo_title: z.string().trim().max(70).optional().or(z.literal("")),
 
-  seo_description: z
-    .string()
-    .trim()
-    .max(160)
-    .optional()
-    .or(z.literal("")),
+  seo_description: z.string().trim().max(160).optional().or(z.literal("")),
 
-  seo_keywords: z
-    .string()
-    .trim()
-    .max(255)
-    .optional()
-    .or(z.literal("")),
+  seo_keywords: z.string().trim().max(255).optional().or(z.literal("")),
 
- monday_hours: z.string().optional().or(z.literal("")),
+  monday_hours: z.string().optional().or(z.literal("")),
 
-tuesday_hours: z.string().optional().or(z.literal("")),
+  tuesday_hours: z.string().optional().or(z.literal("")),
 
-wednesday_hours: z.string().optional().or(z.literal("")),
+  wednesday_hours: z.string().optional().or(z.literal("")),
 
-thursday_hours: z.string().optional().or(z.literal("")),
+  thursday_hours: z.string().optional().or(z.literal("")),
 
-friday_hours: z.string().optional().or(z.literal("")),
+  friday_hours: z.string().optional().or(z.literal("")),
 
-saturday_hours: z.string().optional().or(z.literal("")),
+  saturday_hours: z.string().optional().or(z.literal("")),
 
-sunday_hours: z.string().optional().or(z.literal("")),
+  sunday_hours: z.string().optional().or(z.literal("")),
 });
 
 export type SettingsFormValues = z.infer<typeof settingsSchema>;

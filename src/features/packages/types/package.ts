@@ -6,7 +6,7 @@ export interface Package {
   image: string;
   duration: string;
   price: string;
- rating: number;
+  rating: number;
   includes: string[];
   whatsappMessage: string;
 }

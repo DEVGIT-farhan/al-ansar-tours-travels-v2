@@ -1,7 +1,4 @@
-import type {
-  FieldErrors,
-  UseFormRegister,
-} from "react-hook-form";
+import type { FieldErrors, UseFormRegister } from "react-hook-form";
 
 import SectionCard from "@/admin/components/forms/SectionCard";
 import TextArea from "@/admin/components/forms/TextArea";
@@ -14,10 +11,7 @@ interface SeoSectionProps {
   errors: FieldErrors<SettingsFormValues>;
 }
 
-export default function SeoSection({
-  register,
-  errors,
-}: SeoSectionProps) {
+export default function SeoSection({ register, errors }: SeoSectionProps) {
   return (
     <SectionCard
       title="SEO Settings"

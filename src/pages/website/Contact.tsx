@@ -3,8 +3,12 @@ import PageHeader from "@/components/common/PageHeader";
 
 import ContactSection from "@/features/contact/components/ContactSection";
 import GoogleMap from "@/features/contact/components/GoogleMap";
+import { useSiteContent } from "@/features/site-content";
 
 export default function Contact() {
+  const { content } = useSiteContent();
+  const contact = content.contact;
+
   return (
     <>
       <SEO
@@ -13,11 +17,11 @@ export default function Contact() {
       />
 
       <PageHeader
-        title="Contact Us"
-        description="Speak with our travel experts for Umrah, visas and holiday packages."
+        title={contact.pageTitle}
+        description={contact.pageDescription}
         breadcrumb={[
           {
-            label: "Contact Us",
+            label: contact.pageTitle,
           },
         ]}
       />

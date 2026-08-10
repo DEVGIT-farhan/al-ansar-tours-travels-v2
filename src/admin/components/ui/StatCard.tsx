@@ -19,13 +19,9 @@ export default function StatCard({
     <AdminCard className="transition hover:-translate-y-1 hover:shadow-lg">
       <div className="flex items-center justify-between">
         <div>
-          <p className="text-sm text-gray-500">
-            {title}
-          </p>
+          <p className="text-sm text-gray-500">{title}</p>
 
-          <h3 className="mt-2 text-4xl font-bold">
-            {value}
-          </h3>
+          <h3 className="mt-2 text-4xl font-bold">{value}</h3>
         </div>
 
         <div

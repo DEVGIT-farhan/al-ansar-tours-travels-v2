@@ -20,10 +20,12 @@ type ButtonProps = BaseProps &
   AnchorHTMLAttributes<HTMLAnchorElement>;
 
 const variants = {
-  primary: "bg-[#0B3D91] text-white hover:bg-[#082d6d]",
-  secondary: "bg-[#F4B400] text-black hover:bg-yellow-500",
+  primary:
+    "bg-[#102a43] text-white shadow-lg shadow-[#102a43]/20 hover:-translate-y-0.5 hover:bg-[#163b5c] hover:shadow-xl",
+  secondary:
+    "bg-[#d9a441] text-[#102a43] shadow-lg shadow-[#d9a441]/20 hover:-translate-y-0.5 hover:bg-[#e8ba62] hover:shadow-xl",
   outline:
-    "border-2 border-[#0B3D91] text-[#0B3D91] hover:bg-[#0B3D91] hover:text-white",
+    "border border-[#102a43]/20 bg-white/70 text-[#102a43] hover:-translate-y-0.5 hover:border-[#102a43] hover:bg-[#102a43] hover:text-white",
 };
 
 export default function Button({
@@ -35,18 +37,14 @@ export default function Button({
   ...props
 }: ButtonProps) {
   const classes = cn(
-    "inline-flex items-center justify-center rounded-xl px-6 py-3 font-semibold transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-[#0B3D91] focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+    "inline-flex items-center justify-center rounded-full px-6 py-3 font-semibold transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#d9a441] focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
     variants[variant],
-    className
+    className,
   );
 
   if (href) {
     return (
-      <a
-        href={href}
-        className={classes}
-        {...props}
-      >
+      <a href={href} className={classes} {...props}>
         {children}
       </a>
     );
@@ -54,21 +52,14 @@ export default function Button({
 
   if (to) {
     return (
-      <Link
-        to={to}
-        className={classes}
-      >
+      <Link to={to} className={classes}>
         {children}
       </Link>
     );
   }
 
   return (
-    <button
-      type={props.type ?? "button"}
-      className={classes}
-      {...props}
-    >
+    <button type={props.type ?? "button"} className={classes} {...props}>
       {children}
     </button>
   );

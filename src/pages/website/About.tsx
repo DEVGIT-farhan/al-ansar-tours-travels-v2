@@ -6,21 +6,22 @@ import CoreValues from "@/features/about/components/CoreValues";
 import JourneyTimeline from "@/features/about/components/JourneyTimeline";
 import AboutCTA from "@/features/about/components/AboutCTA";
 import AboutFAQ from "@/features/about/components/AboutFAQ";
+import { useSiteContent } from "@/features/site-content";
 
 export default function About() {
+  const { content } = useSiteContent();
+  const about = content.about;
+
   return (
     <>
-      <SEO
-        title="About Us"
-        description="Discover our journey, our values, and why thousands of travellers trust AL ANSAR TOURS & TRAVELS."
-      />
+      <SEO title={about.pageTitle} description={about.pageDescription} />
 
       <PageHeader
-        title="About Us"
-        description="Discover our journey, our values, and why thousands of travellers trust AL ANSAR TOURS & TRAVELS."
+        title={about.pageTitle}
+        description={about.pageDescription}
         breadcrumb={[
           {
-            label: "About Us",
+            label: about.pageTitle,
           },
         ]}
       />

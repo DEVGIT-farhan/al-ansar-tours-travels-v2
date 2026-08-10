@@ -3,81 +3,138 @@ import { supabase } from "@/lib/supabase/client";
 import type {
   CreatePackageDto,
   TravelPackage,
+  TravelPackageWithCategory,
   UpdatePackageDto,
 } from "../types/package.types";
 
-const TABLE = "packages";
+const TABLE_NAME = "packages";
 
-export async function getPackages(): Promise<
-  TravelPackage[]
-> {
+export async function getPackages(): Promise<TravelPackageWithCategory[]> {
   const { data, error } = await supabase
-    .from(TABLE)
-    .select("*")
+    .from(TABLE_NAME)
+    .select(
+      `
+      *,
+      category:package_categories(
+        id,
+        name,
+        slug
+      ),
+      images:package_images(
+        *
+      )
+    `,
+    )
     .order("created_at", {
       ascending: false,
     });
 
-  if (error) throw error;
+  if (error) {
+    throw new Error(error.message);
+  }
 
-  return data ?? [];
+  const packages = (data ?? []) as TravelPackageWithCategory[];
+
+  packages.forEach((travelPackage) => {
+    travelPackage.images ??= [];
+
+    travelPackage.images.sort((a, b) => a.sort_order - b.sort_order);
+  });
+
+  return packages;
 }
 
 export async function getPackage(
-  id: string
-): Promise<TravelPackage> {
+  id: string,
+): Promise<TravelPackageWithCategory> {
   const { data, error } = await supabase
-    .from(TABLE)
-    .select("*")
+    .from(TABLE_NAME)
+    .select(
+      `
+      *,
+      category:package_categories(
+        id,
+        name,
+        slug
+      ),
+      images:package_images(
+        *
+      )
+    `,
+    )
     .eq("id", id)
-    .single();
+    .maybeSingle();
 
-  if (error) throw error;
+  if (error) {
+    throw new Error(error.message);
+  }
 
-  return data;
+  if (!data) {
+    throw new Error("Package not found.");
+  }
+
+  const travelPackage = data as TravelPackageWithCategory;
+
+  travelPackage.images ??= [];
+
+  travelPackage.images.sort((a, b) => a.sort_order - b.sort_order);
+
+  return travelPackage;
 }
 
 export async function createPackage(
-  values: CreatePackageDto
+  payload: CreatePackageDto,
 ): Promise<TravelPackage> {
   const { data, error } = await supabase
-    .from(TABLE)
-    .insert(values)
+    .from(TABLE_NAME)
+    .insert(payload)
     .select()
     .single();
 
-  if (error) throw error;
+  if (error) {
+    throw new Error(error.message);
+  }
 
-  return data;
+  return data as TravelPackage;
 }
 
 export async function updatePackage(
-  values: UpdatePackageDto
+  payload: UpdatePackageDto,
 ): Promise<TravelPackage> {
-  const payload = {
-  ...values,
-  updated_at: new Date().toISOString(),
-};
+  const { id, ...updates } = payload;
 
-const { data, error } = await supabase
-  .from(TABLE)
-  .update(payload)
-    .eq("id", values.id)
-    .select()
-    .single();
-
-  if (error) {throw error;}
-
-  return data;
-}
-
-export async function deletePackage(
-  id: string
-) {
-  const { error } = await supabase
-    .from(TABLE)
-    .delete()
+  const { error: updateError } = await supabase
+    .from(TABLE_NAME)
+    .update(updates)
     .eq("id", id);
 
-  if (error) throw error;
+  if (updateError) {
+    throw new Error(updateError.message);
+  }
+
+  const { data, error } = await supabase
+    .from(TABLE_NAME)
+    .select("*")
+    .eq("id", id)
+    .maybeSingle();
+
+  if (error) {
+    throw new Error(error.message);
+  }
+
+  if (!data) {
+    throw new Error(
+      "Package updated successfully, but could not reload the package.",
+    );
+  }
+
+  return data as TravelPackage;
+}
+
+export async function deletePackage(id: string): Promise<void> {
+  const { error } = await supabase.from(TABLE_NAME).delete().eq("id", id);
+
+  if (error) {
+    throw new Error(error.message);
+  }
 }

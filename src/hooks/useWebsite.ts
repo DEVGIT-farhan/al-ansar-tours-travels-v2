@@ -6,9 +6,7 @@ export function useWebsite() {
   const context = useContext(WebsiteSettingsContext);
 
   if (!context) {
-    throw new Error(
-      "useWebsite must be used within WebsiteSettingsProvider."
-    );
+    throw new Error("useWebsite must be used within WebsiteSettingsProvider.");
   }
 
   return context;

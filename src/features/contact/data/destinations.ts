@@ -1,7 +1,1 @@
-export const destinations = [
-  "Umrah",
-  "Hajj",
-  "Dubai",
-  "Malaysia",
-  "Singapore",
-];
+export const destinations = ["Umrah", "Hajj", "Dubai", "Malaysia", "Singapore"];

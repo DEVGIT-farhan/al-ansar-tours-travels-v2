@@ -1,10 +1,10 @@
 export interface Destination {
-  id: number;
+  id: string;
   name: string;
   slug: string;
   badge: string;
   image: string;
   duration: string;
   price: string;
-  rating: number;
+  packageCount: number;
 }

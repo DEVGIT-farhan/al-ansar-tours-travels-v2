@@ -8,14 +8,14 @@ import { HomeGallerySection } from "@/features/gallery";
 import PackagesSection from "@/features/packages/components/PackagesSection";
 import ServicesSection from "@/features/services/components/ServicesSection";
 import { TestimonialsSection } from "@/features/testimonials";
+import { useSiteContent } from "@/features/site-content";
 
 export default function Home() {
+  const { content } = useSiteContent();
+
   return (
     <>
-    <SEO
-    description="Trusted travel agency in Chennai offering Umrah packages, tourist visas, flight bookings and international holiday packages."
-    url="/"
-  />
+      <SEO description={content.home.seoDescription} url="/" />
       <Hero />
 
       <SearchSection />

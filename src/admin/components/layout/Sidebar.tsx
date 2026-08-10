@@ -1,7 +1,7 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
-import { adminNavigation } from "../../data/navigation";
+import { adminNavigation } from "@/admin/constants/adminNavigation";
 import { auth } from "@/lib/supabase/auth";
 
 export default function Sidebar() {
@@ -27,15 +27,18 @@ export default function Sidebar() {
   }
 
   return (
-    <aside className="flex h-screen w-72 flex-col border-r border-gray-200 bg-white shadow-sm">
+    <aside className="flex h-screen w-72 flex-col bg-[#102a43] text-white shadow-2xl shadow-[#102a43]/20">
       {/* Logo */}
 
-      <div className="border-b border-gray-200 px-6 py-8">
-        <h1 className="text-2xl font-bold text-[#0B3D91]">
+      <div className="border-b border-white/10 px-6 py-8">
+        <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-2xl bg-[#d9a441] text-sm font-black text-[#102a43]">
+          AA
+        </div>
+        <h1 className="text-xl font-bold tracking-tight text-white">
           AL ANSAR CMS
         </h1>
 
-        <p className="mt-2 text-sm text-gray-500">
+        <p className="mt-1 text-xs font-medium uppercase tracking-[0.16em] text-slate-400">
           Tours & Travels
         </p>
       </div>
@@ -43,7 +46,10 @@ export default function Sidebar() {
       {/* Navigation */}
 
       <nav className="flex-1 overflow-y-auto px-4 py-6">
-        <ul className="space-y-2">
+        <p className="mb-3 px-3 text-[11px] font-bold uppercase tracking-[0.18em] text-slate-500">
+          Workspace
+        </p>
+        <ul className="space-y-1.5">
           {adminNavigation.map((item) => {
             const Icon = item.icon;
 
@@ -53,13 +59,11 @@ export default function Sidebar() {
                   <button
                     type="button"
                     onClick={handleLogout}
-                    className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-gray-600 transition-all duration-200 hover:bg-red-50 hover:text-red-600"
+                    className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-slate-300 transition-all duration-200 hover:bg-red-500/15 hover:text-red-200"
                   >
                     <Icon size={20} />
 
-                    <span className="font-medium">
-                      {item.label}
-                    </span>
+                    <span className="font-medium">{item.label}</span>
                   </button>
                 </li>
               );
@@ -71,18 +75,16 @@ export default function Sidebar() {
                   to={item.path!}
                   className={({ isActive }) =>
                     [
-                      "flex items-center gap-3 rounded-xl px-4 py-3 transition-all duration-200",
+                      "flex items-center gap-3 rounded-xl px-4 py-3 text-sm transition-all duration-200",
                       isActive
-                        ? "bg-[#0B3D91] text-white shadow-md"
-                        : "text-gray-600 hover:bg-gray-100",
+                        ? "bg-white text-[#102a43] shadow-lg shadow-black/10"
+                        : "text-slate-300 hover:bg-white/10 hover:text-white",
                     ].join(" ")
                   }
                 >
                   <Icon size={20} />
 
-                  <span className="font-medium">
-                    {item.label}
-                  </span>
+                  <span className="font-medium">{item.label}</span>
                 </NavLink>
               </li>
             );
@@ -92,12 +94,10 @@ export default function Sidebar() {
 
       {/* Footer */}
 
-      <div className="border-t border-gray-200 px-6 py-5">
-        <p className="text-xs text-gray-400">
-          Version 1.0.0
-        </p>
+      <div className="border-t border-white/10 px-6 py-5">
+        <p className="text-xs text-slate-500">Version 1.0.0</p>
 
-        <p className="mt-1 text-xs text-gray-500">
+        <p className="mt-1 text-xs leading-5 text-slate-400">
           © {new Date().getFullYear()}
           <br />
           AL ANSAR TOURS & TRAVELS

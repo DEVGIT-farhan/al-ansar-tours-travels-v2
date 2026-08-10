@@ -1,16 +1,49 @@
 import SectionHeading from "@/components/common/SectionHeading";
 import { Section } from "@/components/ui";
+import {
+  Briefcase,
+  Globe,
+  Hotel,
+  MapPinned,
+  Plane,
+  PlaneTakeoff,
+} from "lucide-react";
 
-import { services } from "../data/services";
+import { useSiteContent } from "@/features/site-content";
 import ServicesCard from "./ServicesCard";
 
-export default function ServicesSection() {
+const serviceIcons = {
+  Briefcase,
+  Globe,
+  Hotel,
+  MapPinned,
+  Plane,
+  PlaneTakeoff,
+};
+
+interface ServicesSectionProps {
+  heading?: {
+    badge: string;
+    title: string;
+    description: string;
+  };
+}
+
+export default function ServicesSection({ heading }: ServicesSectionProps) {
+  const { content } = useSiteContent();
+  const section = heading ?? content.home.services;
+  const services = content.services.items.map((service, index) => ({
+    ...service,
+    id: index + 1,
+    icon: serviceIcons[service.icon as keyof typeof serviceIcons] ?? Plane,
+  }));
+
   return (
     <Section className="bg-linear-to-b from-white via-gray-50 to-white">
       <SectionHeading
-        badge="Our Services"
-        title="Everything You Need for Your Journey"
-        description="From flight bookings to Umrah packages, we provide complete travel solutions tailored to your needs."
+        badge={section.badge}
+        title={section.title}
+        description={section.description}
       />
 
       <ul className="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-3">

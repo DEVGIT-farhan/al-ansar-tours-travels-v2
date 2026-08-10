@@ -1,6 +1,6 @@
-import { Star, Clock } from "lucide-react";
+import { ArrowUpRight, Clock } from "lucide-react";
 
-import { Button, Card } from "@/components/ui";
+import { Link } from "react-router-dom";
 
 import type { Destination } from "../types/destination";
 
@@ -8,72 +8,45 @@ interface DestinationCardProps {
   destination: Destination;
 }
 
-export default function DestinationCard({
-  destination,
-}: DestinationCardProps) {
+export default function DestinationCard({ destination }: DestinationCardProps) {
   return (
-    <Card className="group flex h-full flex-col overflow-hidden border border-gray-200 transition-all duration-300 hover:-translate-y-2 hover:border-[#0B3D91] hover:shadow-2xl">
-      {/* Image */}
-      <div className="relative overflow-hidden">
+    <article className="group relative min-h-105 overflow-hidden rounded-3xl bg-[#102a43] shadow-[0_20px_40px_-28px_rgba(16,42,67,0.7)]">
+      <div className="absolute inset-0 overflow-hidden">
         <img
           src={destination.image}
           alt={destination.name}
           loading="lazy"
           decoding="async"
-          className="h-64 w-full object-cover transition-transform duration-500 group-hover:scale-110"
+          className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
         />
+      </div>
+      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,20,36,0.05)_20%,rgba(5,20,36,0.88)_100%)]" />
 
-        {/* Badge */}
-        <span className="absolute left-4 top-4 rounded-full bg-[#F4B400] px-4 py-1 text-xs font-semibold uppercase tracking-wide text-black shadow-lg transition-transform duration-300 group-hover:scale-105">
+      <div className="relative flex min-h-105 flex-col justify-end p-6 text-white">
+        <span className="absolute left-6 top-6 rounded-full border border-white/25 bg-white/10 px-3 py-1.5 text-[11px] font-bold uppercase tracking-[0.14em] text-white backdrop-blur">
           {destination.badge}
         </span>
-      </div>
-
-      {/* Content */}
-      <div className="flex grow flex-col p-6">
-        <h3 className="text-2xl font-bold text-[#0B3D91]">
+        <h3 className="text-3xl font-bold tracking-tight">
           {destination.name}
         </h3>
 
-        <div className="mt-4 flex items-center justify-between">
-          <div className="flex items-center gap-2 text-gray-600">
-            <Clock
-              aria-hidden="true"
-              className="h-5 w-5"
-            />
+        <div className="mt-3 flex items-center gap-2 text-sm text-slate-200">
+          <Clock aria-hidden="true" className="h-5 w-5" />
 
-            <span>{destination.duration}</span>
-          </div>
-
-          <div className="flex items-center gap-1">
-            <Star
-              aria-hidden="true"
-              className="h-5 w-5 fill-[#F4B400] text-[#F4B400]"
-            />
-
-            <span className="font-semibold text-gray-700">
-              {destination.rating}
-            </span>
-          </div>
+          <span>{destination.duration}</span>
         </div>
 
-        <div className="mt-6">
-          <p className="text-sm font-medium uppercase tracking-wide text-gray-500">
-            Starting From
-          </p>
-
-          <p className="mt-1 text-2xl font-bold text-[#0B3D91]">
-            {destination.price}
-          </p>
-        </div>
-
-        <Button
-          to={`/packages?destination=${destination.slug}`}
-          className="mt-8 w-full"
+        <Link
+          to={`/packages?destination=${encodeURIComponent(destination.name)}`}
+          className="mt-6 inline-flex items-center justify-between border-t border-white/20 pt-4 text-sm font-bold text-[#f4d28b] transition group-hover:text-white"
         >
-          View Packages
-        </Button>
+          <span>{destination.price}</span>
+          <span className="flex items-center gap-1">
+            View packages{" "}
+            <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+          </span>
+        </Link>
       </div>
-    </Card>
+    </article>
   );
 }

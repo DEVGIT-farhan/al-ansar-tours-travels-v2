@@ -1,11 +1,11 @@
 import type { Testimonial } from "../types/testimonial";
 
-import customer1 from "../../../assets/images/testimonials/customer1.jpg";
-import customer2 from "../../../assets/images/testimonials/customer2.jpg";
-import customer3 from "../../../assets/images/testimonials/customer3.jpg";
-import customer4 from "../../../assets/images/testimonials/customer4.jpg";
-import customer5 from "../../../assets/images/testimonials/customer5.jpg";
-import customer6 from "../../../assets/images/testimonials/customer6.jpg";
+import customer1 from "../../../assets/images/gallery/originals/gallery1.jpg";
+import customer2 from "../../../assets/images/gallery/originals/gallery2.jpg";
+import customer3 from "../../../assets/images/gallery/originals/gallery3.jpg";
+import customer4 from "../../../assets/images/gallery/originals/gallery4.jpg";
+import customer5 from "../../../assets/images/gallery/originals/gallery5.jpg";
+import customer6 from "../../../assets/images/gallery/originals/gallery6.jpg";
 
 export const testimonials: Testimonial[] = [
   {
@@ -23,8 +23,7 @@ export const testimonials: Testimonial[] = [
     location: "Bangalore",
     image: customer2,
     rating: 5,
-    review:
-      "Our Umrah journey was perfectly organized. Highly recommended!",
+    review: "Our Umrah journey was perfectly organized. Highly recommended!",
   },
   {
     id: 3,
@@ -41,8 +40,7 @@ export const testimonials: Testimonial[] = [
     location: "Coimbatore",
     image: customer4,
     rating: 5,
-    review:
-      "The holiday package exceeded our expectations. Great experience!",
+    review: "The holiday package exceeded our expectations. Great experience!",
   },
   {
     id: 5,

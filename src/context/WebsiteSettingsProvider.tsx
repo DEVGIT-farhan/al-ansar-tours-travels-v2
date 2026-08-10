@@ -7,9 +7,7 @@ interface Props {
   children: ReactNode;
 }
 
-export function WebsiteSettingsProvider({
-  children,
-}: Props) {
+export function WebsiteSettingsProvider({ children }: Props) {
   const { data, isLoading } = useWebsiteSettings();
 
   return (

@@ -2,11 +2,13 @@ import { useEffect, useRef, useState } from "react";
 
 import logo from "@/assets/logos/logo.png";
 import { COMPANY } from "@/constants/COMPANY";
+import { useWebsite } from "@/hooks/useWebsite";
 
 const SHOW_DURATION = 700;
 const FADE_DURATION = 600;
 
 export default function PageLoader() {
+  const { settings } = useWebsite();
   const [visible, setVisible] = useState(true);
   const [fadeOut, setFadeOut] = useState(false);
 
@@ -58,13 +60,13 @@ export default function PageLoader() {
     >
       <img
         src={logo}
-        alt={`${COMPANY.name} Logo`}
+        alt={`${settings?.company_name?.trim() || COMPANY.name} Logo`}
         draggable={false}
         className="mb-6 h-28 w-28 animate-[logoFloat_2s_ease-in-out_infinite]"
       />
 
       <h1 className="text-3xl font-extrabold tracking-wide text-[#0B3D91]">
-        {COMPANY.name}
+        {settings?.company_name?.trim() || COMPANY.name}
       </h1>
 
       <p className="mt-2 text-sm uppercase tracking-[4px] text-[#F4B400]">

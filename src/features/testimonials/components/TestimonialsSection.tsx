@@ -8,15 +8,39 @@ import SectionHeading from "@/components/common/SectionHeading";
 import { Section } from "@/components/ui";
 
 import { testimonials } from "../data/testimonials";
+import { useSiteContent } from "@/features/site-content";
 import TestimonialCard from "./TestimonialCard";
 
 export default function TestimonialsSection() {
+  const { content } = useSiteContent();
+  const section = content.home.testimonials;
+  const editableTestimonials = content.testimonials.items.flatMap(
+    (testimonial, index) => {
+      const image = testimonial.imageUrl || testimonials[index]?.image;
+
+      if (!image) {
+        return [];
+      }
+
+      return [
+        {
+          id: index + 1,
+          name: testimonial.name,
+          location: testimonial.location,
+          rating: testimonial.rating,
+          review: testimonial.review,
+          image,
+        },
+      ];
+    },
+  );
+
   return (
     <Section className="bg-gray-50">
       <SectionHeading
-        badge="Testimonials"
-        title="What Our Customers Say"
-        description="Thousands of happy travellers have trusted AL ANSAR TOURS & TRAVELS for unforgettable journeys."
+        badge={section.badge}
+        title={section.title}
+        description={section.description}
       />
 
       <div className="mt-16">
@@ -46,11 +70,9 @@ export default function TestimonialsSection() {
             },
           }}
         >
-          {testimonials.map((testimonial) => (
+          {editableTestimonials.map((testimonial) => (
             <SwiperSlide key={testimonial.id}>
-              <TestimonialCard
-                testimonial={testimonial}
-              />
+              <TestimonialCard testimonial={testimonial} />
             </SwiperSlide>
           ))}
         </Swiper>

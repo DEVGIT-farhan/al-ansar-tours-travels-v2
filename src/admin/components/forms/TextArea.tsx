@@ -1,7 +1,6 @@
 import { forwardRef } from "react";
 
-interface TextAreaProps
-  extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
+interface TextAreaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   label: string;
   error?: string;
 }
@@ -22,12 +21,10 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
           } ${className}`}
         />
 
-        {error && (
-          <p className="text-sm text-red-500">{error}</p>
-        )}
+        {error && <p className="text-sm text-red-500">{error}</p>}
       </div>
     );
-  }
+  },
 );
 
 TextArea.displayName = "TextArea";

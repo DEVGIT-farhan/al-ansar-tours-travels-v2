@@ -12,15 +12,9 @@ export default function PageHeader({
   return (
     <div className="mb-8 flex items-center justify-between">
       <div>
-        <h1 className="text-3xl font-bold text-gray-900">
-          {title}
-        </h1>
+        <h1 className="text-3xl font-bold text-gray-900">{title}</h1>
 
-        {description && (
-          <p className="mt-2 text-gray-500">
-            {description}
-          </p>
-        )}
+        {description && <p className="mt-2 text-gray-500">{description}</p>}
       </div>
 
       {action}

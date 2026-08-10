@@ -8,10 +8,7 @@ interface Props {
   errors: FieldErrors<SettingsFormValues>;
 }
 
-export default function SocialSection({
-  register,
-  errors,
-}: Props) {
+export default function SocialSection({ register, errors }: Props) {
   return (
     <SectionCard
       title="Social Media"
@@ -39,6 +36,12 @@ export default function SocialSection({
         label="Twitter / X"
         {...register("twitter_url")}
         error={errors.twitter_url?.message}
+      />
+
+      <TextInput
+        label="LinkedIn"
+        {...register("linkedin_url")}
+        error={errors.linkedin_url?.message}
       />
     </SectionCard>
   );

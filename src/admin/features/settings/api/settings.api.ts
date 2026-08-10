@@ -1,9 +1,7 @@
 import { supabase } from "@/lib/supabase/client";
 
-import type {
-  Settings,
-  UpdateSettingsDto,
-} from "../types/settings.types";
+import type { Settings, UpdateSettingsDto } from "../types/settings.types";
+import type { SettingsFormValues } from "../validation/settings.schema";
 
 const TABLE_NAME = "settings";
 
@@ -28,7 +26,7 @@ export async function getSettings(): Promise<Settings | null> {
  * Update website settings
  */
 export async function updateSettings(
-  settings: UpdateSettingsDto
+  settings: UpdateSettingsDto,
 ): Promise<Settings> {
   const { data, error } = await supabase
     .from(TABLE_NAME)
@@ -66,6 +64,25 @@ export async function updateSettings(
       updated_at: new Date().toISOString(),
     })
     .eq("id", settings.id)
+    .select()
+    .single();
+
+  if (error) {
+    throw error;
+  }
+
+  return data;
+}
+
+export async function createSettings(
+  values: SettingsFormValues,
+): Promise<Settings> {
+  const { data, error } = await supabase
+    .from(TABLE_NAME)
+    .insert({
+      ...values,
+      linkedin_url: values.linkedin_url || null,
+    })
     .select()
     .single();
 

@@ -18,17 +18,17 @@ export default function SectionHeading({
       }`}
     >
       {badge && (
-        <span className="inline-block rounded-full bg-[#F4B400]/10 px-4 py-1 text-sm font-semibold uppercase tracking-wider text-[#F4B400]">
+        <span className="inline-block rounded-full border border-[#d9a441]/30 bg-[#fff8e9] px-4 py-1.5 text-xs font-bold uppercase tracking-[0.18em] text-[#9b6a18]">
           {badge}
         </span>
       )}
 
-      <h2 className="mt-4 text-4xl font-bold text-[#0B3D91] md:text-5xl">
+      <h2 className="mt-5 text-3xl font-bold leading-tight text-[#102a43] md:text-5xl">
         {title}
       </h2>
 
       {description && (
-        <p className="mt-4 text-lg leading-8 text-gray-600">
+        <p className="mt-5 text-base leading-8 text-slate-600 md:text-lg">
           {description}
         </p>
       )}

@@ -1,29 +1,33 @@
+import { useMemo } from "react";
+
 import SectionHeading from "@/components/common/SectionHeading";
 import { Section } from "@/components/ui";
 
-import { packages } from "../data/packages";
-import PackageCard from "./PackageCard";
+import { usePackages } from "@/admin/features/packages/hooks/usePackages";
+import { useSiteContent } from "@/features/site-content";
+import PackageGrid from "@/website/components/packages/PackageGrid";
 
 export default function PackagesSection() {
+  const { data: packages = [], isLoading } = usePackages();
+  const { content } = useSiteContent();
+  const section = content.home.packages;
+
+  const featuredPackages = useMemo(
+    () => packages.filter((pkg) => pkg.featured).slice(0, 6),
+    [packages],
+  );
+
   return (
     <Section className="bg-linear-to-b from-white via-gray-50 to-white">
       <SectionHeading
-        badge="Featured Packages"
-        title="Choose Your Perfect Journey"
-        description="Discover our best-selling Umrah and holiday packages designed for unforgettable experiences."
+        badge={section.badge}
+        title={section.title}
+        description={section.description}
       />
 
-      <ul className="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-        {packages.map((packageData, index) => (
-          <li
-            key={packageData.id}
-            data-aos="zoom-in"
-            data-aos-delay={Math.min(index * 100, 500)}
-          >
-            <PackageCard packageData={packageData} />
-          </li>
-        ))}
-      </ul>
+      <div className="mt-16">
+        <PackageGrid packages={featuredPackages} loading={isLoading} />
+      </div>
     </Section>
   );
 }

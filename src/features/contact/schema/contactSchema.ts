@@ -7,29 +7,20 @@ export const contactSchema = z.object({
     .min(2, "Please enter your name")
     .max(100, "Name is too long"),
 
-  email: z
-    .email("Please enter a valid email address")
-    .trim(),
+  email: z.email("Please enter a valid email address").trim(),
 
   phone: z
     .string()
     .trim()
     .min(10, "Please enter a valid phone number")
     .max(15, "Phone number is too long")
-    .regex(
-      /^[0-9+\-\s()]+$/,
-      "Please enter a valid phone number"
-    ),
+    .regex(/^[0-9+\-\s()]+$/, "Please enter a valid phone number"),
 
-  destination: z
-    .string()
-    .trim()
-    .optional(),
+  destination: z.string().trim().optional(),
 
-  packageName: z
-    .string()
-    .trim()
-    .optional(),
+  packageName: z.string().trim().optional(),
+
+  preferredCallbackTime: z.string().trim().max(80).optional(),
 
   message: z
     .string()

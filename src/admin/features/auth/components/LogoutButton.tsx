@@ -28,7 +28,6 @@ export default function LogoutButton() {
       className="flex w-full items-center gap-3 rounded-lg px-4 py-3 text-left transition hover:bg-red-50 hover:text-red-600"
     >
       <LogOut size={18} />
-
       Logout
     </button>
   );

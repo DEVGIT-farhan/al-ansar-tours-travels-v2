@@ -8,7 +8,7 @@ import {
   type SettingsFormValues,
 } from "../validation/settings.schema";
 
-import { useUpdateSettings } from "../hooks/useSettings";
+import { useCreateSettings, useUpdateSettings } from "../hooks/useSettings";
 
 import GeneralSection from "./GeneralSection";
 import ContactSection from "./ContactSection";
@@ -21,10 +21,7 @@ interface SettingsFormProps {
   settings: Settings | null;
 }
 
-export default function SettingsForm({
-  settings,
-}: SettingsFormProps) {
-  console.log("SettingsForm props:", settings);
+export default function SettingsForm({ settings }: SettingsFormProps) {
   const {
     register,
     control,
@@ -67,6 +64,7 @@ export default function SettingsForm({
   });
 
   const updateSettings = useUpdateSettings();
+  const createSettings = useCreateSettings();
 
   useEffect(() => {
     if (!settings) return;
@@ -105,75 +103,42 @@ export default function SettingsForm({
   }, [settings, reset]);
 
   function onSubmit(values: SettingsFormValues) {
-  console.log("onSubmit fired");
-  console.log("settings:", settings);
+    if (!settings) {
+      createSettings.mutate(values);
+      return;
+    }
 
-  if (!settings) {
-    console.error("Settings is null");
-    return;
-  }
-
-  updateSettings.mutate(
-    {
+    updateSettings.mutate({
       ...settings,
       ...values,
-    },
-    {
-      onSuccess: (data) => {
-        console.log("Mutation Success", data);
-      },
-      onError: (error) => {
-        console.error("Mutation Error", error);
-      },
-    }
-  );
-}
+    });
+  }
+
+  const isSaving = updateSettings.isPending || createSettings.isPending;
+
   return (
-    <form
-    
-      onSubmit={handleSubmit(onSubmit)}
-      className="space-y-8"
-    >
-      <GeneralSection
-        register={register}
-        errors={errors}
-      />
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
+      <GeneralSection register={register} errors={errors} />
 
-      <ContactSection
-        register={register}
-        errors={errors}
-      />
+      <ContactSection register={register} errors={errors} />
 
-      <SocialSection
-        register={register}
-        errors={errors}
-      />
+      <SocialSection register={register} errors={errors} />
 
-      <SeoSection
-        register={register}
-        errors={errors}
-      />
+      <SeoSection register={register} errors={errors} />
 
-      <BrandingSection
-        control={control}
-      />
+      <BrandingSection control={control} />
 
-      <BusinessHoursSection
-        register={register}
-        errors={errors}
-      />
+      <BusinessHoursSection register={register} errors={errors} />
 
-      <div className="flex justify-end border-t border-gray-200 pt-6">
-  <button
-    type="submit"
-    disabled={updateSettings.isPending}
-    className="rounded-lg bg-[#0B3D91] px-8 py-3 font-medium text-white transition hover:bg-[#082f70] disabled:cursor-not-allowed disabled:opacity-50"
-  >
-    {updateSettings.isPending
-      ? "Saving Changes..."
-      : "Save Changes"}
-  </button>
-</div>
+      <div className="sticky bottom-4 z-10 flex justify-end rounded-2xl border border-slate-200 bg-white/95 p-3 shadow-lg backdrop-blur">
+        <button
+          type="submit"
+          disabled={isSaving}
+          className="rounded-xl bg-[#102a43] px-8 py-3 font-semibold text-white shadow-lg shadow-[#102a43]/20 transition hover:-translate-y-0.5 hover:bg-[#163b5c] disabled:cursor-not-allowed disabled:opacity-50"
+        >
+          {isSaving ? "Saving Changes..." : "Save Changes"}
+        </button>
+      </div>
     </form>
   );
 }

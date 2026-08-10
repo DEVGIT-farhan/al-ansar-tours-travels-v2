@@ -1,52 +1,26 @@
-import {
-  Building2,
-  Landmark,
-  Mountain,
-  Palmtree,
-} from "lucide-react";
+import { Building2, Landmark, Mountain, Palmtree } from "lucide-react";
 
 import SectionHeading from "@/components/common/SectionHeading";
 import { Section } from "@/components/ui";
+import { useSiteContent } from "@/features/site-content";
 
-const categories = [
-  {
-    icon: Landmark,
-    title: "Spiritual Journeys",
-    description:
-      "Experience meaningful pilgrimages including Umrah and Hajj with carefully planned travel arrangements.",
-  },
-  {
-    icon: Building2,
-    title: "City Escapes",
-    description:
-      "Explore vibrant cities with world-class shopping, entertainment, culture, and iconic landmarks.",
-  },
-  {
-    icon: Palmtree,
-    title: "Beach Holidays",
-    description:
-      "Relax on beautiful beaches and enjoy tropical getaways perfect for families and honeymooners.",
-  },
-  {
-    icon: Mountain,
-    title: "Nature & Adventure",
-    description:
-      "Discover breathtaking mountains, scenic landscapes, wildlife, and unforgettable outdoor experiences.",
-  },
-];
+const categoryIcons = [Landmark, Building2, Palmtree, Mountain];
 
 export default function DestinationCategories() {
+  const { content } = useSiteContent();
+  const section = content.destinations.categories;
+
   return (
     <Section className="bg-gray-50">
       <SectionHeading
-        badge="Travel Styles"
-        title="Choose the Journey That Inspires You"
-        description="Every traveller is different. Discover destinations that match your interests and travel goals."
+        badge={section.badge}
+        title={section.title}
+        description={section.description}
       />
 
       <div className="mt-16 grid gap-8 md:grid-cols-2 xl:grid-cols-4">
-        {categories.map((category, index) => {
-          const Icon = category.icon;
+        {section.items.map((category, index) => {
+          const Icon = categoryIcons[index] ?? categoryIcons[0]!;
 
           return (
             <article

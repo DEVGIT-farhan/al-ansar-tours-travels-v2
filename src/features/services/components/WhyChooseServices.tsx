@@ -9,58 +9,32 @@ import {
 
 import SectionHeading from "@/components/common/SectionHeading";
 import { Section } from "@/components/ui";
+import { useSiteContent } from "@/features/site-content";
 
-const reasons = [
-  {
-    icon: BadgeCheck,
-    title: "Experienced Travel Experts",
-    description:
-      "Our knowledgeable consultants help you choose the right travel solutions based on your needs and budget.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Trusted & Reliable",
-    description:
-      "We believe in honesty, transparency, and delivering dependable travel services you can count on.",
-  },
-  {
-    icon: Wallet,
-    title: "Competitive Pricing",
-    description:
-      "Enjoy affordable travel packages without compromising on quality or service.",
-  },
-  {
-    icon: Headphones,
-    title: "Dedicated Support",
-    description:
-      "Our team is available to assist you before, during, and after your journey.",
-  },
-  {
-    icon: Handshake,
-    title: "Personalized Service",
-    description:
-      "Every traveller is different. We recommend solutions that match your travel goals and preferences.",
-  },
-  {
-    icon: Clock3,
-    title: "Hassle-Free Process",
-    description:
-      "From enquiry to departure, we take care of the details so you can travel with confidence.",
-  },
+const reasonIcons = [
+  BadgeCheck,
+  ShieldCheck,
+  Wallet,
+  Headphones,
+  Handshake,
+  Clock3,
 ];
 
 export default function WhyChooseServices() {
+  const { content } = useSiteContent();
+  const section = content.services.reasons;
+
   return (
     <Section>
       <SectionHeading
-        badge="Why Choose Us"
-        title="Travel With Confidence"
-        description="We combine experience, reliability, and personalized service to make every journey smooth and memorable."
+        badge={section.badge}
+        title={section.title}
+        description={section.description}
       />
 
       <div className="mt-16 grid gap-8 md:grid-cols-2 xl:grid-cols-3">
-        {reasons.map((reason, index) => {
-          const Icon = reason.icon;
+        {section.items.map((reason, index) => {
+          const Icon = reasonIcons[index] ?? reasonIcons[0]!;
 
           return (
             <article

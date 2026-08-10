@@ -40,10 +40,7 @@ export default function ScrollToTopButton() {
           : "pointer-events-none translate-y-6 opacity-0"
       }`}
     >
-      <ArrowUp
-        size={22}
-        aria-hidden="true"
-      />
+      <ArrowUp size={22} aria-hidden="true" />
     </button>
   );
 }

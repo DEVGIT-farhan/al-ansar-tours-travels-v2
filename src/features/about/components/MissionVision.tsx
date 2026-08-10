@@ -2,14 +2,18 @@ import { Compass, Target } from "lucide-react";
 
 import SectionHeading from "@/components/common/SectionHeading";
 import { Section } from "@/components/ui";
+import { useSiteContent } from "@/features/site-content";
 
 export default function MissionVision() {
+  const { content } = useSiteContent();
+  const section = content.about.missionVision;
+
   return (
     <Section className="bg-gray-50">
       <SectionHeading
-        badge="Our Purpose"
-        title="Driven by Purpose, Guided by Excellence"
-        description="Our mission and vision define who we are and inspire every journey we help create."
+        badge={section.badge}
+        title={section.title}
+        description={section.description}
       />
 
       <div className="mt-16 grid gap-8 lg:grid-cols-2">
@@ -24,15 +28,11 @@ export default function MissionVision() {
           </div>
 
           <h3 className="text-3xl font-bold text-[#0B3D91]">
-            Our Mission
+            {section.missionTitle}
           </h3>
 
           <p className="mt-6 leading-8 text-gray-600">
-            To provide reliable, transparent, and affordable travel
-            solutions that make every journey smooth and memorable.
-            Through personalized service, professional guidance, and
-            continuous support, we strive to exceed our customers'
-            expectations and build lasting relationships based on trust.
+            {section.missionDescription}
           </p>
         </div>
 
@@ -47,15 +47,11 @@ export default function MissionVision() {
           </div>
 
           <h3 className="text-3xl font-bold text-[#0B3D91]">
-            Our Vision
+            {section.visionTitle}
           </h3>
 
           <p className="mt-6 leading-8 text-gray-600">
-            To become one of India's most trusted travel agencies,
-            connecting people with meaningful travel experiences
-            across the world while delivering exceptional service,
-            innovation, integrity, and customer satisfaction in
-            everything we do.
+            {section.visionDescription}
           </p>
         </div>
       </div>

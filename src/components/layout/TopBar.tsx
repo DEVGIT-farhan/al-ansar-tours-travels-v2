@@ -9,52 +9,58 @@ import {
 
 import { Container } from "@/components/ui";
 import { COMPANY } from "@/constants/COMPANY";
-
-const socialLinks = [
-  {
-    href: COMPANY.social.facebook,
-    label: "Facebook",
-    icon: FaFacebookF,
-  },
-  {
-    href: COMPANY.social.instagram,
-    label: "Instagram",
-    icon: FaInstagram,
-  },
-  {
-    href: COMPANY.social.youtube,
-    label: "YouTube",
-    icon: FaYoutube,
-  },
-  {
-    href: COMPANY.social.whatsapp,
-    label: "WhatsApp",
-    icon: FaWhatsapp,
-  },
-];
+import { useWebsite } from "@/hooks/useWebsite";
 
 export default function TopBar() {
+  const { settings } = useWebsite();
+  const phone = settings?.phone?.trim() || COMPANY.phone;
+  const email = settings?.email?.trim() || COMPANY.email;
+  const whatsapp = settings?.whatsapp?.trim() || COMPANY.whatsapp;
+  const officeHours = settings?.monday_hours?.trim() || COMPANY.officeHours;
+  const socialLinks = [
+    {
+      href: settings?.facebook_url?.trim() || COMPANY.social.facebook,
+      label: "Facebook",
+      icon: FaFacebookF,
+    },
+    {
+      href: settings?.instagram_url?.trim() || COMPANY.social.instagram,
+      label: "Instagram",
+      icon: FaInstagram,
+    },
+    {
+      href: settings?.youtube_url?.trim() || COMPANY.social.youtube,
+      label: "YouTube",
+      icon: FaYoutube,
+    },
+    {
+      href: `https://wa.me/${whatsapp.replace(/[^\d]/g, "")}`,
+      label: "WhatsApp",
+      icon: FaWhatsapp,
+    },
+  ].filter((item) => item.href.length > 0);
+
   return (
-    <div className="hidden bg-[#0B3D91] text-white lg:block">
-      <Container className="flex items-center justify-between py-2 text-sm">
+    <div className="hidden bg-[#102a43] text-white lg:block">
+      <Container className="flex items-center justify-between py-2.5 text-xs font-medium">
         <div className="flex items-center gap-6">
           <a
-            href={`tel:${COMPANY.phone}`}
-            className="flex items-center gap-2 transition-colors hover:text-[#F4B400]"
+            href={`tel:${phone.replace(/\s+/g, "")}`}
+            className="flex items-center gap-2 transition-colors hover:text-[#e8ba62]"
           >
             <FaPhoneAlt size={12} />
-            <span>{COMPANY.phone}</span>
+            <span>{phone}</span>
           </a>
 
           <a
-            href={`mailto:${COMPANY.email}`}
-            className="flex items-center gap-2 transition-colors hover:text-[#F4B400]"
+            href={`mailto:${email}`}
+            className="flex items-center gap-2 transition-colors hover:text-[#e8ba62]"
           >
             <FaEnvelope size={12} />
-            <span>{COMPANY.email}</span>
+            <span>{email}</span>
           </a>
 
-          <span>{COMPANY.officeHours}</span>
+          <span>{officeHours}</span>
         </div>
 
         <div className="flex items-center gap-4">
@@ -65,7 +71,7 @@ export default function TopBar() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={label}
-              className="transition-all duration-200 hover:scale-110 hover:text-[#F4B400]"
+              className="transition-all duration-200 hover:scale-110 hover:text-[#e8ba62]"
             >
               <Icon size={14} />
             </a>

@@ -1,7 +1,4 @@
-import type {
-  AuthChangeEvent,
-  Session,
-} from "@supabase/supabase-js";
+import type { AuthChangeEvent, Session } from "@supabase/supabase-js";
 
 import { supabase } from "./client";
 
@@ -9,6 +6,18 @@ export const auth = {
   signIn(email: string, password: string) {
     return supabase.auth.signInWithPassword({
       email,
+      password,
+    });
+  },
+
+  requestPasswordReset(email: string, redirectTo: string) {
+    return supabase.auth.resetPasswordForEmail(email, {
+      redirectTo,
+    });
+  },
+
+  updatePassword(password: string) {
+    return supabase.auth.updateUser({
       password,
     });
   },
@@ -26,10 +35,7 @@ export const auth = {
   },
 
   onAuthStateChange(
-    callback: (
-      event: AuthChangeEvent,
-      session: Session | null
-    ) => void
+    callback: (event: AuthChangeEvent, session: Session | null) => void,
   ) {
     return supabase.auth.onAuthStateChange(callback);
   },

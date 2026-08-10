@@ -1,8 +1,4 @@
-import {
-  useMutation,
-  useQuery,
-  useQueryClient,
-} from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import toast from "react-hot-toast";
 
@@ -14,9 +10,10 @@ import {
   updatePackageCategory,
 } from "../api/packageCategories.api";
 
+import type { PackageCategory } from "@/shared/types/packageCategory.types";
+
 import type {
   CreatePackageCategoryDto,
-  PackageCategory,
   UpdatePackageCategoryDto,
 } from "../types/packageCategory.types";
 
@@ -41,9 +38,8 @@ export function useCreatePackageCategory() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (
-      values: CreatePackageCategoryDto
-    ) => createPackageCategory(values),
+    mutationFn: (values: CreatePackageCategoryDto) =>
+      createPackageCategory(values),
 
     onSuccess: () => {
       toast.success("Category created.");
@@ -63,9 +59,8 @@ export function useUpdatePackageCategory() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (
-      values: UpdatePackageCategoryDto
-    ) => updatePackageCategory(values),
+    mutationFn: (values: UpdatePackageCategoryDto) =>
+      updatePackageCategory(values),
 
     onSuccess: () => {
       toast.success("Category updated.");

@@ -1,7 +1,4 @@
-import type {
-  FieldErrors,
-  UseFormRegister,
-} from "react-hook-form";
+import type { FieldErrors, UseFormRegister } from "react-hook-form";
 
 import TextInput from "@/admin/components/forms/TextInput";
 import SectionCard from "@/admin/components/forms/SectionCard";
@@ -13,10 +10,7 @@ interface Props {
   errors: FieldErrors<SettingsFormValues>;
 }
 
-export default function GeneralSection({
-  register,
-  errors,
-}: Props) {
+export default function GeneralSection({ register, errors }: Props) {
   return (
     <SectionCard
       title="General Information"

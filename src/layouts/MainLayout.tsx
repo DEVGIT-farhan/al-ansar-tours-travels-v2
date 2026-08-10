@@ -7,7 +7,6 @@ import { ScrollToTopButton } from "@/features/scroll-to-top";
 import ScrollProgress from "@/components/common/ScrollProgress";
 import PageLoader from "@/components/common/PageLoader";
 
-
 export default function MainLayout() {
   return (
     <>
@@ -17,14 +16,13 @@ export default function MainLayout() {
 
       <Navbar />
 
-      <main>
+      <main className="page-enter overflow-hidden">
         <Outlet />
       </main>
 
       <Footer />
       <WhatsAppButton />
       <ScrollToTopButton />
-  
     </>
   );
 }

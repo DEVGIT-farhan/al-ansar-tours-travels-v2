@@ -1,12 +1,19 @@
 import { FaWhatsapp } from "react-icons/fa";
 
 import { COMPANY } from "@/constants/COMPANY";
+import { useWebsite } from "@/hooks/useWebsite";
 
 export default function WhatsAppButton() {
-  const message = `Hello ${COMPANY.name}, I would like to know more about your travel packages.`;
+  const { settings } = useWebsite();
+  const companyName = settings?.company_name?.trim() || COMPANY.name;
+  const whatsapp = (settings?.whatsapp?.trim() || COMPANY.whatsapp).replace(
+    /[^\d]/g,
+    "",
+  );
+  const message = `Hello ${companyName}, I would like to know more about your travel packages.`;
 
-  const whatsappUrl = `https://wa.me/${COMPANY.whatsapp}?text=${encodeURIComponent(
-    message
+  const whatsappUrl = `https://wa.me/${whatsapp}?text=${encodeURIComponent(
+    message,
   )}`;
 
   return (

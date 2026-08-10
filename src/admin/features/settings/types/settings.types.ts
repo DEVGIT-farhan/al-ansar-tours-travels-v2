@@ -24,18 +24,15 @@ export interface Settings {
   seo_keywords: string | null;
 
   monday_hours: string | null;
-tuesday_hours: string | null;
-wednesday_hours: string | null;
-thursday_hours: string | null;
-friday_hours: string | null;
-saturday_hours: string | null;
-sunday_hours: string | null;
+  tuesday_hours: string | null;
+  wednesday_hours: string | null;
+  thursday_hours: string | null;
+  friday_hours: string | null;
+  saturday_hours: string | null;
+  sunday_hours: string | null;
 
   created_at: string;
   updated_at: string;
 }
 
-export type UpdateSettingsDto = Omit<
-  Settings,
-  "created_at" | "updated_at"
->;
+export type UpdateSettingsDto = Omit<Settings, "created_at" | "updated_at">;

@@ -1,8 +1,4 @@
-export type ContactIcon =
-  | "phone"
-  | "mail"
-  | "map"
-  | "clock";
+export type ContactIcon = "phone" | "mail" | "map" | "clock";
 
 export interface ContactInfo {
   icon: ContactIcon;

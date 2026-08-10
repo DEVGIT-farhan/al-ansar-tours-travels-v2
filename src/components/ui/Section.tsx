@@ -16,14 +16,8 @@ export default function Section({
   id,
 }: SectionProps) {
   return (
-    <section
-      id={id}
-      className={cn("py-24", className)}
-      data-aos="fade-up"
-    >
-      <Container className={containerClassName}>
-        {children}
-      </Container>
+    <section id={id} className={cn("py-24", className)} data-aos="fade-up">
+      <Container className={containerClassName}>{children}</Container>
     </section>
   );
 }

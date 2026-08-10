@@ -13,33 +13,21 @@ function LoadingScreen() {
       <div className="flex flex-col items-center gap-4">
         <div className="h-12 w-12 animate-spin rounded-full border-4 border-[#0B3D91] border-t-transparent" />
 
-        <p className="text-sm text-gray-500">
-          Loading...
-        </p>
+        <p className="text-sm text-gray-500">Loading...</p>
       </div>
     </div>
   );
 }
 
-export default function ProtectedRoute({
-  children,
-}: ProtectedRouteProps) {
-  const {
-    loading,
-    isAuthenticated,
-  } = useAuth();
+export default function ProtectedRoute({ children }: ProtectedRouteProps) {
+  const { loading, isAuthenticated } = useAuth();
 
   if (loading) {
     return <LoadingScreen />;
   }
 
   if (!isAuthenticated) {
-    return (
-      <Navigate
-        to="/admin/login"
-        replace
-      />
-    );
+    return <Navigate to="/admin/login" replace />;
   }
 
   return <>{children}</>;

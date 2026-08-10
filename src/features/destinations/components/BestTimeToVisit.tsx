@@ -2,47 +2,18 @@ import { CalendarDays } from "lucide-react";
 
 import SectionHeading from "@/components/common/SectionHeading";
 import { Section } from "@/components/ui";
-
-const seasons = [
-  {
-    destination: "Saudi Arabia",
-    months: "October – March",
-    reason:
-      "Pleasant weather makes it the ideal season for Umrah and sightseeing.",
-  },
-  {
-    destination: "Dubai",
-    months: "November – March",
-    reason:
-      "Comfortable temperatures are perfect for outdoor attractions and shopping festivals.",
-  },
-  {
-    destination: "Malaysia",
-    months: "December – April",
-    reason:
-      "Enjoy warm tropical weather with excellent opportunities for sightseeing.",
-  },
-  {
-    destination: "Thailand",
-    months: "November – February",
-    reason:
-      "Cooler temperatures make beaches, islands, and city tours more enjoyable.",
-  },
-  {
-    destination: "Turkey",
-    months: "April – June & September – November",
-    reason:
-      "Mild weather provides the best conditions for exploring historical sites and natural beauty.",
-  },
-];
+import { useSiteContent } from "@/features/site-content";
 
 export default function BestTimeToVisit() {
+  const { content } = useSiteContent();
+  const section = content.destinations.bestTime;
+
   return (
     <Section>
       <SectionHeading
-        badge="Travel Guide"
-        title="Best Time to Visit Our Popular Destinations"
-        description="Planning your trip during the right season ensures a more enjoyable and comfortable travel experience."
+        badge={section.badge}
+        title={section.title}
+        description={section.description}
       />
 
       <div className="mt-16 overflow-hidden rounded-3xl border border-gray-200 bg-white shadow-xl">
@@ -52,7 +23,7 @@ export default function BestTimeToVisit() {
           <div className="col-span-5">Why Visit?</div>
         </div>
 
-        {seasons.map((item, index) => (
+        {section.items.map((item, index) => (
           <div
             key={item.destination}
             data-aos="fade-up"
@@ -68,9 +39,7 @@ export default function BestTimeToVisit() {
               {item.months}
             </div>
 
-            <div className="col-span-5 text-gray-600">
-              {item.reason}
-            </div>
+            <div className="col-span-5 text-gray-600">{item.reason}</div>
           </div>
         ))}
       </div>

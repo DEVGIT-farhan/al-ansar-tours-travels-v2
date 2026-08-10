@@ -8,19 +8,12 @@ interface TestimonialCardProps {
   testimonial: Testimonial;
 }
 
-export default function TestimonialCard({
-  testimonial,
-}: TestimonialCardProps) {
+export default function TestimonialCard({ testimonial }: TestimonialCardProps) {
   return (
     <Card className="group border border-gray-200 p-8 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:border-[#0B3D91] hover:shadow-2xl">
-      <Quote
-        aria-hidden="true"
-        className="mb-6 h-12 w-12 text-[#0B3D91]/20"
-      />
+      <Quote aria-hidden="true" className="mb-6 h-12 w-12 text-[#0B3D91]/20" />
 
-      <p className="italic leading-7 text-gray-600">
-        "{testimonial.review}"
-      </p>
+      <p className="italic leading-7 text-gray-600">"{testimonial.review}"</p>
 
       <div className="mt-6 flex">
         {Array.from({ length: testimonial.rating }).map((_, index) => (
@@ -42,21 +35,14 @@ export default function TestimonialCard({
         />
 
         <div>
-          <h3 className="font-bold text-[#0B3D91]">
-            {testimonial.name}
-          </h3>
+          <h3 className="font-bold text-[#0B3D91]">{testimonial.name}</h3>
 
           <div className="mt-1 flex items-center gap-1 text-sm text-green-600">
-            <CheckCircle
-              aria-hidden="true"
-              className="h-4 w-4"
-            />
+            <CheckCircle aria-hidden="true" className="h-4 w-4" />
             <span>Verified Traveller</span>
           </div>
 
-          <p className="mt-1 text-sm text-gray-500">
-            {testimonial.location}
-          </p>
+          <p className="mt-1 text-sm text-gray-500">{testimonial.location}</p>
         </div>
       </div>
     </Card>

@@ -6,30 +6,34 @@ import BestTimeToVisit from "@/features/destinations/components/BestTimeToVisit"
 import TravelTips from "@/features/destinations/components/TravelTips";
 import DestinationCTA from "@/features/destinations/components/DestinationCTA";
 import DestinationsSection from "@/features/destinations/components/DestinationsSection";
+import { useSiteContent } from "@/features/site-content";
 
 export default function Destinations() {
+  const { content } = useSiteContent();
+  const destinations = content.destinations;
+
   return (
     <>
       <SEO
-        title="Destinations"
-        description="Explore our most popular travel destinations around the world."
+        title={destinations.pageTitle}
+        description={destinations.overview.description}
       />
 
       <PageHeader
-        title="Destinations"
-        description="Choose your dream destination from our carefully curated international travel experiences."
+        title={destinations.pageTitle}
+        description={destinations.pageDescription}
         breadcrumb={[
           {
-            label: "Destinations",
+            label: destinations.pageTitle,
           },
         ]}
       />
 
       <DestinationsOverview />
-      <DestinationsSection />
+      <DestinationsSection heading={destinations.list} />
       <DestinationCategories />
-      <BestTimeToVisit/> 
-      <TravelTips/>
+      <BestTimeToVisit />
+      <TravelTips />
       <DestinationCTA />
     </>
   );

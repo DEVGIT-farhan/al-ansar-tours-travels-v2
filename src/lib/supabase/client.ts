@@ -2,19 +2,15 @@ import { createClient } from "@supabase/supabase-js";
 
 import { env } from "@/lib/env";
 
-export const supabase = createClient(
-  env.SUPABASE_URL,
-  env.SUPABASE_ANON_KEY,
-  {
-    auth: {
-      persistSession: true,
-      autoRefreshToken: true,
-      detectSessionInUrl: true,
+export const supabase = createClient(env.SUPABASE_URL, env.SUPABASE_ANON_KEY, {
+  auth: {
+    persistSession: true,
+    autoRefreshToken: true,
+    detectSessionInUrl: true,
+  },
+  global: {
+    headers: {
+      "X-Client-Info": "al-ansar-cms",
     },
-    global: {
-      headers: {
-        "X-Client-Info": "al-ansar-cms",
-      },
-    },
-  }
-);
+  },
+});

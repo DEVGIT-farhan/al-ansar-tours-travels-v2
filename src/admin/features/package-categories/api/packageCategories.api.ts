@@ -1,16 +1,15 @@
 import { supabase } from "@/lib/supabase/client";
 
+import type { PackageCategory } from "@/shared/types/packageCategory.types";
+
 import type {
-  PackageCategory,
   CreatePackageCategoryDto,
   UpdatePackageCategoryDto,
 } from "../types/packageCategory.types";
 
 const TABLE = "package_categories";
 
-export async function getPackageCategories(): Promise<
-  PackageCategory[]
-> {
+export async function getPackageCategories(): Promise<PackageCategory[]> {
   const { data, error } = await supabase
     .from(TABLE)
     .select("*")
@@ -25,9 +24,7 @@ export async function getPackageCategories(): Promise<
   return data ?? [];
 }
 
-export async function getPackageCategory(
-  id: string
-): Promise<PackageCategory> {
+export async function getPackageCategory(id: string): Promise<PackageCategory> {
   const { data, error } = await supabase
     .from(TABLE)
     .select("*")
@@ -42,7 +39,7 @@ export async function getPackageCategory(
 }
 
 export async function createPackageCategory(
-  values: CreatePackageCategoryDto
+  values: CreatePackageCategoryDto,
 ): Promise<PackageCategory> {
   const { data, error } = await supabase
     .from(TABLE)
@@ -58,12 +55,14 @@ export async function createPackageCategory(
 }
 
 export async function updatePackageCategory(
-  values: UpdatePackageCategoryDto
+  values: UpdatePackageCategoryDto,
 ): Promise<PackageCategory> {
+  const { id, ...payload } = values;
+
   const { data, error } = await supabase
     .from(TABLE)
-    .update(values)
-    .eq("id", values.id)
+    .update(payload)
+    .eq("id", id)
     .select()
     .single();
 
@@ -74,13 +73,8 @@ export async function updatePackageCategory(
   return data;
 }
 
-export async function deletePackageCategory(
-  id: string
-) {
-  const { error } = await supabase
-    .from(TABLE)
-    .delete()
-    .eq("id", id);
+export async function deletePackageCategory(id: string): Promise<void> {
+  const { error } = await supabase.from(TABLE).delete().eq("id", id);
 
   if (error) {
     throw error;

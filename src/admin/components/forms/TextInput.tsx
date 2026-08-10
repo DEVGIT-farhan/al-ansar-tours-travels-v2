@@ -1,7 +1,6 @@
 import { forwardRef } from "react";
 
-interface TextInputProps
-  extends React.InputHTMLAttributes<HTMLInputElement> {
+interface TextInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label: string;
   error?: string;
 }
@@ -22,12 +21,10 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
           } ${className}`}
         />
 
-        {error && (
-          <p className="text-sm text-red-500">{error}</p>
-        )}
+        {error && <p className="text-sm text-red-500">{error}</p>}
       </div>
     );
-  }
+  },
 );
 
 TextInput.displayName = "TextInput";

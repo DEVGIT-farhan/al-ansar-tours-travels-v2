@@ -9,94 +9,69 @@ import {
 } from "react-icons/fa";
 
 import { Container } from "@/components/ui";
+import { useSiteContent } from "@/features/site-content";
 import { useWebsite } from "@/hooks/useWebsite";
-import {
-  companyLinks,
-  quickLinks,
-} from "../data/footerLinks";
 
 export default function Footer() {
   const { settings } = useWebsite();
-
+  const { content } = useSiteContent();
+  const footer = content.footer;
   const companyName =
-    settings?.company_name?.trim() ||
-    "AL ANSAR TOURS & TRAVELS";
-
-  const tagline =
-    settings?.tagline?.trim() ||
-    "Your Trusted Travel Partner";
-
+    settings?.company_name?.trim() || "AL ANSAR TOURS & TRAVELS";
+  const tagline = settings?.tagline?.trim() || "Your Trusted Travel Partner";
   const phone = settings?.phone?.trim() || "";
   const email = settings?.email?.trim() || "";
   const address = settings?.address?.trim() || "";
   const maps = settings?.google_maps_url?.trim() || "#";
-
   const socials = [
     {
-      href: settings?.facebook_url,
+      href: settings?.facebook_url ?? "",
       icon: FaFacebookF,
       label: "Facebook",
     },
     {
-      href: settings?.instagram_url,
+      href: settings?.instagram_url ?? "",
       icon: FaInstagram,
       label: "Instagram",
     },
+    { href: settings?.youtube_url ?? "", icon: FaYoutube, label: "YouTube" },
+    { href: settings?.twitter_url ?? "", icon: FaTwitter, label: "Twitter" },
     {
-      href: settings?.youtube_url,
-      icon: FaYoutube,
-      label: "YouTube",
-    },
-    {
-      href: settings?.twitter_url,
-      icon: FaTwitter,
-      label: "Twitter",
-    },
-    {
-      href: settings?.linkedin_url,
+      href: settings?.linkedin_url ?? "",
       icon: FaLinkedinIn,
       label: "LinkedIn",
     },
-  ].filter((item) => item.href);
+  ].filter((item) => item.href.trim().length > 0);
 
   return (
-    <footer className="bg-[#0B3D91] text-white">
+    <footer className="relative overflow-hidden bg-[#102a43] text-white">
+      <div className="pointer-events-none absolute -left-32 bottom-0 h-96 w-96 rounded-full bg-[#d9a441]/10 blur-3xl" />
       <Container>
-        <div className="grid gap-10 py-16 md:grid-cols-2 lg:grid-cols-4">
-          {/* Company */}
+        <div className="relative grid gap-10 py-18 md:grid-cols-2 lg:grid-cols-4">
           <div>
-            <h3 className="text-2xl font-bold">
-              {companyName}
-            </h3>
+            <h3 className="text-2xl font-bold">{companyName}</h3>
+            <p className="mt-4 text-sm leading-7 text-slate-300">{tagline}</p>
 
-            <p className="mt-4 text-sm leading-7 text-blue-100">
-              {tagline}
-            </p>
+            <hr className="my-6 border-white/10" />
 
-            <hr className="my-6 border-blue-800" />
-
-            <ul className="space-y-2 text-sm text-blue-100">
-              <li>✔ Trusted Travel Partner</li>
-              <li>✔ Umrah & Hajj Specialists</li>
-              <li>✔ Tourist & Visit Visas</li>
-              <li>✔ Flight Ticket Booking</li>
-              <li>✔ Holiday Packages</li>
+            <ul className="space-y-2 text-sm text-slate-300">
+              {footer.highlights.map((highlight) => (
+                <li key={highlight}>✓ {highlight}</li>
+              ))}
             </ul>
           </div>
 
-          {/* Company Links */}
           <div>
             <h4 className="mb-5 text-lg font-semibold">
-              Company
+              {footer.companyHeading}
             </h4>
-
-            <nav aria-label="Company links">
+            <nav aria-label="Company Links">
               <ul className="space-y-3">
-                {companyLinks.map((link) => (
+                {footer.companyLinks.map((link) => (
                   <li key={link.label}>
                     <Link
                       to={link.href}
-                      className="text-blue-100 transition hover:text-[#F4B400]"
+                      className="text-slate-300 transition hover:text-[#e8ba62]"
                     >
                       {link.label}
                     </Link>
@@ -106,19 +81,17 @@ export default function Footer() {
             </nav>
           </div>
 
-          {/* Quick Links */}
           <div>
             <h4 className="mb-5 text-lg font-semibold">
-              Quick Links
+              {footer.quickLinksHeading}
             </h4>
-
-            <nav aria-label="Quick links">
+            <nav aria-label="Quick Links">
               <ul className="space-y-3">
-                {quickLinks.map((link) => (
+                {footer.quickLinks.map((link) => (
                   <li key={link.label}>
                     <Link
                       to={link.href}
-                      className="text-blue-100 transition hover:text-[#F4B400]"
+                      className="text-slate-300 transition hover:text-[#e8ba62]"
                     >
                       {link.label}
                     </Link>
@@ -128,17 +101,15 @@ export default function Footer() {
             </nav>
           </div>
 
-          {/* Contact */}
           <div>
             <h4 className="mb-5 text-lg font-semibold">
-              Contact
+              {footer.contactHeading}
             </h4>
-
-            <div className="space-y-4 text-blue-100">
+            <div className="space-y-4 text-slate-300">
               {phone && (
                 <a
                   href={`tel:${phone.replace(/\s+/g, "")}`}
-                  className="flex items-start gap-3 transition hover:text-[#F4B400]"
+                  className="flex items-start gap-3 transition hover:text-[#e8ba62]"
                 >
                   <Phone size={18} />
                   <span>{phone}</span>
@@ -148,7 +119,7 @@ export default function Footer() {
               {email && (
                 <a
                   href={`mailto:${email}`}
-                  className="flex items-start gap-3 transition hover:text-[#F4B400]"
+                  className="flex items-start gap-3 transition hover:text-[#e8ba62]"
                 >
                   <Mail size={18} />
                   <span>{email}</span>
@@ -160,7 +131,7 @@ export default function Footer() {
                   href={maps}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-start gap-3 transition hover:text-[#F4B400]"
+                  className="flex items-start gap-3 transition hover:text-[#e8ba62]"
                 >
                   <MapPin size={18} />
                   <span>{address}</span>
@@ -171,38 +142,36 @@ export default function Footer() {
             {socials.length > 0 && (
               <div className="mt-8">
                 <h4 className="mb-5 text-lg font-semibold">
-                  Follow Us
+                  {footer.followHeading}
                 </h4>
-
                 <div className="flex gap-4">
-                  {socials.map(
-                    ({ href, icon: Icon, label }) => (
+                  {socials.map((social) => {
+                    const Icon = social.icon;
+
+                    return (
                       <a
-                        key={label}
-                        href={href}
+                        key={social.label}
+                        href={social.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        aria-label={label}
-                        className="rounded-full bg-white/10 p-3 transition-all duration-300 hover:bg-[#F4B400] hover:text-black"
+                        aria-label={social.label}
+                        className="rounded-full border border-white/10 bg-white/10 p-3 transition-all duration-300 hover:-translate-y-1 hover:bg-[#d9a441] hover:text-[#102a43]"
                       >
                         <Icon />
                       </a>
-                    )
-                  )}
+                    );
+                  })}
                 </div>
               </div>
             )}
           </div>
         </div>
 
-        <div className="border-t border-blue-800 py-6 text-center text-sm text-blue-200">
+        <div className="relative border-t border-white/10 py-6 text-center text-sm text-slate-300">
           <p>
             © {new Date().getFullYear()} {companyName}. All Rights Reserved.
           </p>
-
-          <p className="mt-2 text-xs text-blue-300">
-            {tagline}
-          </p>
+          <p className="mt-2 text-xs text-slate-400">{tagline}</p>
         </div>
       </Container>
     </footer>

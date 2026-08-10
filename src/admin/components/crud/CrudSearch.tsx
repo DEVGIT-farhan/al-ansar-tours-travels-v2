@@ -25,18 +25,14 @@ export default function CrudSearch({
         <input
           type="text"
           value={value}
-          onChange={(e) =>
-            onChange(e.target.value)
-          }
+          onChange={(e) => onChange(e.target.value)}
           placeholder={placeholder}
           className="w-full rounded-lg border border-gray-300 py-3 pl-10 pr-4 outline-none transition focus:border-[#0B3D91] focus:ring-2 focus:ring-[#0B3D91]/20"
         />
       </div>
 
       {rightContent && (
-        <div className="flex items-center gap-3">
-          {rightContent}
-        </div>
+        <div className="flex items-center gap-3">{rightContent}</div>
       )}
     </div>
   );

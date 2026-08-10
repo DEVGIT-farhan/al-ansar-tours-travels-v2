@@ -9,9 +9,7 @@ interface BrandingSectionProps {
   control: Control<SettingsFormValues>;
 }
 
-export default function BrandingSection({
-  control,
-}: BrandingSectionProps) {
+export default function BrandingSection({ control }: BrandingSectionProps) {
   return (
     <SectionCard
       title="Branding"
@@ -24,6 +22,7 @@ export default function BrandingSection({
           render={({ field }) => (
             <ImageUpload
               label="Company Logo"
+              bucket="website-assets"
               folder="logo"
               value={field.value}
               onChange={field.onChange}
@@ -37,6 +36,7 @@ export default function BrandingSection({
           render={({ field }) => (
             <ImageUpload
               label="Favicon"
+              bucket="website-assets"
               folder="favicon"
               value={field.value}
               onChange={field.onChange}

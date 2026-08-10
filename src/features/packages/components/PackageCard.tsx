@@ -1,27 +1,31 @@
-import { Check, Clock, Star } from "lucide-react";
+import { Check, Clock } from "lucide-react";
 
 import { Button, Card } from "@/components/ui";
 import { COMPANY } from "@/constants/COMPANY";
+import { useWebsite } from "@/hooks/useWebsite";
 
-import type { Package } from "../types/package";
+import type { TravelPackageWithCategory } from "@/shared/types/package.types";
 
 interface PackageCardProps {
-  packageData: Package;
+  packageData: TravelPackageWithCategory;
 }
 
-export default function PackageCard({
-  packageData,
-}: PackageCardProps) {
- const whatsappUrl = `https://wa.me/${
-  COMPANY.whatsapp
-}?text=${encodeURIComponent(packageData.whatsappMessage)}`;
+export default function PackageCard({ packageData }: PackageCardProps) {
+  const { settings } = useWebsite();
+  const whatsapp = (settings?.whatsapp?.trim() || COMPANY.whatsapp).replace(
+    /[^\d]/g,
+    "",
+  );
+  const whatsappUrl = `https://wa.me/${whatsapp}?text=${encodeURIComponent(
+    `Hello, I'm interested in the "${packageData.title}" package.`,
+  )}`;
 
   return (
-    <Card className="group flex h-full flex-col overflow-hidden border border-gray-200 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:border-[#0B3D91] hover:shadow-2xl">
+    <Card className="group flex h-full flex-col overflow-hidden border-slate-200 shadow-[0_18px_42px_-30px_rgba(16,42,67,0.45)] transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
       {/* Image */}
       <div className="relative overflow-hidden">
         <img
-          src={packageData.image}
+          src={packageData.cover_image ?? "/images/package-placeholder.jpg"}
           alt={packageData.title}
           loading="lazy"
           decoding="async"
@@ -29,51 +33,32 @@ export default function PackageCard({
         />
 
         {/* Badge */}
-        <span className="absolute left-4 top-4 rounded-full bg-[#F4B400] px-4 py-1 text-xs font-semibold uppercase tracking-wide text-black shadow-lg">
-          {packageData.badge}
+        <span className="absolute left-4 top-4 rounded-full bg-[#102a43] px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.14em] text-white shadow-lg">
+          {packageData.category?.name ?? "Tour Package"}
         </span>
-
-        {/* Rating */}
-        <div className="absolute right-4 top-4 flex items-center gap-1 rounded-full bg-white px-3 py-1 shadow-md">
-          <Star
-            aria-hidden="true"
-            className="h-4 w-4 fill-[#F4B400] text-[#F4B400]"
-          />
-          <span className="text-sm font-semibold">
-            {packageData.rating}
-          </span>
-        </div>
       </div>
 
       {/* Content */}
       <div className="flex grow flex-col p-6">
-        <h3 className="text-2xl font-bold text-[#0B3D91] transition-colors duration-300 group-hover:text-[#082d6d]">
+        <h3 className="text-2xl font-bold tracking-tight text-[#102a43] transition-colors duration-300 group-hover:text-[#9b6a18]">
           {packageData.title}
         </h3>
 
         <div className="mt-4 flex items-center gap-2 text-gray-600">
-          <Clock
-            aria-hidden="true"
-            className="h-5 w-5"
-          />
+          <Clock aria-hidden="true" className="h-5 w-5" />
           <span>{packageData.duration}</span>
         </div>
 
         {/* Package Includes */}
         <div className="mt-6 space-y-3">
-          {packageData.includes.map((item) => (
-            <div
-              key={item}
-              className="flex items-center gap-2"
-            >
+          {packageData.inclusions.map((item) => (
+            <div key={item.id} className="flex items-center gap-2">
               <Check
                 aria-hidden="true"
                 className="h-5 w-5 shrink-0 text-green-600"
               />
 
-              <span className="text-gray-700">
-                {item}
-              </span>
+              <span className="text-gray-700">{item.description}</span>
             </div>
           ))}
         </div>
@@ -84,23 +69,19 @@ export default function PackageCard({
             Starting From
           </p>
 
-          <p className="mt-1 text-3xl font-bold text-[#0B3D91]">
-            {packageData.price}
+          <p className="mt-1 text-3xl font-bold text-[#102a43]">
+            {packageData.currency} {packageData.price ?? "Contact Us"}
           </p>
         </div>
 
         {/* Actions */}
         <div className="mt-8 flex gap-3">
-          <Button
-  href={whatsappUrl}
-  variant="primary"
-  className="flex-1"
->
-  Book Now
-</Button>
+          <Button href={whatsappUrl} variant="primary" className="flex-1">
+            Book Now
+          </Button>
 
           <Button
-            to={`/package-details/${packageData.slug}`}
+            to={`/packages/${packageData.slug}`}
             variant="outline"
             className="flex-1"
           >

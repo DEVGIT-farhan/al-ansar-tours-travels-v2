@@ -1,7 +1,4 @@
-import type {
-  FieldErrors,
-  UseFormRegister,
-} from "react-hook-form";
+import type { FieldErrors, UseFormRegister } from "react-hook-form";
 
 import SectionCard from "@/admin/components/forms/SectionCard";
 import TextInput from "@/admin/components/forms/TextInput";

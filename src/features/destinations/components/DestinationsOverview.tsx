@@ -2,14 +2,18 @@ import { Globe2 } from "lucide-react";
 
 import SectionHeading from "@/components/common/SectionHeading";
 import { Section } from "@/components/ui";
+import { useSiteContent } from "@/features/site-content";
 
 export default function DestinationsOverview() {
+  const { content } = useSiteContent();
+  const overview = content.destinations.overview;
+
   return (
     <Section>
       <SectionHeading
-        badge="Explore the World"
-        title="Discover Your Next Dream Destination"
-        description="From spiritual pilgrimages to unforgettable international holidays, we help you explore the world's most loved destinations."
+        badge={overview.badge}
+        title={overview.title}
+        description={overview.description}
       />
 
       <div className="mx-auto mt-12 max-w-5xl rounded-3xl border border-gray-200 bg-white p-10 shadow-lg">
@@ -18,19 +22,14 @@ export default function DestinationsOverview() {
             <Globe2 className="h-10 w-10 text-[#0B3D91]" />
           </div>
 
-          <p className="max-w-4xl text-lg leading-8 text-gray-600">
-            Every destination offers something unique, whether it's a
-            spiritual experience, breathtaking landscapes, vibrant
-            cultures, or unforgettable adventures. At AL ANSAR TOURS &
-            TRAVELS, we help you choose the perfect destination based on
-            your interests, travel goals, and budget.
-          </p>
-
-          <p className="max-w-4xl text-lg leading-8 text-gray-600">
-            Our carefully selected destinations combine comfort,
-            convenience, and memorable experiences, ensuring every journey
-            becomes a story worth sharing.
-          </p>
+          {overview.paragraphs.map((paragraph) => (
+            <p
+              key={paragraph}
+              className="max-w-4xl text-lg leading-8 text-gray-600"
+            >
+              {paragraph}
+            </p>
+          ))}
         </div>
       </div>
     </Section>

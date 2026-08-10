@@ -8,52 +8,31 @@ import {
 
 import SectionHeading from "@/components/common/SectionHeading";
 import { Section } from "@/components/ui";
+import { useSiteContent } from "@/features/site-content";
 
-const steps = [
-  {
-    icon: Search,
-    title: "Enquiry",
-    description:
-      "Tell us about your travel plans, preferred destination, and requirements.",
-  },
-  {
-    icon: Headphones,
-    title: "Travel Consultation",
-    description:
-      "Our travel experts recommend the best package and guide you through every option.",
-  },
-  {
-    icon: ClipboardCheck,
-    title: "Booking Confirmation",
-    description:
-      "We confirm your flights, accommodation, visas, and travel itinerary.",
-  },
-  {
-    icon: CalendarCheck,
-    title: "Travel Preparation",
-    description:
-      "Receive all your travel documents, guidance, and important information before departure.",
-  },
-  {
-    icon: PlaneTakeoff,
-    title: "Enjoy Your Journey",
-    description:
-      "Travel with confidence knowing our team is available whenever you need assistance.",
-  },
+const processIcons = [
+  Search,
+  Headphones,
+  ClipboardCheck,
+  CalendarCheck,
+  PlaneTakeoff,
 ];
 
 export default function ServiceProcess() {
+  const { content } = useSiteContent();
+  const section = content.services.process;
+
   return (
     <Section className="bg-gray-50">
       <SectionHeading
-        badge="How It Works"
-        title="A Simple Journey From Enquiry to Departure"
-        description="Our streamlined process ensures a smooth and hassle-free travel experience."
+        badge={section.badge}
+        title={section.title}
+        description={section.description}
       />
 
       <div className="mt-16 grid gap-8 md:grid-cols-2 xl:grid-cols-5">
-        {steps.map((step, index) => {
-          const Icon = step.icon;
+        {section.items.map((step, index) => {
+          const Icon = processIcons[index] ?? processIcons[0]!;
 
           return (
             <article
@@ -74,9 +53,7 @@ export default function ServiceProcess() {
                 {step.title}
               </h3>
 
-              <p className="mt-4 leading-7 text-gray-600">
-                {step.description}
-              </p>
+              <p className="mt-4 leading-7 text-gray-600">{step.description}</p>
             </article>
           );
         })}

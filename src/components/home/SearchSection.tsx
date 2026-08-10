@@ -3,74 +3,77 @@ import type { ChangeEvent } from "react";
 
 import { Button, Container } from "@/components/ui";
 import { COMPANY } from "@/constants/COMPANY";
-import {
-  BUDGETS,
-  DESTINATIONS,
-  PAX_OPTIONS,
-  TRAVEL_MONTHS,
-  TRAVEL_TYPES,
-} from "@/data/travelOptions";
+import { useSiteContent } from "@/features/site-content";
+import { useWebsite } from "@/hooks/useWebsite";
 
-const SAUDI_DESTINATION = "Saudi Arabia (Umrah & Hajj)";
-
-function getDestinationsForTravelType(travelType: string) {
+function getDestinationsForTravelType(
+  travelType: string,
+  destinations: Record<string, string[]>,
+) {
   switch (travelType) {
     case "Umrah":
     case "Hajj":
-      return DESTINATIONS.religious;
+      return destinations.religious ?? [];
 
     case "Honeymoon":
-      return DESTINATIONS.honeymoon;
+      return destinations.honeymoon ?? [];
 
     case "Corporate":
-      return DESTINATIONS.corporate;
+      return destinations.corporate ?? [];
 
     case "Medical Tourism":
-      return DESTINATIONS.medical;
+      return destinations.medical ?? [];
 
     case "Student Tour":
-      return DESTINATIONS.student;
+      return destinations.student ?? [];
 
     case "Group Tour":
-      return DESTINATIONS.group;
+      return destinations.group ?? [];
 
     default:
       return [
-        ...DESTINATIONS.holiday,
-        ...DESTINATIONS.religious,
+        ...(destinations.holiday ?? []),
+        ...(destinations.religious ?? []),
       ];
   }
 }
 
 export default function SearchSection() {
+  const { content } = useSiteContent();
+  const { settings } = useWebsite();
+  const searchContent = content.home.search;
+  const destinationOptions = searchContent.destinationOptions as Record<
+    string,
+    string[]
+  >;
+  const saudiDestination = destinationOptions.religious?.[0] ?? "";
   const [travelType, setTravelType] = useState("");
   const [destination, setDestination] = useState("");
   const [travelMonth, setTravelMonth] = useState("");
   const [pax, setPax] = useState("");
   const [budget, setBudget] = useState("");
 
-  const isReligiousTrip =
-    travelType === "Umrah" || travelType === "Hajj";
+  const isReligiousTrip = travelType === "Umrah" || travelType === "Hajj";
 
   const availableDestinations = useMemo(
-    () => getDestinationsForTravelType(travelType),
-    [travelType]
+    () => getDestinationsForTravelType(travelType, destinationOptions),
+    [travelType, destinationOptions],
   );
 
-  const handleTravelTypeChange = (
-    e: ChangeEvent<HTMLSelectElement>
-  ) => {
+  const handleTravelTypeChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value;
 
     setTravelType(value);
 
     if (value === "Umrah" || value === "Hajj") {
-      setDestination(SAUDI_DESTINATION);
+      setDestination(saudiDestination);
       return;
     }
 
-    const validDestinations =
-      getDestinationsForTravelType(value);
+    const validDestinations = getDestinationsForTravelType(
+      value,
+      destinationOptions,
+    );
 
     if (!validDestinations.includes(destination as never)) {
       setDestination("");
@@ -78,7 +81,12 @@ export default function SearchSection() {
   };
 
   const whatsappUrl = useMemo(() => {
-    const message = `Hello ${COMPANY.name},
+    const companyName = settings?.company_name?.trim() || COMPANY.name;
+    const whatsapp = (settings?.whatsapp?.trim() || COMPANY.whatsapp).replace(
+      /[^\d]/g,
+      "",
+    );
+    const message = `Hello ${companyName},
 
 I'm interested in planning a trip.
 
@@ -92,30 +100,19 @@ Please share suitable packages and quotation.
 
 Thank you.`;
 
-    return `https://wa.me/${
-      COMPANY.whatsapp
-    }?text=${encodeURIComponent(message)}`;
-  }, [
-    destination,
-    travelType,
-    travelMonth,
-    pax,
-    budget,
-  ]);
+    return `https://wa.me/${whatsapp}?text=${encodeURIComponent(message)}`;
+  }, [destination, travelType, travelMonth, pax, budget, settings]);
 
   return (
-    <section className="bg-white py-16">
+    <section id="search" className="relative z-10 bg-[#f7f4ed] py-16 lg:-mt-1">
       <Container>
-        <div className="rounded-3xl border border-gray-100 bg-white p-8 shadow-xl">
+        <div className="rounded-3xl border border-white bg-white p-6 shadow-[0_22px_60px_-35px_rgba(16,42,67,0.42)] md:p-8">
           <div className="max-w-2xl">
             <h2 className="text-3xl font-bold text-[#0B3D91]">
-              Plan Your Next Journey
+              {searchContent.heading}
             </h2>
 
-            <p className="mt-3 text-gray-600">
-              Tell us about your travel plans and receive a
-              personalised quotation from our travel experts.
-            </p>
+            <p className="mt-3 text-gray-600">{searchContent.description}</p>
           </div>
 
           <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-6">
@@ -132,24 +129,15 @@ Thank you.`;
                 id="destination"
                 value={destination}
                 disabled={isReligiousTrip}
-                onChange={(e) =>
-                  setDestination(e.target.value)
-                }
+                onChange={(e) => setDestination(e.target.value)}
                 className={`w-full rounded-xl border border-gray-300 p-3 transition focus:border-[#0B3D91] focus:outline-none ${
-                  isReligiousTrip
-                    ? "cursor-not-allowed bg-gray-100"
-                    : ""
+                  isReligiousTrip ? "cursor-not-allowed bg-gray-100" : ""
                 }`}
               >
-                <option value="">
-                  Select Destination
-                </option>
+                <option value="">Select Destination</option>
 
                 {availableDestinations.map((item) => (
-                  <option
-                    key={item}
-                    value={item}
-                  >
+                  <option key={item} value={item}>
                     {item}
                   </option>
                 ))}
@@ -171,15 +159,10 @@ Thank you.`;
                 onChange={handleTravelTypeChange}
                 className="w-full rounded-xl border border-gray-300 p-3 transition focus:border-[#0B3D91] focus:outline-none"
               >
-                <option value="">
-                  Select Travel Type
-                </option>
+                <option value="">Select Travel Type</option>
 
-                {TRAVEL_TYPES.map((item) => (
-                  <option
-                    key={item}
-                    value={item}
-                  >
+                {searchContent.travelTypes.map((item) => (
+                  <option key={item} value={item}>
                     {item}
                   </option>
                 ))}
@@ -198,20 +181,13 @@ Thank you.`;
               <select
                 id="travelMonth"
                 value={travelMonth}
-                onChange={(e) =>
-                  setTravelMonth(e.target.value)
-                }
+                onChange={(e) => setTravelMonth(e.target.value)}
                 className="w-full rounded-xl border border-gray-300 p-3 transition focus:border-[#0B3D91] focus:outline-none"
               >
-                <option value="">
-                  Select Month
-                </option>
+                <option value="">Select Month</option>
 
-                {TRAVEL_MONTHS.map((item) => (
-                  <option
-                    key={item}
-                    value={item}
-                  >
+                {searchContent.travelMonths.map((item) => (
+                  <option key={item} value={item}>
                     {item}
                   </option>
                 ))}
@@ -230,20 +206,13 @@ Thank you.`;
               <select
                 id="pax"
                 value={pax}
-                onChange={(e) =>
-                  setPax(e.target.value)
-                }
+                onChange={(e) => setPax(e.target.value)}
                 className="w-full rounded-xl border border-gray-300 p-3 transition focus:border-[#0B3D91] focus:outline-none"
               >
-                <option value="">
-                  Select Travellers
-                </option>
+                <option value="">Select Travellers</option>
 
-                {PAX_OPTIONS.map((item) => (
-                  <option
-                    key={item}
-                    value={item}
-                  >
+                {searchContent.travellerOptions.map((item) => (
+                  <option key={item} value={item}>
                     {item}
                   </option>
                 ))}
@@ -262,20 +231,13 @@ Thank you.`;
               <select
                 id="budget"
                 value={budget}
-                onChange={(e) =>
-                  setBudget(e.target.value)
-                }
+                onChange={(e) => setBudget(e.target.value)}
                 className="w-full rounded-xl border border-gray-300 p-3 transition focus:border-[#0B3D91] focus:outline-none"
               >
-                <option value="">
-                  Select Budget
-                </option>
+                <option value="">Select Budget</option>
 
-                {BUDGETS.map((item) => (
-                  <option
-                    key={item}
-                    value={item}
-                  >
+                {searchContent.budgetOptions.map((item) => (
+                  <option key={item} value={item}>
                     {item}
                   </option>
                 ))}
@@ -284,11 +246,8 @@ Thank you.`;
 
             {/* Button */}
             <div className="flex items-end">
-              <Button
-                href={whatsappUrl}
-                className="w-full"
-              >
-                Get Free Quote
+              <Button href={whatsappUrl} className="w-full">
+                {searchContent.buttonLabel}
               </Button>
             </div>
           </div>

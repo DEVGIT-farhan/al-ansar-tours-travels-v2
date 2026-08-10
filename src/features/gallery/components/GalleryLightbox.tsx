@@ -1,4 +1,6 @@
 import Lightbox from "yet-another-react-lightbox";
+import Fullscreen from "yet-another-react-lightbox/plugins/fullscreen";
+import Zoom from "yet-another-react-lightbox/plugins/zoom";
 
 import "yet-another-react-lightbox/styles.css";
 
@@ -26,6 +28,7 @@ export default function GalleryLightbox({
       close={close}
       slides={slides}
       index={index}
+      plugins={[Fullscreen, Zoom]}
       carousel={{
         finite: false,
       }}
@@ -33,9 +36,16 @@ export default function GalleryLightbox({
         closeOnBackdropClick: true,
       }}
       styles={{
-        container: {
-          backgroundColor: "rgba(0,0,0,0.92)",
+        root: {
+          "--yarl__color_backdrop": "rgba(0,0,0,0.97)",
         },
+        container: {
+          backgroundColor: "rgba(0,0,0,0.97)",
+        },
+      }}
+      zoom={{
+        maxZoomPixelRatio: 3,
+        zoomInMultiplier: 2,
       }}
       animation={{
         fade: 350,

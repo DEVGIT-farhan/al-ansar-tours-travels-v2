@@ -9,58 +9,25 @@ import {
 
 import SectionHeading from "@/components/common/SectionHeading";
 import { Section } from "@/components/ui";
+import { useSiteContent } from "@/features/site-content";
 
-const tips = [
-  {
-    icon: FileText,
-    title: "Keep Your Documents Ready",
-    description:
-      "Carry both printed and digital copies of your passport, visa, travel insurance, and flight tickets.",
-  },
-  {
-    icon: Plane,
-    title: "Arrive Early",
-    description:
-      "For international flights, arrive at the airport at least three hours before departure.",
-  },
-  {
-    icon: CreditCard,
-    title: "Carry Multiple Payment Options",
-    description:
-      "Keep some local currency along with an international debit or credit card for convenience.",
-  },
-  {
-    icon: Briefcase,
-    title: "Pack Smart",
-    description:
-      "Pack according to your destination's climate and airline baggage allowance to avoid extra charges.",
-  },
-  {
-    icon: Globe2,
-    title: "Respect Local Culture",
-    description:
-      "Learn about local customs, traditions, and dress codes before travelling to ensure a respectful experience.",
-  },
-  {
-    icon: BadgeCheck,
-    title: "Travel With Confidence",
-    description:
-      "Our team is always available to assist you before departure and throughout your journey whenever you need support.",
-  },
-];
+const tipIcons = [FileText, Plane, CreditCard, Briefcase, Globe2, BadgeCheck];
 
 export default function TravelTips() {
+  const { content } = useSiteContent();
+  const section = content.destinations.tips;
+
   return (
     <Section className="bg-gray-50">
       <SectionHeading
-        badge="Travel Tips"
-        title="Travel Smarter, Travel Better"
-        description="A few simple preparations can make your journey smoother, safer, and more enjoyable."
+        badge={section.badge}
+        title={section.title}
+        description={section.description}
       />
 
       <div className="mt-16 grid gap-8 md:grid-cols-2 xl:grid-cols-3">
-        {tips.map((tip, index) => {
-          const Icon = tip.icon;
+        {section.items.map((tip, index) => {
+          const Icon = tipIcons[index] ?? tipIcons[0]!;
 
           return (
             <article
@@ -77,9 +44,7 @@ export default function TravelTips() {
                 {tip.title}
               </h3>
 
-              <p className="mt-4 leading-7 text-gray-600">
-                {tip.description}
-              </p>
+              <p className="mt-4 leading-7 text-gray-600">{tip.description}</p>
             </article>
           );
         })}

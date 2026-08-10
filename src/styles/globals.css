@@ -6,9 +6,10 @@ html {
 
 body {
   margin: 0;
-  font-family: "Inter", sans-serif;
-  background: #ffffff;
-  color: #1f2937;
+  font-family: "Inter", system-ui, sans-serif;
+  background: #f8fafc;
+  color: #18202f;
+  -webkit-font-smoothing: antialiased;
 }
 
 h1,
@@ -17,13 +18,34 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Poppins", sans-serif;
+  font-family: "Poppins", "Inter", system-ui, sans-serif;
+  letter-spacing: -0.025em;
 }
 
 *,
 *::before,
 *::after {
   box-sizing: border-box;
+}
+
+::selection {
+  background: #d9a441;
+  color: #102a43;
+}
+
+@keyframes floatIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.page-enter {
+  animation: floatIn 500ms ease-out both;
 }
 
 /* animations... */
@@ -42,7 +64,7 @@ h6 {
   }
 }
 
-.whatsapp-pulse  {
+.whatsapp-pulse {
   animation: whatsappPulse 2s infinite;
 }
 

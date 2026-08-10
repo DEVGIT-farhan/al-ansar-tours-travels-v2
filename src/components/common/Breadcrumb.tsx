@@ -10,9 +10,7 @@ interface BreadcrumbProps {
   items: BreadcrumbItem[];
 }
 
-export default function Breadcrumb({
-  items,
-}: BreadcrumbProps) {
+export default function Breadcrumb({ items }: BreadcrumbProps) {
   const breadcrumbItems = [
     {
       name: "Home",
@@ -46,15 +44,12 @@ export default function Breadcrumb({
         }}
       />
 
-      <nav
-        aria-label="Breadcrumb"
-        className="mb-8"
-      >
-        <ol className="flex flex-wrap items-center gap-2 text-sm text-gray-500">
+      <nav aria-label="Breadcrumb" className="mb-8">
+        <ol className="flex flex-wrap items-center gap-2 text-sm text-slate-300">
           <li>
             <Link
               to="/"
-              className="flex items-center gap-1 transition-colors hover:text-[#0B3D91]"
+              className="flex items-center gap-1 transition-colors hover:text-white"
             >
               <Home className="h-4 w-4" />
               Home
@@ -65,24 +60,18 @@ export default function Breadcrumb({
             const last = index === items.length - 1;
 
             return (
-              <li
-                key={item.label}
-                className="flex items-center gap-2"
-              >
+              <li key={item.label} className="flex items-center gap-2">
                 <ChevronRight className="h-4 w-4" />
 
                 {last || !item.to ? (
                   <span
-                    className="font-semibold text-[#0B3D91]"
+                    className="font-semibold text-[#e8ba62]"
                     aria-current="page"
                   >
                     {item.label}
                   </span>
                 ) : (
-                  <Link
-                    to={item.to}
-                    className="transition hover:text-[#0B3D91]"
-                  >
+                  <Link to={item.to} className="transition hover:text-white">
                     {item.label}
                   </Link>
                 )}

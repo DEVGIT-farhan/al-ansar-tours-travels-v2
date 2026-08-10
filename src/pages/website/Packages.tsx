@@ -1,27 +1,31 @@
 import SEO from "@/components/common/SEO";
 import PageHeader from "@/components/common/PageHeader";
 
-import PackagesSection from "@/features/packages/components/PackagesSection";
+import PackagesPage from "@/website/pages/packages/PackagesPage";
+import { useSiteContent } from "@/features/site-content";
 
 export default function Packages() {
+  const { content } = useSiteContent();
+  const packagesContent = content.home.packagesPage;
+
   return (
     <>
       <SEO
-        title="Travel Packages"
-        description="Explore our Umrah, Hajj and international holiday packages."
+        title={packagesContent.title}
+        description={packagesContent.seoDescription}
       />
 
       <PageHeader
-        title="Travel Packages"
-        description="Explore our carefully designed Umrah and international holiday packages."
+        title={packagesContent.title}
+        description={packagesContent.description}
         breadcrumb={[
           {
-            label: "Packages",
+            label: packagesContent.title,
           },
         ]}
       />
 
-      <PackagesSection />
+      <PackagesPage />
     </>
   );
 }

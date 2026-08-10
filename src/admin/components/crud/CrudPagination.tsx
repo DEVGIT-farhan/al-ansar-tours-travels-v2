@@ -25,23 +25,20 @@ export default function CrudPagination({
       </button>
 
       <div className="flex gap-2">
-        {Array.from(
-          { length: totalPages },
-          (_, index) => index + 1
-        ).map((page) => (
-          <button
-            key={page}
-            type="button"
-            onClick={() => onPageChange(page)}
-            className={`h-10 w-10 rounded-lg transition ${
-              page === currentPage
-                ? "bg-[#0B3D91] text-white"
-                : "border"
-            }`}
-          >
-            {page}
-          </button>
-        ))}
+        {Array.from({ length: totalPages }, (_, index) => index + 1).map(
+          (page) => (
+            <button
+              key={page}
+              type="button"
+              onClick={() => onPageChange(page)}
+              className={`h-10 w-10 rounded-lg transition ${
+                page === currentPage ? "bg-[#0B3D91] text-white" : "border"
+              }`}
+            >
+              {page}
+            </button>
+          ),
+        )}
       </div>
 
       <button

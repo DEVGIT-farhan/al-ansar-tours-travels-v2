@@ -5,30 +5,34 @@ import ServicesSection from "@/features/services/components/ServicesSection";
 import ServiceProcess from "@/features/services/components/ServiceProcess";
 import WhyChooseServices from "@/features/services/components/WhyChooseServices";
 import ServicesCTA from "@/features/services/components/ServicesCTA";
+import { useSiteContent } from "@/features/site-content";
+
 export default function Services() {
+  const { content } = useSiteContent();
+  const services = content.services;
+
   return (
     <>
-  <SEO
-    title="Our Services"
-    description="Explore our complete range of travel services including Umrah, Hajj, visa assistance, flight bookings, and holiday packages."
-  />
+      <SEO
+        title={services.pageTitle}
+        description={services.overview.description}
+      />
 
-  <PageHeader
-    title="Our Services"
-    description="Professional travel solutions tailored to your needs."
-    breadcrumb={[
-      {
-        label: "Services",
-      },
-    ]}
-  />
+      <PageHeader
+        title={services.pageTitle}
+        description={services.pageDescription}
+        breadcrumb={[
+          {
+            label: services.pageTitle,
+          },
+        ]}
+      />
 
-  <ServicesOverview />
-  <ServicesSection />
-  <ServiceProcess />
-  <WhyChooseServices />
-  <ServicesCTA/>
-
-</>
+      <ServicesOverview />
+      <ServicesSection heading={services.list} />
+      <ServiceProcess />
+      <WhyChooseServices />
+      <ServicesCTA />
+    </>
   );
 }

@@ -23,7 +23,7 @@ export default function ImageSlider({
       autoplay={{
         delay: 4000,
         disableOnInteraction: false,
-         pauseOnMouseEnter: true,
+        pauseOnMouseEnter: true,
       }}
       pagination={{ clickable: true }}
       className={`w-full ${className}`}
@@ -32,12 +32,12 @@ export default function ImageSlider({
         <SwiperSlide key={index}>
           <div className="h-[450px] w-full">
             <img
-  src={image}
-  alt={`About ${index + 1}`}
-  loading="lazy"
-  decoding="async"
-  className="h-72 w-full rounded-3xl object-cover md:h-96 lg:h-[450px]"
-/>
+              src={image}
+              alt={`About ${index + 1}`}
+              loading="lazy"
+              decoding="async"
+              className="h-72 w-full rounded-3xl object-cover md:h-96 lg:h-[450px]"
+            />
           </div>
         </SwiperSlide>
       ))}

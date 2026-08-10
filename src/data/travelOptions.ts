@@ -1,7 +1,5 @@
 export const DESTINATIONS = {
-  religious: [
-    "Saudi Arabia (Umrah & Hajj)",
-  ],
+  religious: ["Saudi Arabia (Umrah & Hajj)"],
 
   holiday: [
     "UAE (Dubai & Abu Dhabi)",
@@ -24,25 +22,11 @@ export const DESTINATIONS = {
     "Singapore",
   ],
 
-  corporate: [
-    "UAE (Dubai & Abu Dhabi)",
-    "Singapore",
-    "Malaysia",
-    "Turkey",
-  ],
+  corporate: ["UAE (Dubai & Abu Dhabi)", "Singapore", "Malaysia", "Turkey"],
 
-  medical: [
-    "Thailand",
-    "Turkey",
-    "Malaysia",
-  ],
+  medical: ["Thailand", "Turkey", "Malaysia"],
 
-  student: [
-    "Singapore",
-    "Malaysia",
-    "Turkey",
-    "UAE (Dubai & Abu Dhabi)",
-  ],
+  student: ["Singapore", "Malaysia", "Turkey", "UAE (Dubai & Abu Dhabi)"],
 
   group: [
     "Saudi Arabia (Umrah & Hajj)",
@@ -90,8 +74,4 @@ export const PAX_OPTIONS = [
   "5+ Travellers",
 ] as const;
 
-export const BUDGETS = [
-  "₹25,000+",
-  "₹50,000+",
-  "₹1,00,000+",
-] as const;
+export const BUDGETS = ["₹25,000+", "₹50,000+", "₹1,00,000+"] as const;
